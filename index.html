@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -1290,6 +1291,203 @@
             margin-right: auto;
         }
 
+        /* ===== فرم سفارش ===== */
+        #order-form {
+            background: var(--bg);
+            padding: 80px 40px;
+            scroll-margin-top: 70px;
+        }
+        #order-form .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #orderForm {
+            background: white;
+            padding: 45px 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px var(--shadow);
+            border: 1px solid rgba(106, 0, 255, 0.08);
+            transition: 0.4s;
+        }
+        #orderForm:hover {
+            box-shadow: 0 15px 50px rgba(106, 0, 255, 0.15);
+        }
+        #orderForm .form-group {
+            margin-bottom: 22px;
+        }
+        #orderForm label {
+            display: block;
+            font-weight: 600;
+            color: #2d1b4e;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        #orderForm label .required {
+            color: #e74c3c;
+            margin-right: 4px;
+        }
+        #orderForm input,
+        #orderForm select,
+        #orderForm textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0d6f0;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: var(--bg);
+            color: #1a1a2e;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        #orderForm input:focus,
+        #orderForm select:focus,
+        #orderForm textarea:focus {
+            border-color: var(--purple);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(106, 0, 255, 0.08);
+            background: white;
+        }
+        #orderForm textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        #orderForm .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        #orderForm .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        #orderForm .file-upload-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--bg);
+            border: 2px dashed var(--purple);
+            border-radius: 14px;
+            color: var(--purple);
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        #orderForm .file-upload-btn:hover {
+            background: #f0e6ff;
+            border-color: var(--dpurple);
+        }
+        #orderForm .file-upload-btn i {
+            margin-left: 8px;
+        }
+        #orderForm .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            margin-top: 8px;
+        }
+        #orderForm .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            #orderForm .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            #orderForm {
+                padding: 25px 18px;
+            }
+        }
+
+        /* ===== نظرات مشتریان ===== */
+        #testimonials {
+            background: white;
+            padding: 80px 40px;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .testimonial-item {
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 28px 25px;
+            border-right: 4px solid var(--purple);
+            transition: 0.4s;
+            box-shadow: 0 4px 20px rgba(106, 0, 255, 0.04);
+        }
+        .testimonial-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(106, 0, 255, 0.1);
+        }
+        .testimonial-item p {
+            font-size: 15px;
+            line-height: 2;
+            color: #444;
+        }
+        .testimonial-item .client {
+            margin-top: 12px;
+            font-weight: 700;
+            color: var(--purple);
+        }
+        .testimonial-item .client i {
+            margin-left: 6px;
+            color: #f1c40f;
+        }
+
+        /* ===== دکمه شناور ثبت سفارش ===== */
+        .order-float-btn {
+            position: fixed;
+            bottom: 120px;
+            right: 25px;
+            z-index: 501;
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 8px 35px var(--shadow);
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            animation: pulseFloat 2s infinite;
+        }
+        .order-float-btn:hover {
+            transform: scale(1.05) translateY(-4px);
+            box-shadow: 0 12px 45px rgba(106, 0, 255, 0.5);
+        }
+        @keyframes pulseFloat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        @media (max-width: 768px) {
+            .order-float-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+                bottom: 100px;
+                right: 15px;
+            }
+            .order-float-btn i {
+                font-size: 14px;
+            }
+        }
+
         /* ===== ریسپانسیو ===== */
         @media (max-width: 992px) {
             .hero-main .hero-text h1 {
@@ -1513,6 +1711,12 @@
                 width: 270px;
                 right: -290px;
             }
+            #order-form {
+                padding: 50px 20px;
+            }
+            #testimonials {
+                padding: 50px 20px;
+            }
         }
         @media (max-width: 480px) {
             .top-bar .left .search-box input {
@@ -1578,6 +1782,9 @@
                 min-width: 380px;
                 font-size: 10px;
             }
+            #orderForm .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1626,6 +1833,7 @@
             <li><a href="#about" onclick="closeSideMenu()"><i class="fas fa-user"></i> درباره من</a></li>
             <li><a href="#works" onclick="closeSideMenu()"><i class="fas fa-image"></i> نمونه کارها</a></li>
             <li><a href="#" onclick="showPricingPage(); closeSideMenu();"><i class="fas fa-table"></i> تعرفه طراحی</a></li>
+            <li><a href="#order-form" onclick="closeSideMenu()"><i class="fas fa-pen"></i> ثبت سفارش</a></li>
             <li><a href="#contact" onclick="closeSideMenu()"><i class="fas fa-phone"></i> تماس با من</a></li>
         </ul>
         <div class="menu-footer">
@@ -1646,7 +1854,7 @@
                     <h1>آرا <span>گرافیک</span></h1>
                     <p>برندینگ · تایپوگرافی · تصویرسازی · طراحی هویت بصری با کیفیت بالا و خلاقیت بی‌نهایت</p>
                     <div class="hero-btns">
-                        <a class="btn" href="#contact"><span>ثبت سفارش</span></a>
+                        <a class="btn" href="#order-form"><span>ثبت سفارش</span></a>
                         <a class="btn btn-outline" href="#works"><span>نمونه کارها</span></a>
                     </div>
                 </div>
@@ -1800,6 +2008,79 @@
             </div>
         </section>
 
+        <!-- ===== فرم ثبت سفارش ===== -->
+        <section id="order-form">
+            <div class="container">
+                <h2 class="section-title reveal">ثبت <span>سفارش</span></h2>
+                <p class="section-sub reveal">فرم زیر را تکمیل کنید تا در سریع‌ترین زمان با شما تماس بگیرم</p>
+                
+                <form id="orderForm" class="reveal" style="background:white;padding:45px 40px;border-radius:30px;box-shadow:0 10px 40px var(--shadow);border:1px solid rgba(106,0,255,0.08);">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نام و نام خانوادگی <span class="required">*</span></label>
+                            <input type="text" id="fullName" required placeholder="مثال: زینت غلامی">
+                        </div>
+                        <div class="form-group">
+                            <label>شماره تماس <span class="required">*</span></label>
+                            <input type="tel" id="phoneNumber" required placeholder="۰۹۹۲۷۱۳۱۶۲۱">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نوع خدمات مورد نیاز</label>
+                        <select id="serviceType">
+                            <option value="logo">طراحی لوگو</option>
+                            <option value="card">کارت ویزیت</option>
+                            <option value="flyer">تراکت و پوستر</option>
+                            <option value="branding">هویت بصری کامل</option>
+                            <option value="social">محتوای شبکه‌های اجتماعی</option>
+                            <option value="other">سایر خدمات</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>توضیحات پروژه <span class="required">*</span></label>
+                        <textarea id="projectDesc" required placeholder="لطفاً توضیحات کامل پروژه، ابعاد، رنگ‌های مورد نظر و هر نکته دیگری که مهم است را بنویسید..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>بارگذاری فایل (اختیاری)</label>
+                        <div class="file-upload-wrapper">
+                            <div class="file-upload-btn">
+                                <i class="fas fa-cloud-upload-alt"></i> انتخاب فایل (تصویر، PDF، ورد)
+                            </div>
+                            <input type="file" id="fileUpload" accept="image/*,.pdf,.doc,.docx">
+                        </div>
+                        <div id="fileName" style="margin-top:8px;font-size:13px;color:#888;"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn submit-btn">
+                        <span>📩 ارسال درخواست سفارش</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== نظرات مشتریان ===== -->
+        <section id="testimonials">
+            <h2 class="section-title reveal">نظرات <span>مشتریان</span></h2>
+            <p class="section-sub reveal">آنچه مشتریان درباره کار با من می‌گویند</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-item reveal">
+                    <p>"طراحی فوق‌العاده‌ای انجام دادند. کاملاً مطابق سلیقه من بود و خیلی زود تحویل گرفتند."</p>
+                    <div class="client"><i class="fas fa-star"></i> علی رضایی</div>
+                </div>
+                <div class="testimonial-item reveal">
+                    <p>"از همکاری با آرا گرافیک خیلی راضی هستم. هویت برند من رو کاملاً متحول کردند."</p>
+                    <div class="client"><i class="fas fa-star"></i> سارا محمدی</div>
+                </div>
+                <div class="testimonial-item reveal">
+                    <p>"حرفه‌ای، خلاق و دقیق. دقیقاً همون چیزی که برای برندم نیاز داشتم."</p>
+                    <div class="client"><i class="fas fa-star"></i> احمد کریمی</div>
+                </div>
+            </div>
+        </section>
+
         <!-- ===== تماس ===== -->
         <section id="contact">
             <div class="container" style="max-width:1200px;margin:auto;">
@@ -1840,6 +2121,11 @@
             <a href="https://t.me/ara_graphic1" target="_blank" title="تلگرام">✈️</a>
             <a href="https://instagram.com/ara_graphic1" target="_blank" title="اینستاگرام">📷</a>
         </div>
+
+        <!-- ===== دکمه شناور ثبت سفارش ===== -->
+        <a href="#order-form" class="order-float-btn">
+            <i class="fas fa-pen-fancy"></i> ثبت سفارش
+        </a>
     </div>
 
     <!-- ===== صفحه تعرفه (جداگانه) ===== -->
@@ -2042,7 +2328,90 @@
                 window.scrollTo({ top: top, behavior: 'smooth' });
             }
         });
+
+        // ===== نمایش نام فایل انتخاب شده =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileUpload');
+            const fileNameDisplay = document.getElementById('fileName');
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        fileNameDisplay.textContent = '📎 ' + this.files[0].name;
+                    } else {
+                        fileNameDisplay.textContent = '';
+                    }
+                });
+            }
+        });
+
+        // ===== ارسال فرم سفارش =====
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const service = document.getElementById('serviceType').value;
+            const description = document.getElementById('projectDesc').value.trim();
+            
+            if (!fullName || !phone || !description) {
+                alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+                return;
+            }
+            
+            // اعتبارسنجی شماره موبایل
+            const phoneRegex = /^09[0-9]{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('شماره تماس باید با 09 شروع شود و 11 رقم باشد.');
+                return;
+            }
+            
+            const orderData = {
+                id: Date.now(),
+                name: fullName,
+                phone: phone,
+                service: service,
+                description: description,
+                date: new Date().toLocaleDateString('fa-IR'),
+                time: new Date().toLocaleTimeString('fa-IR'),
+                status: 'در انتظار بررسی'
+            };
+            
+            // ذخیره در localStorage
+            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // نمایش پیام موفقیت
+            alert('✅ سفارش شما با موفقیت ثبت شد! به زودی با شما تماس می‌گیرم.');
+            this.reset();
+            document.getElementById('fileName').textContent = '';
+            
+            // (اختیاری) ارسال به تلگرام - توکن و چت آیدی را تنظیم کنید
+            // sendToTelegram(orderData);
+        });
+
+        // ===== ارسال به تلگرام (در صورت تنظیم توکن) =====
+        /*
+        function sendToTelegram(order) {
+            const botToken = 'YOUR_BOT_TOKEN';
+            const chatId = 'YOUR_CHAT_ID';
+            
+            const message = `📋 سفارش جدید:
+            👤 نام: ${order.name}
+            📱 تماس: ${order.phone}
+            🎯 سرویس: ${order.service}
+            📝 توضیحات: ${order.description}
+            🕐 تاریخ: ${order.date} - ${order.time}`;
+            
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({chat_id: chatId, text: message})
+            }).catch(console.error);
+        }
+        */
     </script>
 
 </body>
 </html>
+```
