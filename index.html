@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>آرا گرافیک | طراحی گرافیک حرفه‌ای</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== RESET & BASE ========== */
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -16,360 +16,415 @@
             scroll-behavior: smooth;
         }
         :root {
-            --purple: #6C0CE5;
-            --lpurple: #A855F7;
-            --dpurple: #4C00B0;
-            --pink: #EC4899;
-            --white: #FFFFFF;
-            --bg: #F8F5FF;
-            --dark: #0F0A1A;
-            --glass: rgba(255, 255, 255, 0.85);
-            --shadow: rgba(108, 12, 229, 0.2);
-            --shadow-lg: rgba(108, 12, 229, 0.3);
-            --radius: 24px;
+            --purple: #6a00ff;
+            --lpurple: #a855f7;
+            --dpurple: #3b008a;
+            --white: #ffffff;
+            --bg: #f8f5ff;
+            --dark: #0f0a1a;
+            --glass: rgba(255, 255, 255, 0.12);
+            --shadow: rgba(106, 0, 255, 0.25);
             --transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
         body {
-            background: var(--white);
-            color: #1A1A2E;
+            background: var(--dark);
+            color: #ffffff;
             overflow-x: hidden;
-            line-height: 1.8;
-        }
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--purple);
-            border-radius: 50px;
         }
 
-        /* ========== PRELOADER ========== */
-        #preloader {
+        /* ===== PRELOADER ===== */
+        .preloader {
             position: fixed;
             inset: 0;
             z-index: 99999;
-            background: var(--white);
+            background: var(--dark);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 25px;
-            transition: 0.8s ease;
+            gap: 30px;
+            transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        #preloader.hide {
+        .preloader.hide {
             opacity: 0;
             pointer-events: none;
         }
-        .loader-ring {
-            width: 70px;
-            height: 70px;
-            border: 4px solid var(--bg);
-            border-top: 4px solid var(--purple);
+        .preloader .logo-loader {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .preloader .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(106, 0, 255, 0.1);
+            border-top-color: var(--purple);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin 1s linear infinite;
         }
-        .loader-text {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--purple);
-            letter-spacing: 3px;
-        }
-        .loader-progress {
+        .preloader .progress-bar {
             width: 200px;
             height: 3px;
-            background: var(--bg);
-            border-radius: 50px;
+            background: rgba(106, 0, 255, 0.1);
+            border-radius: 10px;
             overflow: hidden;
         }
-        .loader-progress-bar {
+        .preloader .progress-bar .fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, var(--purple), var(--pink));
-            border-radius: 50px;
-            animation: progress 1.5s ease forwards;
+            background: linear-gradient(90deg, var(--purple), var(--lpurple));
+            animation: loadProgress 1.2s ease forwards;
         }
-        @keyframes progress {
-            to { width: 100%; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes loadProgress { to { width: 100%; } }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .bg-canvas .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .bg-canvas .gradient-orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: rgba(106, 0, 255, 0.15);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        .bg-canvas .gradient-orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: rgba(168, 85, 247, 0.12);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -7s;
+        }
+        .bg-canvas .gradient-orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: rgba(106, 0, 255, 0.08);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+        .bg-canvas .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--lpurple);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: particleFloat 15s infinite linear;
+        }
+        .bg-canvas .particle:nth-child(4) { top: 20%; left: 10%; animation-delay: 0s; }
+        .bg-canvas .particle:nth-child(5) { top: 60%; right: 15%; animation-delay: -4s; }
+        .bg-canvas .particle:nth-child(6) { top: 40%; left: 30%; animation-delay: -8s; }
+        .bg-canvas .particle:nth-child(7) { bottom: 30%; right: 25%; animation-delay: -12s; }
+        .bg-canvas .particle:nth-child(8) { top: 80%; left: 50%; animation-delay: -3s; }
+        .bg-canvas .particle:nth-child(9) { top: 10%; right: 40%; animation-delay: -9s; }
+        .bg-canvas .particle:nth-child(10) { bottom: 10%; left: 20%; animation-delay: -6s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 40px) scale(0.9); }
+            75% { transform: translate(40px, 20px) scale(1.05); }
+        }
+        @keyframes particleFloat {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-30px) translateX(20px) scale(1.5); opacity: 0.6; }
+            50% { transform: translateY(30px) translateX(-20px) scale(0.8); opacity: 0.2; }
+            75% { transform: translateY(-20px) translateX(30px) scale(1.2); opacity: 0.5; }
+            100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
         }
 
-        /* ========== TOP BAR ========== */
+        /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: var(--glass);
+            background: rgba(15, 10, 26, 0.85);
             backdrop-filter: blur(20px);
-            padding: 8px 30px;
+            border-bottom: 1px solid rgba(106, 0, 255, 0.15);
+            padding: 12px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(108, 12, 229, 0.08);
             transition: var(--transition);
         }
         .top-bar.scrolled {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-        }
-        .top-bar .right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .top-bar .right .menu-toggle {
-            font-size: 24px;
-            color: var(--purple);
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px 8px;
-            transition: var(--transition);
-        }
-        .top-bar .right .menu-toggle:hover {
-            transform: scale(1.1);
+            background: rgba(15, 10, 26, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
         .top-bar .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
         }
         .top-bar .logo-area .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+            width: 45px;
+            height: 45px;
             border-radius: 12px;
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 18px;
-        }
-        .top-bar .logo-area .logo-text {
             font-size: 22px;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 0, 255, 0.3);
+        }
+        .top-bar .logo-area .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, var(--lpurple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .top-bar .left {
+        .top-bar .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
+            list-style: none;
         }
-        .top-bar .left .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--bg);
-            border-radius: 50px;
-            padding: 6px 15px;
-            border: 1px solid rgba(108, 12, 229, 0.1);
-            transition: var(--transition);
-        }
-        .top-bar .left .search-box:focus-within {
-            border-color: var(--purple);
-            box-shadow: 0 0 0 4px rgba(108, 12, 229, 0.08);
-        }
-        .top-bar .left .search-box input {
-            border: none;
-            background: transparent;
-            padding: 6px 10px;
-            font-size: 14px;
-            outline: none;
-            width: 140px;
-        }
-        .top-bar .left .search-box i {
-            color: var(--purple);
-            opacity: 0.6;
-        }
-        .top-bar .left .contact-phone {
-            font-weight: 700;
-            color: var(--purple);
+        .top-bar .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            background: var(--bg);
-            padding: 6px 16px;
-            border-radius: 50px;
-            border: 1px solid rgba(108, 12, 229, 0.1);
-            transition: var(--transition);
+            font-weight: 500;
             font-size: 14px;
+            transition: var(--transition);
+            position: relative;
         }
-        .top-bar .left .contact-phone:hover {
+        .top-bar .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
             background: var(--purple);
+            transition: var(--transition);
+        }
+        .top-bar .nav-links a:hover {
             color: white;
         }
-
-        /* ========== SIDE MENU ========== */
-        .side-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1050;
-            display: none;
-            backdrop-filter: blur(5px);
+        .top-bar .nav-links a:hover::after {
+            width: 100%;
         }
-        .side-overlay.show {
-            display: block;
-        }
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: -340px;
-            width: 300px;
-            height: 100vh;
-            background: var(--white);
-            box-shadow: -10px 0 50px rgba(0, 0, 0, 0.1);
-            z-index: 1100;
-            padding: 30px 25px;
+        .top-bar .nav-links .btn-contact {
+            padding: 8px 22px;
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            border-radius: 50px;
+            color: white !important;
+            font-weight: 700;
+            box-shadow: 0 4px 20px var(--shadow);
             transition: var(--transition);
-            overflow-y: auto;
         }
-        .side-menu.open {
-            right: 0;
+        .top-bar .nav-links .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--shadow);
         }
-        .side-menu .close-btn {
+        .top-bar .nav-links .btn-contact::after { display: none; }
+        .top-bar .menu-toggle {
+            display: none;
             font-size: 28px;
-            color: var(--purple);
+            color: white;
             cursor: pointer;
             background: none;
             border: none;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 30px;
             transition: var(--transition);
         }
-        .side-menu .close-btn:hover {
-            transform: rotate(90deg);
+        .top-bar .menu-toggle:hover { transform: scale(1.1); }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(15, 10, 26, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1100;
+            padding: 30px 25px;
+            transition: var(--transition);
+            border-left: 2px solid var(--purple);
         }
-        .side-menu .menu-links {
+        .mobile-menu.open { right: 0; }
+        .mobile-menu .close-btn {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            background: none;
+            border: none;
+            width: 100%;
+            transition: var(--transition);
+        }
+        .mobile-menu .close-btn:hover { transform: rotate(90deg); }
+        .mobile-menu .menu-links {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
-        .side-menu .menu-links li a {
+        .mobile-menu .menu-links a {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            color: #2D1B4E;
-            font-weight: 600;
-            padding: 12px 18px;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 12px 16px;
             display: block;
             border-radius: 12px;
             transition: var(--transition);
             border-right: 3px solid transparent;
         }
-        .side-menu .menu-links li a:hover {
-            background: var(--bg);
-            color: var(--purple);
+        .mobile-menu .menu-links a:hover {
+            background: rgba(106, 0, 255, 0.1);
+            color: white;
             border-right-color: var(--purple);
             padding-right: 25px;
         }
-        .side-menu .menu-links li a i {
-            margin-left: 12px;
-            width: 22px;
-            color: var(--purple);
+        .mobile-menu .menu-links a i { margin-left: 12px; width: 22px; color: var(--purple); }
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            display: none;
+            backdrop-filter: blur(5px);
         }
-        .side-menu .menu-footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            text-align: center;
-            font-size: 14px;
-            color: #888;
-        }
+        .mobile-overlay.show { display: block; }
 
-        /* ========== HERO ========== */
-        .hero {
-            margin-top: 60px;
-            padding: 80px 40px 60px;
-            background: linear-gradient(135deg, #F8F5FF 0%, #EDE0FF 50%, #F5EDFF 100%);
+        /* ===== HERO BANNER ===== */
+        .hero-banner {
+            margin-top: 70px;
+            padding: 100px 40px 80px;
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(108, 12, 229, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
-        }
-        .hero .container {
+        .hero-banner .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            gap: 50px;
-            position: relative;
-            z-index: 1;
         }
-        .hero .content {
-            flex: 1;
-        }
-        .hero .content .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            color: white;
-            padding: 6px 22px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
+        .hero-banner .hero-text h1 {
+            font-size: 58px;
+            font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 20px;
         }
-        .hero .content h1 {
-            font-size: 52px;
-            font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 15px;
-        }
-        .hero .content h1 span {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+        .hero-banner .hero-text h1 span {
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .hero .content p {
+        .hero-banner .hero-text p {
             font-size: 18px;
-            color: #555;
-            max-width: 500px;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 2;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            max-width: 500px;
         }
-        .hero .content .btns {
+        .hero-banner .hero-text .hero-btns {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
+            gap: 15px;
         }
-        .hero .image {
-            flex: 0 0 340px;
-            animation: float 6s ease-in-out infinite;
+        .hero-banner .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .hero .image img {
+        .hero-banner .hero-image .img-wrapper {
             width: 100%;
-            height: 340px;
-            object-fit: cover;
+            max-width: 400px;
+            aspect-ratio: 1;
             border-radius: 30px;
-            box-shadow: 0 25px 70px rgba(108, 12, 229, 0.2);
-            border: 6px solid white;
+            overflow: hidden;
+            border: 3px solid rgba(106, 0, 255, 0.2);
+            box-shadow: 0 30px 80px rgba(106, 0, 255, 0.2);
+            animation: floatHero 6s ease-in-out infinite;
+        }
+        .hero-banner .hero-image .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: var(--transition);
         }
-        .hero .image img:hover {
-            transform: scale(1.03) rotate(-2deg);
+        .hero-banner .hero-image .img-wrapper:hover img { transform: scale(1.05); }
+        .hero-banner .hero-image .floating-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: floatBadge 4s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .hero-banner .hero-image .floating-badge:nth-child(2) {
+            top: 10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+        .hero-banner .hero-image .floating-badge:nth-child(3) {
+            bottom: 15%;
+            left: -10%;
+            animation-delay: -2s;
+        }
+        .hero-banner .hero-image .floating-badge .icon {
+            font-size: 28px;
+        }
+        .hero-banner .hero-image .floating-badge .text {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .hero-banner .hero-image .floating-badge .text small {
+            display: block;
+            font-weight: 400;
+            opacity: 0.6;
+            font-size: 11px;
         }
 
-        /* ========== BUTTONS ========== */
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        /* ===== BUTTONS ===== */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
             padding: 14px 38px;
             background: linear-gradient(135deg, var(--purple), var(--dpurple));
             color: white;
@@ -377,208 +432,119 @@
             text-decoration: none;
             border-radius: 50px;
             transition: var(--transition);
-            box-shadow: 0 8px 30px rgba(108, 12, 229, 0.3);
+            box-shadow: 0 8px 35px var(--shadow);
             border: none;
             font-size: 15px;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--lpurple), var(--purple));
+            opacity: 0;
+            transition: var(--transition);
+            border-radius: 50px;
+        }
+        .btn:hover::before { opacity: 1; }
         .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 45px rgba(108, 12, 229, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(106, 0, 255, 0.4);
         }
+        .btn span { position: relative; z-index: 1; }
         .btn-outline {
             background: transparent;
-            color: var(--purple);
-            border: 2px solid var(--purple);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: none;
         }
-        .btn-outline:hover {
-            background: var(--purple);
-            color: white;
-        }
-        .btn-pink {
-            background: linear-gradient(135deg, var(--pink), #DB2777);
-        }
+        .btn-outline::before { background: linear-gradient(135deg, var(--purple), var(--dpurple)); }
+        .btn-outline:hover { color: white; border-color: transparent; }
 
-        /* ========== FEATURES ========== */
-        .features {
-            max-width: 1100px;
-            margin: -20px auto 0;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        .feature {
-            background: white;
-            border-radius: var(--radius);
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(108, 12, 229, 0.06);
-            border: 1px solid rgba(108, 12, 229, 0.06);
-            transition: var(--transition);
-        }
-        .feature:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(108, 12, 229, 0.12);
-            border-color: var(--purple);
-        }
-        .feature .icon {
-            font-size: 36px;
-            color: var(--purple);
-            margin-bottom: 12px;
-            display: block;
-        }
-        .feature h4 {
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-        .feature p {
-            font-size: 13px;
-            color: #777;
-        }
-
-        /* ========== SECTION ========== */
-        section {
-            padding: 80px 40px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* ===== SECTION TITLES ===== */
         .section-title {
             text-align: center;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
             margin-bottom: 12px;
         }
         .section-title span {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .section-sub {
             text-align: center;
             font-size: 18px;
-            color: #777;
-            max-width: 650px;
-            margin: 0 auto 50px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 50px;
             line-height: 2;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* ========== ABOUT ========== */
-        #about {
-            background: var(--bg);
+        /* ===== FEATURES ===== */
+        .features-section {
+            padding: 60px 40px 80px;
         }
-        .about-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: start;
-        }
-        .about-text p {
-            font-size: 17px;
-            line-height: 2.4;
-            color: #444;
-            margin-bottom: 16px;
-        }
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .about-stats .stat {
-            background: white;
-            padding: 22px;
-            border-radius: 18px;
-            text-align: center;
-            border: 1px solid rgba(108, 12, 229, 0.06);
-            transition: var(--transition);
-        }
-        .about-stats .stat:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(108, 12, 229, 0.08);
-        }
-        .about-stats .stat .num {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--purple);
-        }
-        .about-stats .stat .label {
-            font-size: 14px;
-            color: #666;
-        }
-        .about-quote {
-            margin-top: 30px;
-            padding: 30px 35px;
-            background: white;
-            border-radius: var(--radius);
-            border-right: 5px solid var(--purple);
-            box-shadow: 0 4px 20px rgba(108, 12, 229, 0.04);
-        }
-        .about-quote p {
-            font-size: 18px;
-            font-weight: 500;
-            color: #333;
-            line-height: 2.2;
-        }
-
-        /* ========== SERVICES ========== */
-        #services {
-            background: white;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .service-card {
-            background: var(--bg);
-            border-radius: var(--radius);
+        .feature-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
             padding: 30px 25px;
             text-align: center;
             transition: var(--transition);
-            border: 1px solid transparent;
         }
-        .service-card:hover {
+        .feature-card:hover {
             transform: translateY(-8px);
             border-color: var(--purple);
-            box-shadow: 0 15px 50px rgba(108, 12, 229, 0.08);
+            box-shadow: 0 20px 60px rgba(106, 0, 255, 0.1);
         }
-        .service-card .icon {
-            font-size: 44px;
+        .feature-card .icon {
+            font-size: 40px;
             margin-bottom: 15px;
             display: block;
         }
-        .service-card h3 {
+        .feature-card h4 {
             font-size: 18px;
             margin-bottom: 8px;
         }
-        .service-card p {
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.6);
             font-size: 14px;
-            color: #666;
             line-height: 1.8;
         }
 
-        /* ========== PORTFOLIO ========== */
-        #portfolio {
-            background: var(--bg);
+        /* ===== PORTFOLIO ===== */
+        #works {
+            padding: 80px 40px;
             scroll-margin-top: 70px;
         }
         .filters {
+            text-align: center;
+            margin-bottom: 35px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 35px;
+            gap: 10px;
         }
         .filters button {
             padding: 10px 26px;
-            border: 2px solid var(--purple);
-            background: white;
-            color: var(--purple);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
@@ -590,18 +556,23 @@
         .filters button:hover {
             background: var(--purple);
             color: white;
+            border-color: var(--purple);
             transform: scale(1.05);
+            box-shadow: 0 6px 25px var(--shadow);
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
+            max-width: 1200px;
+            margin: auto;
         }
         .work {
-            background: white;
-            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 35px rgba(108, 12, 229, 0.06);
             transition: var(--transition);
             opacity: 0;
             transform: translateY(50px);
@@ -611,8 +582,9 @@
             transform: translateY(0);
         }
         .work:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 60px rgba(108, 12, 229, 0.15);
+            transform: translateY(-10px);
+            border-color: var(--purple);
+            box-shadow: 0 25px 60px rgba(106, 0, 255, 0.15);
         }
         .work .img-wrapper {
             overflow: hidden;
@@ -625,31 +597,31 @@
             object-fit: cover;
             transition: var(--transition);
         }
-        .work:hover .img-wrapper img {
-            transform: scale(1.08);
-        }
+        .work:hover .img-wrapper img { transform: scale(1.08); }
         .work .img-wrapper .overlay {
             position: absolute;
             inset: 0;
-            background: rgba(108, 12, 229, 0.7);
+            background: rgba(106, 0, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: var(--transition);
+        }
+        .work:hover .img-wrapper .overlay { opacity: 1; }
+        .work .img-wrapper .overlay i {
+            font-size: 40px;
             color: white;
-            font-size: 30px;
-            backdrop-filter: blur(3px);
+            transform: scale(0);
+            transition: var(--transition);
         }
-        .work:hover .img-wrapper .overlay {
-            opacity: 1;
-        }
+        .work:hover .img-wrapper .overlay i { transform: scale(1); }
         .work .work-desc {
             padding: 18px 20px 22px;
         }
         .work .work-desc h3 {
             font-size: 17px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -661,385 +633,395 @@
             color: white;
             padding: 3px 12px;
             border-radius: 50px;
+            font-weight: 500;
         }
         .work .work-desc p {
             font-size: 14px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.8;
         }
         .work .work-desc .meta {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 8px;
+            margin-top: 10px;
         }
         .work .work-desc .meta span {
             font-size: 11px;
-            background: var(--bg);
-            color: var(--purple);
+            background: rgba(106, 0, 255, 0.15);
+            color: var(--lpurple);
             padding: 3px 12px;
             border-radius: 50px;
+            font-weight: 500;
         }
 
-        /* ========== LIGHTBOX ========== */
+        /* ===== LIGHTBOX ===== */
         .lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(15, 10, 26, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
         }
-        .lightbox.show {
-            display: flex;
-        }
+        .lightbox.show { display: flex; }
         .lightbox img {
             max-width: 90%;
             max-height: 85%;
             border-radius: 16px;
-            box-shadow: 0 0 60px rgba(108, 12, 229, 0.2);
-            animation: zoom 0.5s ease;
+            animation: zoomIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 2px solid rgba(106, 0, 255, 0.2);
         }
         .lightbox .close {
             position: absolute;
             top: 25px;
             left: 35px;
             color: white;
-            font-size: 40px;
+            font-size: 45px;
             cursor: pointer;
             transition: var(--transition);
+            line-height: 1;
             width: 50px;
             height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
         }
-        .lightbox .close:hover {
-            transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        @keyframes zoom {
+        .lightbox .close:hover { transform: rotate(90deg); background: rgba(255, 255, 255, 0.15); }
+        @keyframes zoomIn {
             from { transform: scale(0.6); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* ========== PRICING ========== */
-        #pricing {
-            background: white;
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        .pricing-card {
-            background: var(--bg);
-            border-radius: var(--radius);
-            padding: 35px 30px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            position: relative;
-        }
-        .pricing-card:hover {
-            border-color: var(--purple);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(108, 12, 229, 0.08);
-        }
-        .pricing-card.popular {
-            border-color: var(--purple);
-            background: linear-gradient(135deg, var(--bg), #EDE0FF);
-        }
-        .pricing-card .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            color: white;
-            padding: 4px 20px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .pricing-card h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .pricing-card .price {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--purple);
-            margin: 10px 0;
-        }
-        .pricing-card .price small {
-            font-size: 14px;
-            font-weight: 400;
-            color: #888;
-        }
-        .pricing-card ul {
-            list-style: none;
-            text-align: right;
-            margin: 20px 0;
-            padding: 0;
-        }
-        .pricing-card ul li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(108, 12, 229, 0.06);
-            font-size: 14px;
-            color: #555;
-        }
-        .pricing-card ul li i {
-            color: var(--purple);
-            margin-left: 10px;
-        }
-        .pricing-card .btn {
-            width: 100%;
-            justify-content: center;
-        }
-
-        /* ========== TESTIMONIALS ========== */
-        #testimonials {
-            background: var(--bg);
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .testimonial {
-            background: white;
-            border-radius: var(--radius);
-            padding: 30px 25px;
-            box-shadow: 0 10px 35px rgba(108, 12, 229, 0.04);
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px;
             transition: var(--transition);
-            border: 1px solid rgba(108, 12, 229, 0.04);
         }
-        .testimonial:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 50px rgba(108, 12, 229, 0.08);
+        .testimonial-card:hover {
+            border-color: var(--purple);
+            transform: translateY(-5px);
         }
-        .testimonial .stars {
-            color: #FBBF24;
-            font-size: 16px;
+        .testimonial-card .stars {
+            color: #ffc107;
             margin-bottom: 12px;
+            font-size: 18px;
         }
-        .testimonial p {
+        .testimonial-card .text {
             font-size: 15px;
             line-height: 2;
-            color: #444;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 15px;
         }
-        .testimonial .author {
+        .testimonial-card .author {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .testimonial .author .avatar {
-            width: 44px;
-            height: 44px;
+        .testimonial-card .author .avatar {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-weight: 700;
             font-size: 18px;
         }
-        .testimonial .author .info h4 {
+        .testimonial-card .author .info .name {
+            font-weight: 600;
             font-size: 15px;
         }
-        .testimonial .author .info span {
-            font-size: 13px;
-            color: #888;
+        .testimonial-card .author .info .role {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        /* ========== BLOG ========== */
-        #blog {
-            background: white;
+        /* ===== BLOG ===== */
+        .blog-section {
+            padding: 80px 40px;
         }
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .blog-card {
-            background: var(--bg);
-            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
             overflow: hidden;
             transition: var(--transition);
         }
         .blog-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 50px rgba(108, 12, 229, 0.08);
+            border-color: var(--purple);
+            box-shadow: 0 20px 60px rgba(106, 0, 255, 0.1);
         }
-        .blog-card img {
-            width: 100%;
+        .blog-card .blog-img {
             height: 200px;
+            overflow: hidden;
+        }
+        .blog-card .blog-img img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: var(--transition);
         }
-        .blog-card .body {
-            padding: 20px 22px 25px;
+        .blog-card:hover .blog-img img { transform: scale(1.05); }
+        .blog-card .blog-content {
+            padding: 25px;
         }
-        .blog-card .body .tag {
+        .blog-card .blog-content .date {
             font-size: 12px;
-            color: var(--purple);
-            font-weight: 600;
-            background: rgba(108, 12, 229, 0.08);
-            padding: 3px 14px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .blog-card .body h3 {
-            font-size: 17px;
+            color: rgba(255, 255, 255, 0.4);
             margin-bottom: 8px;
-            cursor: pointer;
+        }
+        .blog-card .blog-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
             transition: var(--transition);
         }
-        .blog-card .body h3:hover {
-            color: var(--purple);
-        }
-        .blog-card .body p {
+        .blog-card:hover .blog-content h4 { color: var(--lpurple); }
+        .blog-card .blog-content p {
             font-size: 14px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.8;
-        }
-        .blog-card .body .read-more {
-            color: var(--purple);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 10px;
-            transition: var(--transition);
-        }
-        .blog-card .body .read-more:hover {
-            gap: 12px;
-        }
-
-        /* ========== CONTACT ========== */
-        #contact {
-            background: var(--bg);
-        }
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .contact-info h3 {
-            font-size: 24px;
             margin-bottom: 15px;
         }
-        .contact-info p {
-            color: #666;
-            line-height: 2;
-            margin-bottom: 25px;
-        }
-        .contact-info .item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-        .contact-info .item .icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--purple);
-            font-size: 20px;
-        }
-        .contact-info .item .text h4 {
-            font-size: 15px;
-        }
-        .contact-info .item .text span {
-            font-size: 14px;
-            color: #888;
-        }
-        .contact-form input,
-        .contact-form textarea,
-        .contact-form select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid rgba(108, 12, 229, 0.08);
-            border-radius: 14px;
-            font-size: 15px;
+        .blog-card .blog-content .read-more {
+            color: var(--lpurple);
+            text-decoration: none;
+            font-weight: 600;
             transition: var(--transition);
-            background: white;
-            margin-bottom: 16px;
-            font-family: Vazirmatn, sans-serif;
         }
-        .contact-form input:focus,
-        .contact-form textarea:focus,
-        .contact-form select:focus {
-            border-color: var(--purple);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(108, 12, 229, 0.06);
-        }
-        .contact-form textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        .contact-form .btn {
-            width: 100%;
-            justify-content: center;
-        }
+        .blog-card .blog-content .read-more:hover { color: white; }
 
-        /* ========== FOOTER ========== */
-        footer {
-            background: var(--dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 40px 30px;
+        /* ===== PRICING ===== */
+        .pricing-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+        .pricing-wrapper {
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: auto;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
         }
-        .footer-grid .col h4 {
-            color: white;
-            font-size: 18px;
-            margin-bottom: 15px;
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 15px;
+            min-width: 700px;
         }
-        .footer-grid .col p {
-            font-size: 14px;
-            line-height: 2;
+        .pricing-table thead {
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
         }
-        .footer-grid .col a {
-            display: block;
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            padding: 4px 0;
-            font-size: 14px;
+        .pricing-table th {
+            padding: 18px 12px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .pricing-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .pricing-table tbody tr { transition: var(--transition); }
+        .pricing-table tbody tr:hover {
+            background: rgba(106, 0, 255, 0.06);
+        }
+        .pricing-table .service-name {
+            text-align: right;
+            font-weight: 700;
+            color: var(--lpurple);
+            padding-right: 20px;
+        }
+        .pricing-table .price-high {
+            color: var(--lpurple);
+            font-weight: 700;
+        }
+        .pricing-tools {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .pricing-tools .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             transition: var(--transition);
         }
-        .footer-grid .col a:hover {
-            color: var(--lpurple);
-            padding-right: 8px;
+        .pricing-tools .tool-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--purple);
+            box-shadow: 0 8px 30px rgba(106, 0, 255, 0.1);
         }
-        .footer-bottom {
+        .pricing-tools .tool-item .icon-3d {
+            font-size: 32px;
+        }
+        .pricing-tools .tool-item span {
+            font-weight: 700;
+        }
+        .pricing-note {
             text-align: center;
-            padding-top: 30px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        /* ========== FLOAT BUTTONS ========== */
+        /* ===== CONTACT ===== */
+        #contact {
+            padding: 80px 40px;
+        }
+        .contact-box {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 50px 35px;
+            max-width: 700px;
+            margin: auto;
+        }
+        .contact-box .phone {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 16px 0;
+            direction: ltr;
+        }
+        .contact-box .channels {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+        .contact-box .ch {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        .contact-box .ch:hover {
+            background: var(--purple);
+            color: white;
+            border-color: var(--purple);
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        footer .logo .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+        }
+        footer .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, var(--lpurple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        footer .socials {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        footer .socials a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50px;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        footer .socials a:hover {
+            background: rgba(106, 0, 255, 0.15);
+            color: white;
+            border-color: var(--purple);
+        }
+        footer .copyright {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        /* ===== FLOAT BUTTONS ===== */
         .float-btns {
             position: fixed;
             bottom: 25px;
@@ -1053,299 +1035,329 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             text-decoration: none;
-            box-shadow: 0 6px 30px rgba(108, 12, 229, 0.3);
+            box-shadow: 0 6px 30px var(--shadow);
             transition: var(--transition);
         }
         .float-btns a:hover {
             transform: scale(1.15);
+            box-shadow: 0 10px 40px rgba(106, 0, 255, 0.5);
         }
 
-        /* ========== REVEAL ========== */
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 6px 30px var(--shadow);
+            transition: var(--transition);
+            z-index: 500;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(106, 0, 255, 0.5);
+        }
+
+        /* ===== REVEAL ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(50px);
+            transition: 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .reveal.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* ========== RESPONSIVE ========== */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
-            .hero .container { flex-direction: column; text-align: center; }
-            .hero .content p { max-width: 100%; }
-            .hero .content .btns { justify-content: center; }
-            .hero .image { flex: none; width: 100%; max-width: 340px; margin: 0 auto; }
-            .hero .image img { height: 280px; }
-            .about-grid { grid-template-columns: 1fr; gap: 30px; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            section { padding: 60px 20px; }
-            .hero { padding: 60px 20px 40px; }
+            .hero-banner .hero-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-banner .hero-text p { max-width: 100%; }
+            .hero-banner .hero-text .hero-btns { justify-content: center; }
+            .hero-banner .hero-image .floating-badge { display: none; }
+            .hero-banner .hero-text h1 { font-size: 42px; }
+            .top-bar .nav-links { display: none; }
+            .top-bar .menu-toggle { display: block; }
         }
         @media (max-width: 768px) {
-            .top-bar { padding: 8px 16px; flex-wrap: wrap; gap: 8px; }
-            .top-bar .right { gap: 10px; }
-            .top-bar .left { gap: 10px; flex-wrap: wrap; }
-            .top-bar .left .search-box input { width: 70px; font-size: 12px; }
-            .top-bar .left .contact-phone { font-size: 12px; padding: 4px 10px; }
-            .top-bar .logo-area .logo-text { font-size: 16px; }
-            .top-bar .logo-area .logo-icon { width: 32px; height: 32px; font-size: 14px; }
-            .hero .content h1 { font-size: 32px; }
-            .section-title { font-size: 26px; }
-            .features { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .feature { padding: 16px 12px; }
-            .gallery { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .work .img-wrapper img { height: 200px; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
+            .top-bar { padding: 10px 20px; }
+            .top-bar .logo-area .logo-text { font-size: 18px; }
+            .top-bar .logo-area .logo-icon { width: 35px; height: 35px; font-size: 16px; }
+            .hero-banner { padding: 80px 20px 50px; }
+            .hero-banner .hero-text h1 { font-size: 32px; }
+            .hero-banner .hero-text p { font-size: 15px; }
+            .hero-banner .hero-image .img-wrapper { max-width: 280px; }
+            .section-title { font-size: 28px; }
+            .features-section { padding: 40px 20px; }
+            #works { padding: 50px 20px; }
+            .gallery { grid-template-columns: 1fr; }
+            .testimonials-section { padding: 50px 20px; }
+            .blog-section { padding: 50px 20px; }
             .blog-grid { grid-template-columns: 1fr; }
-            .about-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .about-stats .stat { padding: 16px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .side-menu { width: 270px; right: -290px; }
+            .pricing-section { padding: 50px 20px; }
+            #contact { padding: 50px 20px; }
+            .contact-box { padding: 30px 20px; }
+            .contact-box .phone { font-size: 24px; }
+            .pricing-table { font-size: 12px; min-width: 500px; }
+            .pricing-table th, .pricing-table td { padding: 8px 4px; }
+            .float-btns a { width: 40px; height: 40px; font-size: 16px; }
+            .back-to-top { width: 40px; height: 40px; font-size: 18px; bottom: 80px; }
+            .mobile-menu { width: 280px; right: -290px; }
         }
         @media (max-width: 480px) {
-            .features { grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 8px; }
-            .gallery { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .contact-form input, .contact-form textarea { font-size: 14px; padding: 12px 14px; }
-            .hero .content h1 { font-size: 26px; }
-            .hero .image img { height: 200px; }
-            .float-btns a { width: 40px; height: 40px; font-size: 16px; }
+            .hero-banner .hero-text h1 { font-size: 26px; }
+            .hero-banner .hero-image .img-wrapper { max-width: 220px; }
+            .btn { padding: 10px 20px; font-size: 13px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .pricing-table { min-width: 380px; font-size: 10px; }
         }
     </style>
 </head>
 <body>
 
     <!-- ===== PRELOADER ===== -->
-    <div id="preloader">
-        <div class="loader-ring"></div>
-        <div class="loader-text">آرا گرافیک</div>
-        <div class="loader-progress"><div class="loader-progress-bar"></div></div>
+    <div class="preloader" id="preloader">
+        <div class="logo-loader">آرا گرافیک</div>
+        <div class="spinner"></div>
+        <div class="progress-bar"><div class="fill"></div></div>
+    </div>
+
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="bg-canvas">
+        <div class="gradient-orb"></div>
+        <div class="gradient-orb"></div>
+        <div class="gradient-orb"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <!-- ===== TOP BAR ===== -->
     <header class="top-bar" id="topBar">
-        <div class="right">
-            <button class="menu-toggle" onclick="toggleSideMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="logo-area" onclick="scrollToTop()">
-                <div class="logo-icon">آ</div>
-                <span class="logo-text">آرا گرافیک</span>
-            </div>
+        <div class="logo-area" onclick="location.href='#'">
+            <div class="logo-icon">آ</div>
+            <span class="logo-text">آرا گرافیک</span>
         </div>
-        <div class="left">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="جستجو...">
-            </div>
-            <a href="tel:09927131621" class="contact-phone">📞 ۰۹۹۲۷۱۳۱۶۲۱</a>
-        </div>
+        <ul class="nav-links">
+            <li><a href="#works">نمونه کارها</a></li>
+            <li><a href="#testimonials">نظرات</a></li>
+            <li><a href="#blog">وبلاگ</a></li>
+            <li><a href="#pricing">تعرفه</a></li>
+            <li><a href="#contact" class="btn-contact">تماس با من</a></li>
+        </ul>
+        <button class="menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
-    <!-- ===== SIDE MENU ===== -->
-    <div class="side-overlay" id="sideOverlay" onclick="toggleSideMenu()"></div>
-    <nav class="side-menu" id="sideMenu">
-        <button class="close-btn" onclick="toggleSideMenu()"><i class="fas fa-times"></i></button>
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
         <ul class="menu-links">
-            <li><a href="#" onclick="scrollToTop(); closeSideMenu();"><i class="fas fa-home"></i> خانه</a></li>
-            <li><a href="#about" onclick="closeSideMenu()"><i class="fas fa-user"></i> درباره من</a></li>
-            <li><a href="#services" onclick="closeSideMenu()"><i class="fas fa-cogs"></i> خدمات</a></li>
-            <li><a href="#portfolio" onclick="closeSideMenu()"><i class="fas fa-image"></i> نمونه کارها</a></li>
-            <li><a href="#pricing" onclick="closeSideMenu()"><i class="fas fa-table"></i> تعرفه</a></li>
-            <li><a href="#testimonials" onclick="closeSideMenu()"><i class="fas fa-star"></i> نظرات</a></li>
-            <li><a href="#blog" onclick="closeSideMenu()"><i class="fas fa-blog"></i> وبلاگ</a></li>
-            <li><a href="#contact" onclick="closeSideMenu()"><i class="fas fa-phone"></i> تماس</a></li>
+            <li><a href="#" onclick="toggleMobileMenu()"><i class="fas fa-home"></i> خانه</a></li>
+            <li><a href="#works" onclick="toggleMobileMenu()"><i class="fas fa-image"></i> نمونه کارها</a></li>
+            <li><a href="#testimonials" onclick="toggleMobileMenu()"><i class="fas fa-star"></i> نظرات</a></li>
+            <li><a href="#blog" onclick="toggleMobileMenu()"><i class="fas fa-blog"></i> وبلاگ</a></li>
+            <li><a href="#pricing" onclick="toggleMobileMenu()"><i class="fas fa-table"></i> تعرفه</a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()"><i class="fas fa-phone"></i> تماس با من</a></li>
         </ul>
-        <div class="menu-footer">
-            <i class="fas fa-phone" style="color:var(--purple);margin-left:8px;"></i> ۰۹۹۲۷۱۳۱۶۲۱
-            <br>
-            <span style="font-size:12px;opacity:0.6;">آرا گرافیک | طراحی حرفه‌ای</span>
-        </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="content">
-                <div class="badge">✨ طراح گرافیک حرفه‌ای</div>
-                <h1>آرا <span>گرافیک</span></h1>
-                <p>برندینگ · تایپوگرافی · تصویرسازی · طراحی هویت بصری با کیفیت بالا و خلاقیت بی‌نهایت</p>
-                <div class="btns">
-                    <a class="btn" href="#contact">ثبت سفارش <i class="fas fa-arrow-left"></i></a>
-                    <a class="btn btn-outline" href="#portfolio">نمونه کارها</a>
+    <!-- ===== HERO BANNER ===== -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>طراحی <span>گرافیک</span> حرفه‌ای<br>با خلاقیت بی‌نهایت</h1>
+                <p>برندینگ · تایپوگرافی · تصویرسازی · طراحی هویت بصری با کیفیت بالا و خلاقیت بی‌نهایت برای کسب‌وکار شما</p>
+                <div class="hero-btns">
+                    <a class="btn" href="#contact"><span>شروع همکاری</span></a>
+                    <a class="btn btn-outline" href="#works"><span>مشاهده نمونه‌کارها</span></a>
                 </div>
             </div>
-            <div class="image">
-                <img src="zinat.jpg" alt="زینت غلامی - طراح گرافیک" onerror="this.src='https://via.placeholder.com/340x340/6C0CE5/ffffff?text=آرا+گرافیک'">
+            <div class="hero-image">
+                <div class="img-wrapper">
+                    <img src="zinat.jpg" alt="زینت غلامی - طراح گرافیک" onerror="this.src='https://via.placeholder.com/400x400/6a00ff/ffffff?text=آرا+گرافیک'">
+                </div>
+                <div class="floating-badge">
+                    <span class="icon">🏆</span>
+                    <span class="text">۸ سال تجربه <small>طراحی حرفه‌ای</small></span>
+                </div>
+                <div class="floating-badge">
+                    <span class="icon">⭐</span>
+                    <span class="text">۱۵۰+ پروژه <small>رضایت مشتریان</small></span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ===== FEATURES ===== -->
-    <div class="features">
-        <div class="feature">
-            <span class="icon"><i class="fas fa-palette"></i></span>
-            <h4>طراحی اختصاصی</h4>
-            <p>هر طرح منحصربه‌فرد و متناسب با برند شما</p>
-        </div>
-        <div class="feature">
-            <span class="icon"><i class="fas fa-clock"></i></span>
-            <h4>تحویل سریع</h4>
-            <p>انجام پروژه‌ها در سریع‌ترین زمان</p>
-        </div>
-        <div class="feature">
-            <span class="icon"><i class="fas fa-users"></i></span>
-            <h4>متخصص و باتجربه</h4>
-            <p>تجربه و تخصص در کنار خلاقیت</p>
-        </div>
-        <div class="feature">
-            <span class="icon"><i class="fas fa-headset"></i></span>
-            <h4>پشتیبانی ۲۴/۷</h4>
-            <p>همیشه آنلاین برای پاسخگویی</p>
-        </div>
-    </div>
-
-    <!-- ===== ABOUT ===== -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title reveal">درباره <span>من</span></h2>
-            <p class="section-sub reveal">طراح گرافیک و متخصص هویت بصری</p>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p><strong>سلام، من زینت غلامی هستم؛</strong> طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
-                    <p>طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
-                </div>
-                <div class="about-stats reveal">
-                    <div class="stat"><div class="num">۸+</div><div class="label">سال تجربه</div></div>
-                    <div class="stat"><div class="num">۱۵۰+</div><div class="label">پروژه برندینگ</div></div>
-                    <div class="stat"><div class="num">۱۰۰%</div><div class="label">رضایت مشتری</div></div>
-                    <div class="stat"><div class="num">۲۴h</div><div class="label">پاسخگویی</div></div>
-                </div>
+    <section class="features-section">
+        <h2 class="section-title reveal">چرا <span>آرا گرافیک</span></h2>
+        <p class="section-sub reveal">خدمات حرفه‌ای طراحی گرافیک با کیفیت بالا و قیمت مناسب</p>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <span class="icon">🎨</span>
+                <h4>طراحی اختصاصی</h4>
+                <p>هر طرح منحصربه‌فرد و متناسب با برند شما طراحی می‌شود</p>
             </div>
-            <div class="about-quote reveal">
-                <p>«طراحی، پلی است میان آنچه برند می‌گوید و آنچه مخاطب احساس می‌کند. من این پل را با عشق می‌سازم.»</p>
+            <div class="feature-card reveal">
+                <span class="icon">⚡</span>
+                <h4>تحویل سریع</h4>
+                <p>انجام پروژه‌ها در سریع‌ترین زمان ممکن با کیفیت عالی</p>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== SERVICES ===== -->
-    <section id="services">
-        <div class="container">
-            <h2 class="section-title reveal">خدمات <span>من</span></h2>
-            <p class="section-sub reveal">خدمات طراحی گرافیک با کیفیت بالا و قیمت مناسب</p>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <span class="icon">🎨</span>
-                    <h3>طراحی لوگو و هویت برند</h3>
-                    <p>طراحی لوگو، هویت بصری، ست اداری و المان‌های برندینگ</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="icon">🖼️</span>
-                    <h3>طراحی چاپی</h3>
-                    <p>کارت ویزیت، تراکت، بروشور، کاتالوگ، لیبل و بسته‌بندی</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="icon">📱</span>
-                    <h3>طراحی دیجیتال</h3>
-                    <p>بنر وبسایت، پست اینستاگرام، استوری، کاور و تبلیغات آنلاین</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="icon">✏️</span>
-                    <h3>تصویرسازی و تایپوگرافی</h3>
-                    <p>تصویرسازی سفارشی، تایپوگرافی خلاقانه و المان‌های گرافیکی</p>
-                </div>
+            <div class="feature-card reveal">
+                <span class="icon">💎</span>
+                <h4>کیفیت بالا</h4>
+                <p>استفاده از بهترین ابزارها و تکنیک‌های روز طراحی</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="icon">🔄</span>
+                <h4>پشتیبانی ۲۴/۷</h4>
+                <p>همیشه آنلاین برای پاسخگویی و رفع نیازهای شما</p>
             </div>
         </div>
     </section>
 
     <!-- ===== PORTFOLIO ===== -->
-    <section id="portfolio">
-        <div class="container">
-            <h2 class="section-title reveal">نمونه <span>کارها</span></h2>
-            <p class="section-sub reveal">برخی از پروژه‌های اخیر من در حوزه‌های مختلف طراحی</p>
-            <div class="filters reveal">
-                <button class="active" onclick="filterWorks('all',this)">همه</button>
-                <button onclick="filterWorks('card',this)">کارت ویزیت</button>
-                <button onclick="filterWorks('flyer',this)">تراکت</button>
-                <button onclick="filterWorks('label',this)">لیبل</button>
-                <button onclick="filterWorks('logo',this)">لوگو</button>
+    <section id="works">
+        <h2 class="section-title reveal">نمونه <span>کارها</span></h2>
+        <p class="section-sub reveal">پروژه‌های اخیر در حوزه‌های مختلف طراحی</p>
+        <div class="filters reveal">
+            <button class="active" onclick="filterWorks('all',this)">همه</button>
+            <button onclick="filterWorks('card',this)">کارت ویزیت</button>
+            <button onclick="filterWorks('flyer',this)">تراکت</button>
+            <button onclick="filterWorks('label',this)">لیبل</button>
+            <button onclick="filterWorks('logo',this)">لوگو</button>
+            <button onclick="filterWorks('banner',this)">بنر</button>
+            <button onclick="filterWorks('poster',this)">پوستر</button>
+        </div>
+        <div class="gallery" id="gallery">
+            <div class="work" data-cat="card">
+                <div class="img-wrapper">
+                    <img src="images/card/1.jpg" alt="کارت ویزیت" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>کارت ویزیت روانشناس <span class="tag">برندینگ</span></h3>
+                    <p>طراحی مدرن و مینیمال با هویت بصری قوی</p>
+                    <div class="meta"><span>چاپ افست</span><span>بیزینس کارت</span><span>روانشناس</span></div>
+                </div>
             </div>
-            <div class="gallery" id="gallery">
-                <div class="work" data-cat="card">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/card/1.jpg" alt="کارت ویزیت روانشناس">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>کارت ویزیت روانشناس <span class="tag">برندینگ</span></h3>
-                        <p>طراحی مدرن و مینیمال</p>
-                        <div class="meta"><span>چاپ افست</span><span>بیزینس کارت</span></div>
-                    </div>
+            <div class="work" data-cat="card">
+                <div class="img-wrapper">
+                    <img src="images/card/2.jpg" alt="کارت ویزیت" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
-                <div class="work" data-cat="card">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/card/2.jpg" alt="کارت ویزیت فروشگاه موبایل">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>کارت ویزیت فروشگاه موبایل <span class="tag">لوکس</span></h3>
-                        <p>طراحی مینیمال مشکی و نارنجی</p>
-                        <div class="meta"><span>مشکی</span><span>فروشگاه</span></div>
-                    </div>
+                <div class="work-desc">
+                    <h3>کارت ویزیت فروشگاه موبایل <span class="tag">لوکس</span></h3>
+                    <p>طراحی مینیمال مشکی و نارنجی با المان‌های مدرن</p>
+                    <div class="meta"><span>مشکی</span><span>فروشگاه</span><span>موبایل</span></div>
                 </div>
-                <div class="work" data-cat="flyer">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/flyer/1.jpg" alt="تراکت تبلیغاتی">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>تراکت تبلیغاتی <span class="tag">تبلیغات</span></h3>
-                        <p>طراحی جذاب برای کافه‌ها</p>
-                        <div class="meta"><span>A4</span><span>جذاب</span></div>
-                    </div>
+            </div>
+            <div class="work" data-cat="card">
+                <div class="img-wrapper">
+                    <img src="images/card/3.jpg" alt="کارت ویزیت" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
-                <div class="work" data-cat="label">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/label/1.jpg" alt="لیبل محصول">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>لیبل محصول <span class="tag">طبیعی</span></h3>
-                        <p>طراحی لیبل با حس طبیعی و ارگانیک</p>
-                        <div class="meta"><span>مات</span><span>رنگ‌های خاکی</span></div>
-                    </div>
+                <div class="work-desc">
+                    <h3>کارت ویزیت مبلمان <span class="tag">خلاق</span></h3>
+                    <p>طراحی با ترکیب رنگ جذاب و المان‌های چوبی</p>
+                    <div class="meta"><span>سرویس خواب</span><span>سبز</span><span>مبلمان</span></div>
                 </div>
-                <div class="work" data-cat="logo">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/logo/1.jpg" alt="لوگو فروشگاه آنلاین">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>لوگو فروشگاه آنلاین <span class="tag">برندینگ</span></h3>
-                        <p>طراحی لوگو مینیمال و مدرن</p>
-                        <div class="meta"><span>برندینگ</span><span>لوگو</span></div>
-                    </div>
+            </div>
+            <div class="work" data-cat="flyer">
+                <div class="img-wrapper">
+                    <img src="images/flyer/1.jpg" alt="تراکت" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
-                <div class="work" data-cat="flyer">
-                    <div class="img-wrapper" onclick="openLB(this.querySelector('img'))">
-                        <img src="images/flyer/2.jpg" alt="تراکت رویداد">
-                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="work-desc">
-                        <h3>تراکت رویداد <span class="tag">رویداد</span></h3>
-                        <p>طراحی برای جشنواره موسیقی</p>
-                        <div class="meta"><span>A5</span><span>فانتزی</span></div>
-                    </div>
+                <div class="work-desc">
+                    <h3>تراکت تبلیغاتی <span class="tag">تبلیغات</span></h3>
+                    <p>طراحی جذاب و مدرن برای کافه‌های لوکس</p>
+                    <div class="meta"><span>A4</span><span>جذاب</span><span>کافه</span></div>
+                </div>
+            </div>
+            <div class="work" data-cat="flyer">
+                <div class="img-wrapper">
+                    <img src="images/flyer/2.jpg" alt="تراکت" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>تراکت رویداد <span class="tag">رویداد</span></h3>
+                    <p>طراحی برای جشنواره موسیقی با المان‌های گرافیکی</p>
+                    <div class="meta"><span>A5</span><span>فانتزی</span><span>جشنواره</span></div>
+                </div>
+            </div>
+            <div class="work" data-cat="label">
+                <div class="img-wrapper">
+                    <img src="images/label/1.jpg" alt="لیبل" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>لیبل محصول <span class="tag">طبیعی</span></h3>
+                    <p>طراحی لیبل با حس طبیعی و ارگانیک برای محصولات غذایی</p>
+                    <div class="meta"><span>مات</span><span>رنگ‌های خاکی</span><span>کره بادام زمینی</span></div>
+                </div>
+            </div>
+            <div class="work" data-cat="logo">
+                <div class="img-wrapper">
+                    <img src="images/logo/1.jpg" alt="لوگو" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>لوگو فروشگاه آنلاین <span class="tag">برندینگ</span></h3>
+                    <p>طراحی لوگو مینیمال و مدرن با هویت بصری قوی</p>
+                    <div class="meta"><span>برندینگ</span><span>لوگو</span><span>فروشگاه</span></div>
+                </div>
+            </div>
+            <div class="work" data-cat="banner">
+                <div class="img-wrapper">
+                    <img src="images/banner/1.jpg" alt="بنر" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>بنر تبلیغاتی <span class="tag">تبلیغات</span></h3>
+                    <p>طراحی بنر جذاب برای کمپین‌های تبلیغاتی</p>
+                    <div class="meta"><span>بنر</span><span>تبلیغات</span><span>کمپین</span></div>
+                </div>
+            </div>
+            <div class="work" data-cat="poster">
+                <div class="img-wrapper">
+                    <img src="images/poster/1.jpg" alt="پوستر" onclick="openLB(this)">
+                    <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="work-desc">
+                    <h3>پوستر سینمایی <span class="tag">هنری</span></h3>
+                    <p>طراحی پوستر با المان‌های گرافیکی و هنری</p>
+                    <div class="meta"><span>پوستر</span><span>سینما</span><span>هنری</span></div>
                 </div>
             </div>
         </div>
@@ -1357,80 +1369,41 @@
         <img id="lbImg" src="" alt="">
     </div>
 
-    <!-- ===== PRICING ===== -->
-    <section id="pricing">
-        <div class="container">
-            <h2 class="section-title reveal">تعرفه <span>طراحی</span></h2>
-            <p class="section-sub reveal">قیمت‌ها به تومان بوده و با توجه به پیچیدگی پروژه تغییر می‌کند</p>
-            <div class="pricing-grid">
-                <div class="pricing-card reveal">
-                    <h3>شروع</h3>
-                    <div class="price">۵۰۰,۰۰۰ <small>تومان</small></div>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> طراحی ساده</li>
-                        <li><i class="fas fa-check-circle"></i> ۱ مرحله بازبینی</li>
-                        <li><i class="fas fa-check-circle"></i> تحویل ۴۸ ساعته</li>
-                        <li><i class="fas fa-check-circle"></i> فایل‌های نهایی</li>
-                    </ul>
-                    <a class="btn" href="#contact">انتخاب <i class="fas fa-arrow-left"></i></a>
-                </div>
-                <div class="pricing-card popular reveal">
-                    <div class="popular-badge">محبوب</div>
-                    <h3>حرفه‌ای</h3>
-                    <div class="price">۱,۵۰۰,۰۰۰ <small>تومان</small></div>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> طراحی اختصاصی</li>
-                        <li><i class="fas fa-check-circle"></i> ۳ مرحله بازبینی</li>
-                        <li><i class="fas fa-check-circle"></i> تحویل ۲۴ ساعته</li>
-                        <li><i class="fas fa-check-circle"></i> فایل‌های لایه‌دار</li>
-                        <li><i class="fas fa-check-circle"></i> مشاوره رایگان</li>
-                    </ul>
-                    <a class="btn" href="#contact">انتخاب <i class="fas fa-arrow-left"></i></a>
-                </div>
-                <div class="pricing-card reveal">
-                    <h3>پریمیوم</h3>
-                    <div class="price">۳,۵۰۰,۰۰۰ <small>تومان</small></div>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> طراحی کامل برند</li>
-                        <li><i class="fas fa-check-circle"></i> بازبینی نامحدود</li>
-                        <li><i class="fas fa-check-circle"></i> تحویل ۱۲ ساعته</li>
-                        <li><i class="fas fa-check-circle"></i> فایل‌های کامل</li>
-                        <li><i class="fas fa-check-circle"></i> پشتیبانی یک‌ماهه</li>
-                    </ul>
-                    <a class="btn" href="#contact">انتخاب <i class="fas fa-arrow-left"></i></a>
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials-section" id="testimonials">
+        <h2 class="section-title reveal">نظرات <span>مشتریان</span></h2>
+        <p class="section-sub reveal">آنچه مشتریان درباره همکاری با من می‌گویند</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="text">"طراحی فوق‌العاده و حرفه‌ای. زینت خانم با دقت و ظرافت خاصی کار رو انجام دادن. خیلی راضی هستم."</p>
+                <div class="author">
+                    <div class="avatar">م</div>
+                    <div class="info">
+                        <div class="name">محمد رضایی</div>
+                        <div class="role">مدیر برندینگ</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== TESTIMONIALS ===== -->
-    <section id="testimonials">
-        <div class="container">
-            <h2 class="section-title reveal">نظرات <span>مشتریان</span></h2>
-            <p class="section-sub reveal">آنچه مشتریان درباره من می‌گویند</p>
-            <div class="testimonials-grid">
-                <div class="testimonial reveal">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"کیفیت طراحی‌های خانم غلامی فوق‌العاده است. کاملاً حرفه‌ای و با سلیقه، من از نتیجه کار بسیار راضی هستم."</p>
-                    <div class="author">
-                        <div class="avatar">م</div>
-                        <div class="info"><h4>محمد رضایی</h4><span>مدیر برند لباس</span></div>
+            <div class="testimonial-card reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="text">"کیفیت کار و سرعت تحویل عالی بود. قطعاً همکاری رو ادامه می‌دم و به دیگران هم توصیه می‌کنم."</p>
+                <div class="author">
+                    <div class="avatar">س</div>
+                    <div class="info">
+                        <div class="name">سارا محمدی</div>
+                        <div class="role">صاحب برند</div>
                     </div>
                 </div>
-                <div class="testimonial reveal">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"بسیار حرفه‌ای و دقیق، طراحی لوگو و هویت برند ما را دقیقاً مطابق با آنچه می‌خواستیم انجام دادند. عالی!"</p>
-                    <div class="author">
-                        <div class="avatar">س</div>
-                        <div class="info"><h4>سارا احمدی</h4><span>بنیانگذار استارتاپ</span></div>
-                    </div>
-                </div>
-                <div class="testimonial reveal">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"تحویل سریع و کیفیت عالی، از کارت ویزیت تا تراکت، همه چیز بی‌نقص بود. حتماً دوباره همکاری خواهم کرد."</p>
-                    <div class="author">
-                        <div class="avatar">ع</div>
-                        <div class="info"><h4>علی کریمی</h4><span>مدیر کافه</span></div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="text">"بسیار خلاق و دقیق. تمام نکات رو رعایت کردن و نتیجه کار فراتر از انتظارم بود."</p>
+                <div class="author">
+                    <div class="avatar">ع</div>
+                    <div class="info">
+                        <div class="name">علی کریمی</div>
+                        <div class="role">مدیر بازاریابی</div>
                     </div>
                 </div>
             </div>
@@ -1438,119 +1411,124 @@
     </section>
 
     <!-- ===== BLOG ===== -->
-    <section id="blog">
-        <div class="container">
-            <h2 class="section-title reveal">وبلاگ <span>آرا گرافیک</span></h2>
-            <p class="section-sub reveal">مطالب آموزشی و الهام‌بخش در زمینه طراحی گرافیک</p>
-            <div class="blog-grid">
-                <div class="blog-card reveal">
-                    <img src="https://via.placeholder.com/600x400/6C0CE5/ffffff?text=طراحی+لوگو" alt="طراحی لوگو">
-                    <div class="body">
-                        <span class="tag">آموزشی</span>
-                        <h3>۱۰ نکته طلایی برای طراحی لوگو</h3>
-                        <p>طراحی لوگو یکی از مهم‌ترین مراحل برندینگ است. در این مقاله با اصول کلیدی طراحی لوگو آشنا می‌شوید...</p>
-                        <a href="#" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
-                    </div>
+    <section class="blog-section" id="blog">
+        <h2 class="section-title reveal">وبلاگ <span>آموزشی</span></h2>
+        <p class="section-sub reveal">مقالات آموزشی در حوزه طراحی گرافیک</p>
+        <div class="blog-grid">
+            <div class="blog-card reveal">
+                <div class="blog-img">
+                    <img src="blog/1.jpg" alt="آموزش طراحی" onerror="this.src='https://via.placeholder.com/600x400/6a00ff/ffffff?text=آموزش+طراحی'">
                 </div>
-                <div class="blog-card reveal">
-                    <img src="https://via.placeholder.com/600x400/EC4899/ffffff?text=رنگ+در+طراحی" alt="رنگ در طراحی">
-                    <div class="body">
-                        <span class="tag">الهام‌بخش</span>
-                        <h3>روان‌شناسی رنگ در طراحی گرافیک</h3>
-                        <p>رنگ‌ها تأثیر مستقیمی بر احساسات و تصمیمات مخاطب دارند. با روان‌شناسی رنگ‌ها و کاربرد آنها آشنا شوید...</p>
-                        <a href="#" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
-                    </div>
+                <div class="blog-content">
+                    <div class="date">۲۵ تیر ۱۴۰۴</div>
+                    <h4>۱۰ اصل طراحی لوگوی حرفه‌ای</h4>
+                    <p>اصول کلیدی و نکات مهم در طراحی لوگو که هر طراح باید بداند...</p>
+                    <a href="#" class="read-more">ادامه مطلب →</a>
                 </div>
-                <div class="blog-card reveal">
-                    <img src="https://via.placeholder.com/600x400/A855F7/ffffff?text=برندینگ" alt="برندینگ">
-                    <div class="body">
-                        <span class="tag">برندینگ</span>
-                        <h3>چگونه یک برند ماندگار بسازیم؟</h3>
-                        <p>برندینگ فراتر از یک لوگو است. در این مقاله با مراحل ساخت یک برند موفق و ماندگار آشنا می‌شوید...</p>
-                        <a href="#" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
-                    </div>
+            </div>
+            <div class="blog-card reveal">
+                <div class="blog-img">
+                    <img src="blog/2.jpg" alt="آموزش تایپوگرافی" onerror="this.src='https://via.placeholder.com/600x400/a855f7/ffffff?text=تایپوگرافی'">
+                </div>
+                <div class="blog-content">
+                    <div class="date">۱۸ تیر ۱۴۰۴</div>
+                    <h4>راهنمای کامل تایپوگرافی در طراحی</h4>
+                    <p>انتخاب فونت مناسب و اصول چیدمان حروف در طراحی گرافیک...</p>
+                    <a href="#" class="read-more">ادامه مطلب →</a>
+                </div>
+            </div>
+            <div class="blog-card reveal">
+                <div class="blog-img">
+                    <img src="blog/3.jpg" alt="رنگ‌شناسی" onerror="this.src='https://via.placeholder.com/600x400/6a00ff/ffffff?text=رنگ+شناسی'">
+                </div>
+                <div class="blog-content">
+                    <div class="date">۱۲ تیر ۱۴۰۴</div>
+                    <h4>روانشناسی رنگ در طراحی گرافیک</h4>
+                    <p>تاثیر رنگ‌ها در جذب مخاطب و انتقال پیام برند...</p>
+                    <a href="#" class="read-more">ادامه مطلب →</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== PRICING ===== -->
+    <section class="pricing-section" id="pricing">
+        <h2 class="section-title reveal">تعرفه <span>طراحی گرافیک</span></h2>
+        <p class="section-sub reveal">قیمت‌ها به تومان بوده و با توجه به پیچیدگی پروژه تغییر می‌کند</p>
+        <div class="pricing-wrapper reveal">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>خدمات</th>
+                        <th>ساده</th>
+                        <th>معمولی</th>
+                        <th>سطح بالا</th>
+                        <th>حرفه‌ای</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="service-name">لوگو / آیکن / پروفایل</td><td>۱,۵۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰</td><td>۴,۹۰۰,۰۰۰</td><td class="price-high">۷,۰۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">ست اداری</td><td>۳,۰۰۰,۰۰۰</td><td>۴,۵۰۰,۰۰۰</td><td>۷,۹۰۰,۰۰۰</td><td class="price-high">۹,۰۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">بنر وبسایت</td><td>۶۰۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td class="price-high">۱,۸۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">پست / استوری / کاور</td><td>۴۰۰,۰۰۰</td><td>۵۵۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td class="price-high">۱,۲۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">بنر / پوستر تبلیغاتی</td><td>۵۵۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰</td><td class="price-high">۱,۷۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">بیزینس کارت / کارت ویزیت</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td class="price-high">۵۰۰,۰۰۰</td></tr>
+                    <tr><td class="service-name">بروشور / کاتالوگ (هر صفحه)</td><td>۱۹۰,۰۰۰</td><td>۲۳۰,۰۰۰</td><td>۲۹۰,۰۰۰</td><td class="price-high">۴۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">اینفوگرافیک</td><td>۹۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۹۰۰,۰۰۰</td><td class="price-high">۲,۵۰۰,۰۰۰+</td></tr>
+                    <tr><td class="service-name">کارت ویزیت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
+                    <tr><td class="service-name">تراکت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pricing-tools reveal">
+            <div class="tool-item">
+                <span class="icon-3d">🎨</span>
+                <span>Adobe Photoshop</span>
+            </div>
+            <div class="tool-item">
+                <span class="icon-3d">✏️</span>
+                <span>Adobe Illustrator</span>
+            </div>
+            <div class="tool-item">
+                <span class="icon-3d">🖌️</span>
+                <span>طراحی حرفه‌ای</span>
+            </div>
+        </div>
+        <div class="pricing-note reveal">
+            <i class="fas fa-info-circle"></i> تمامی قیمت‌ها به تومان بوده و با توجه به پیچیدگی و نیازهای خاص پروژه، قابل مذاکره و تغییر هستند.
+        </div>
+    </section>
+
     <!-- ===== CONTACT ===== -->
     <section id="contact">
-        <div class="container">
-            <h2 class="section-title reveal">تماس <span>با من</span></h2>
-            <p class="section-sub reveal">برای مشاوره رایگان و ثبت سفارش با من در ارتباط باشید</p>
-            <div class="contact-wrapper">
-                <div class="contact-info reveal">
-                    <h3>ارتباط مستقیم</h3>
-                    <p>من همیشه آنلاین هستم تا به سوالات شما پاسخ دهم و پروژه‌تان را شروع کنیم.</p>
-                    <div class="item">
-                        <div class="icon"><i class="fas fa-phone"></i></div>
-                        <div class="text"><h4>تلفن</h4><span>۰۹۹۲۷۱۳۱۶۲۱</span></div>
-                    </div>
-                    <div class="item">
-                        <div class="icon"><i class="fas fa-envelope"></i></div>
-                        <div class="text"><h4>ایمیل</h4><span>info@aragraphic.ir</span></div>
-                    </div>
-                    <div class="item">
-                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="text"><h4>آدرس</h4><span>تهران، ایران</span></div>
-                    </div>
-                    <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
-                        <a href="https://t.me/ara_graphic1" target="_blank" class="btn" style="padding:10px 20px;font-size:13px;">✈️ تلگرام</a>
-                        <a href="https://bale.ai/Gholami_graphist" target="_blank" class="btn btn-pink" style="padding:10px 20px;font-size:13px;">💬 بله</a>
-                        <a href="https://instagram.com/ara_graphic1" target="_blank" class="btn btn-outline" style="padding:10px 20px;font-size:13px;">📷 اینستاگرام</a>
-                    </div>
-                </div>
-                <form class="contact-form reveal" onsubmit="event.preventDefault(); alert('پیام شما با موفقیت ارسال شد!');">
-                    <input type="text" placeholder="نام و نام خانوادگی" required>
-                    <input type="email" placeholder="ایمیل" required>
-                    <input type="tel" placeholder="شماره تماس" required>
-                    <select>
-                        <option>نوع خدمات مورد نظر</option>
-                        <option>طراحی لوگو</option>
-                        <option>طراحی کارت ویزیت</option>
-                        <option>طراحی تراکت</option>
-                        <option>طراحی لیبل</option>
-                        <option>طراحی دیجیتال</option>
-                        <option>سایر</option>
-                    </select>
-                    <textarea placeholder="توضیحات پروژه..." required></textarea>
-                    <button type="submit" class="btn">ارسال پیام <i class="fas fa-arrow-left"></i></button>
-                </form>
+        <div class="contact-box reveal">
+            <h2 class="section-title" style="margin-bottom:8px;">تماس <span>با من</span></h2>
+            <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:2;">برای مشاوره رایگان و ثبت سفارش با من در ارتباط باشید</p>
+            <div class="phone">۰۹۹۲۷۱۳۱۶۲۱</div>
+            <a class="btn" href="tel:09927131621" style="margin-top:8px;"><span>📞 تماس مستقیم</span></a>
+            <div class="channels">
+                <a class="ch" href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
+                <a class="ch" href="https://bale.ai/Gholami_graphist" target="_blank">💬 بله</a>
+                <a class="ch" href="#">📱 ایتا</a>
+                <a class="ch" href="https://instagram.com/ara_graphic1" target="_blank">📷 اینستاگرام</a>
             </div>
         </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer>
-        <div class="footer-grid">
-            <div class="col">
-                <h4>آرا گرافیک</h4>
-                <p>طراحی گرافیک حرفه‌ای با کیفیت بالا و خلاقیت بی‌نهایت. برندینگ، تایپوگرافی، تصویرسازی و طراحی هویت بصری.</p>
-            </div>
-            <div class="col">
-                <h4>دسترسی سریع</h4>
-                <a href="#about">درباره من</a>
-                <a href="#services">خدمات</a>
-                <a href="#portfolio">نمونه کارها</a>
-                <a href="#pricing">تعرفه</a>
-            </div>
-            <div class="col">
-                <h4>شبکه‌های اجتماعی</h4>
-                <a href="https://instagram.com/ara_graphic1" target="_blank">اینستاگرام</a>
-                <a href="https://t.me/ara_graphic1" target="_blank">تلگرام</a>
-                <a href="https://bale.ai/Gholami_graphist" target="_blank">بله</a>
-                <a href="#">ایتا</a>
-            </div>
-            <div class="col">
-                <h4>تماس</h4>
-                <a href="tel:09927131621">📞 ۰۹۹۲۷۱۳۱۶۲۱</a>
-                <a href="mailto:info@aragraphic.ir">📧 info@aragraphic.ir</a>
-            </div>
+        <div class="logo">
+            <div class="logo-icon">آ</div>
+            <span class="logo-text">آرا گرافیک</span>
         </div>
-        <div class="footer-bottom">
-            <p>© ۲۰۲۴ تمامی حقوق برای آرا گرافیک محفوظ است. | طراحی شده با ❤️</p>
+        <p style="opacity:.6;margin-bottom:14px;font-size:15px;">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
+        <div class="socials">
+            <a href="https://instagram.com/ara_graphic1" target="_blank">📷 اینستاگرام</a>
+            <a href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
+            <a href="https://bale.ai/Gholami_graphist" target="_blank">💬 بله</a>
+            <a href="#">📱 ایتا</a>
         </div>
+        <p class="copyright">© تمامی حقوق برای آرا گرافیک محفوظ است.</p>
     </footer>
 
     <!-- ===== FLOAT BUTTONS ===== -->
@@ -1558,37 +1536,44 @@
         <a href="tel:09927131621" title="تماس">📞</a>
         <a href="https://t.me/ara_graphic1" target="_blank" title="تلگرام">✈️</a>
         <a href="https://instagram.com/ara_graphic1" target="_blank" title="اینستاگرام">📷</a>
-        <a href="#" title="بالا" onclick="scrollToTop(); return false;">⬆</a>
     </div>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
         // ===== PRELOADER =====
         window.addEventListener('load', function() {
-            setTimeout(() => document.getElementById('preloader').classList.add('hide'), 1000);
+            setTimeout(function() {
+                document.getElementById('preloader').classList.add('hide');
+            }, 1200);
         });
 
-        // ===== SIDE MENU =====
-        function toggleSideMenu() {
-            document.getElementById('sideMenu').classList.toggle('open');
-            document.getElementById('sideOverlay').classList.toggle('show');
-            document.body.style.overflow = document.getElementById('sideMenu').classList.contains('open') ? 'hidden' : 'auto';
+        // ===== MOBILE MENU =====
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('show');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : 'auto';
         }
 
-        function closeSideMenu() {
-            document.getElementById('sideMenu').classList.remove('open');
-            document.getElementById('sideOverlay').classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-
-        // ===== SCROLL TO TOP =====
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            closeSideMenu();
-        }
-
-        // ===== TOP BAR SCROLL EFFECT =====
+        // ===== TOP BAR SCROLL =====
         window.addEventListener('scroll', function() {
-            document.getElementById('topBar').classList.toggle('scrolled', window.scrollY > 20);
+            const topBar = document.getElementById('topBar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 20) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
         });
 
         // ===== FILTER GALLERY =====
@@ -1600,14 +1585,24 @@
             works.forEach(w => {
                 if (cat === 'all' || w.dataset.cat === cat) {
                     w.style.display = 'block';
-                    setTimeout(() => w.classList.add('show'), delay);
+                    setTimeout(() => { w.classList.add('show') }, delay);
                     delay += 100;
                 } else {
                     w.classList.remove('show');
-                    setTimeout(() => w.style.display = 'none', 400);
+                    setTimeout(() => { w.style.display = 'none' }, 400);
                 }
             });
         }
+
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.work').forEach((w, i) => {
+                setTimeout(() => { w.classList.add('show') }, i * 80);
+            });
+            document.querySelectorAll('.reveal').forEach(el => {
+                let top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) { el.classList.add('show') }
+            });
+        });
 
         // ===== LIGHTBOX =====
         function openLB(img) {
@@ -1623,27 +1618,20 @@
             }
         }
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeLB({ target: document.getElementById('lightbox') });
+            if (e.key === 'Escape') { closeLB({ target: document.getElementById('lightbox') }) }
         });
 
         // ===== REVEAL ON SCROLL =====
         const revealItems = document.querySelectorAll('.reveal');
         const revealOnScroll = () => {
             revealItems.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 80) {
-                    el.classList.add('show');
-                }
+                let top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) { el.classList.add('show') }
             });
         };
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
-
-        // ===== INITIAL LOAD =====
-        window.addEventListener('load', function() {
-            document.querySelectorAll('.work').forEach((w, i) => {
-                setTimeout(() => w.classList.add('show'), i * 80);
-            });
-        });
     </script>
+
 </body>
 </html>
