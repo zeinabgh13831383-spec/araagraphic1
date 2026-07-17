@@ -68,7 +68,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer;
         }
         .top-bar .logo-area img {
             height: 40px;
@@ -215,7 +214,7 @@
             display: block;
         }
 
-        /* ===== بنر اصلی (مثل سایت tarhkohan) ===== */
+        /* ===== بنر اصلی ===== */
         .hero-main {
             margin-top: 60px;
             background: linear-gradient(135deg, #f5edff 0%, #ede0ff 40%, #f8f5ff 100%);
@@ -246,7 +245,7 @@
         }
         .hero-main .hero-text {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
         .hero-main .hero-text .badge {
             display: inline-block;
@@ -261,7 +260,7 @@
             animation: slideR 0.8s ease;
         }
         .hero-main .hero-text h1 {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 900;
             color: #1a1a2e;
             line-height: 1.2;
@@ -274,7 +273,7 @@
             background-clip: text;
         }
         .hero-main .hero-text p {
-            font-size: 18px;
+            font-size: 17px;
             color: #555;
             margin: 16px 0 25px;
             max-width: 550px;
@@ -288,13 +287,13 @@
             animation: slideR 1.4s ease;
         }
         .hero-main .hero-image {
-            flex: 0 0 380px;
+            flex: 0 0 340px;
             animation: floatHero 6s ease-in-out infinite;
             position: relative;
         }
         .hero-main .hero-image img {
             width: 100%;
-            height: 380px;
+            height: 340px;
             object-fit: cover;
             border-radius: 30px;
             box-shadow: 0 25px 70px var(--shadow);
@@ -326,11 +325,11 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* ===== آیکون‌های زیر بنر (مثل tarhkohan) ===== */
+        /* ===== آیکون‌های زیر بنر ===== */
         .feature-icons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
             max-width: 1100px;
             margin: -20px auto 0;
             padding: 0 20px;
@@ -340,7 +339,7 @@
         .feature-icon-item {
             background: var(--white);
             border-radius: 20px;
-            padding: 25px 20px;
+            padding: 22px 18px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(106, 0, 255, 0.08);
             border: 1px solid rgba(106, 0, 255, 0.06);
@@ -353,9 +352,9 @@
             border-color: var(--purple);
         }
         .feature-icon-item .icon {
-            font-size: 38px;
+            font-size: 32px;
             color: var(--purple);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
             transition: 0.4s;
         }
@@ -363,14 +362,14 @@
             transform: scale(1.1) rotate(-5deg);
         }
         .feature-icon-item h4 {
-            font-size: 18px;
+            font-size: 16px;
             color: #1a1a2e;
             margin-bottom: 4px;
         }
         .feature-icon-item p {
-            font-size: 14px;
+            font-size: 13px;
             color: #777;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* ===== دکمه‌ها ===== */
@@ -423,9 +422,83 @@
             color: white;
         }
 
-        /* ===== بقیه بخش‌ها ===== */
-        .main-content.hide {
-            display: none;
+        /* ===== بنر پورتفولیو (مستطیل عریض) ===== */
+        .portfolio-banner {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+        }
+        .portfolio-banner .banner-box {
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            border-radius: 30px;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 25px;
+            box-shadow: 0 15px 50px rgba(106, 0, 255, 0.25);
+            cursor: pointer;
+            transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            min-height: 80px;
+        }
+        .portfolio-banner .banner-box::before {
+            content: '🖼️';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            opacity: 0.1;
+        }
+        .portfolio-banner .banner-box::after {
+            content: '✨';
+            position: absolute;
+            left: 20px;
+            bottom: 10px;
+            font-size: 40px;
+            opacity: 0.08;
+        }
+        .portfolio-banner .banner-box:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 60px rgba(106, 0, 255, 0.35);
+        }
+        .portfolio-banner .banner-box .text {
+            color: white;
+            z-index: 1;
+        }
+        .portfolio-banner .banner-box .text h3 {
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .portfolio-banner .banner-box .text p {
+            font-size: 15px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+        .portfolio-banner .banner-box .arrow-btn {
+            background: white;
+            color: var(--purple);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.4s;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        .portfolio-banner .banner-box .arrow-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            background: #f0e6ff;
         }
 
         /* ===== درباره من ===== */
@@ -681,7 +754,7 @@
             margin: 0 auto;
             background: linear-gradient(135deg, var(--purple), var(--dpurple));
             border-radius: 30px;
-            padding: 45px 50px;
+            padding: 40px 45px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -700,7 +773,7 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 70px;
+            font-size: 60px;
             opacity: 0.08;
         }
         .pricing-cta-card::after {
@@ -708,7 +781,7 @@
             position: absolute;
             left: 20px;
             bottom: 10px;
-            font-size: 50px;
+            font-size: 40px;
             opacity: 0.06;
         }
         .pricing-cta-card:hover {
@@ -720,12 +793,12 @@
             z-index: 1;
         }
         .pricing-cta-card .text h3 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             letter-spacing: 0.5px;
         }
         .pricing-cta-card .text p {
-            font-size: 16px;
+            font-size: 15px;
             opacity: 0.85;
             margin-top: 4px;
         }
@@ -735,7 +808,7 @@
             padding: 14px 35px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             border: none;
             cursor: pointer;
             transition: 0.4s;
@@ -743,7 +816,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
         .pricing-cta-card .cta-btn:hover {
             transform: translateX(-5px);
@@ -789,7 +862,7 @@
             margin-bottom: 40px;
         }
         .pricing-page .pricing-header h2 {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 800;
             color: #1a1a2e;
         }
@@ -866,14 +939,14 @@
             text-align: center;
             background: white;
             border-radius: 30px;
-            padding: 55px 40px;
+            padding: 50px 35px;
             border: 2px solid rgba(106, 0, 255, 0.08);
             max-width: 700px;
             margin: auto;
             box-shadow: 0 4px 30px rgba(106, 0, 255, 0.04);
         }
         .contact-box .phone {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 900;
             color: var(--purple);
             margin: 16px 0;
@@ -887,7 +960,7 @@
             margin-top: 22px;
         }
         .contact-box .ch {
-            padding: 12px 26px;
+            padding: 12px 24px;
             background: var(--bg);
             border: 2px solid var(--purple);
             border-radius: 50px;
@@ -911,11 +984,19 @@
             padding: 40px;
         }
         footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             justify-content: center;
             margin-bottom: 8px;
         }
+        footer .logo img {
+            height: 36px;
+        }
         footer .logo-text {
             color: white;
+            font-size: 20px;
+            font-weight: 900;
         }
         footer .socials {
             display: flex;
@@ -928,7 +1009,7 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 20px;
+            padding: 8px 18px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50px;
             transition: 0.4s;
@@ -950,8 +1031,8 @@
             z-index: 500;
         }
         .float-btns a {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--purple), var(--dpurple));
             color: white;
@@ -994,7 +1075,7 @@
         }
         .section-title {
             text-align: center;
-            font-size: 36px;
+            font-size: 34px;
             font-weight: 800;
             color: #1a1a2e;
             margin-bottom: 12px;
@@ -1016,13 +1097,13 @@
         /* ===== ریسپانسیو ===== */
         @media (max-width: 992px) {
             .hero-main .hero-text h1 {
-                font-size: 40px;
+                font-size: 38px;
             }
             .hero-main .hero-image {
-                flex: 0 0 300px;
+                flex: 0 0 280px;
             }
             .hero-main .hero-image img {
-                height: 300px;
+                height: 280px;
             }
             .about-grid {
                 grid-template-columns: 1fr;
@@ -1032,26 +1113,44 @@
         @media (max-width: 768px) {
             .top-bar {
                 padding: 8px 16px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .top-bar .right {
+                gap: 10px;
+            }
+            .top-bar .left {
+                gap: 10px;
             }
             .top-bar .left .search-box input {
-                width: 100px;
+                width: 80px;
+                font-size: 12px;
             }
             .top-bar .left .contact-phone {
-                font-size: 13px;
-                padding: 4px 12px;
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+            .top-bar .logo-area .logo-text {
+                font-size: 16px;
+            }
+            .top-bar .logo-area img {
+                height: 32px;
             }
             .hero-main {
                 padding: 40px 20px 30px;
+                margin-top: 70px;
             }
             .hero-main .hero-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 25px;
             }
             .hero-main .hero-text h1 {
-                font-size: 32px;
+                font-size: 30px;
             }
             .hero-main .hero-text p {
                 max-width: 100%;
+                font-size: 15px;
             }
             .hero-main .hero-text .hero-btns {
                 justify-content: center;
@@ -1063,8 +1162,8 @@
                 justify-content: center;
             }
             .hero-main .hero-image img {
-                width: 280px;
-                height: 280px;
+                width: 220px;
+                height: 220px;
             }
             .hero-main .hero-image::before {
                 display: none;
@@ -1072,82 +1171,199 @@
             .feature-icons {
                 grid-template-columns: 1fr 1fr;
                 margin-top: -10px;
-                gap: 15px;
+                gap: 12px;
+                padding: 0 12px;
             }
-            .pricing-cta-card {
-                padding: 30px 20px;
+            .feature-icon-item {
+                padding: 16px 12px;
+            }
+            .feature-icon-item .icon {
+                font-size: 26px;
+            }
+            .feature-icon-item h4 {
+                font-size: 14px;
+            }
+            .feature-icon-item p {
+                font-size: 12px;
+            }
+            .portfolio-banner {
+                padding: 0 12px;
+                margin-top: 25px;
+            }
+            .portfolio-banner .banner-box {
+                padding: 20px 20px;
                 flex-direction: column;
                 text-align: center;
+                min-height: auto;
             }
-            .pricing-cta-card .text h3 {
-                font-size: 22px;
+            .portfolio-banner .banner-box .text h3 {
+                font-size: 18px;
+            }
+            .portfolio-banner .banner-box .text p {
+                font-size: 13px;
+            }
+            .portfolio-banner .banner-box .arrow-btn {
+                padding: 10px 22px;
+                font-size: 13px;
             }
             .section-title {
-                font-size: 26px;
+                font-size: 24px;
             }
             section {
                 padding: 50px 20px;
             }
+            .about-grid {
+                gap: 25px;
+            }
+            .about-text p {
+                font-size: 15px;
+                text-align: center;
+            }
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .about-stats .item {
+                padding: 16px;
+            }
+            .about-stats .item .num {
+                font-size: 24px;
+            }
+            .about-quote {
+                padding: 20px;
+            }
+            .about-quote p {
+                font-size: 16px;
+            }
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 18px;
+                gap: 15px;
             }
             .work .img-wrapper img {
                 height: 200px;
             }
-            .about-stats {
-                grid-template-columns: 1fr 1fr;
+            .work .work-desc {
+                padding: 14px 16px 18px;
+            }
+            .work .work-desc h3 {
+                font-size: 15px;
+            }
+            .pricing-cta-section {
+                padding: 40px 20px;
+            }
+            .pricing-cta-card {
+                padding: 25px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .pricing-cta-card .text h3 {
+                font-size: 20px;
+            }
+            .pricing-cta-card .text p {
+                font-size: 14px;
+            }
+            .pricing-cta-card .cta-btn {
+                padding: 10px 24px;
+                font-size: 13px;
             }
             .pricing-page {
                 padding: 80px 16px 40px;
             }
+            .pricing-page .pricing-header h2 {
+                font-size: 26px;
+            }
             .pricing-page .price-table {
-                font-size: 12px;
-                min-width: 600px;
+                font-size: 11px;
+                min-width: 500px;
             }
             .pricing-page .price-table th,
             .pricing-page .price-table td {
-                padding: 10px 6px;
+                padding: 8px 4px;
             }
-            .side-menu {
-                width: 280px;
-                right: -300px;
+            .pricing-page .back-home {
+                font-size: 13px;
+                padding: 8px 16px;
             }
-            .top-bar .logo-area .logo-text {
-                font-size: 18px;
+            .contact-box {
+                padding: 30px 20px;
             }
             .contact-box .phone {
-                font-size: 26px;
+                font-size: 24px;
+            }
+            .contact-box .ch {
+                padding: 10px 18px;
+                font-size: 12px;
             }
             .float-btns a {
-                width: 44px;
-                height: 44px;
-                font-size: 17px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
             footer {
                 padding: 30px 20px;
             }
             footer .socials a {
                 font-size: 12px;
-                padding: 6px 14px;
+                padding: 6px 12px;
+            }
+            .side-menu {
+                width: 270px;
+                right: -290px;
             }
         }
         @media (max-width: 480px) {
+            .top-bar .left .search-box input {
+                width: 50px;
+                font-size: 11px;
+                padding: 4px 6px;
+            }
+            .top-bar .left .contact-phone {
+                font-size: 10px;
+                padding: 3px 6px;
+            }
+            .top-bar .right .menu-toggle {
+                font-size: 20px;
+            }
+            .top-bar .logo-area .logo-text {
+                font-size: 14px;
+            }
+            .top-bar .logo-area img {
+                height: 28px;
+            }
             .hero-main .hero-text h1 {
                 font-size: 26px;
             }
             .hero-main .hero-image img {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
             }
             .feature-icons {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                padding: 0 8px;
+            }
+            .feature-icon-item {
+                padding: 12px 8px;
+                border-radius: 14px;
+            }
+            .feature-icon-item .icon {
+                font-size: 22px;
+            }
+            .feature-icon-item h4 {
+                font-size: 13px;
+            }
+            .feature-icon-item p {
+                font-size: 11px;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 13px;
             }
             .gallery {
                 grid-template-columns: 1fr;
             }
             .work .img-wrapper img {
-                height: 220px;
+                height: 200px;
             }
             .about-stats {
                 grid-template-columns: 1fr;
@@ -1155,24 +1371,9 @@
             .pricing-cta-card .text h3 {
                 font-size: 18px;
             }
-            .pricing-cta-card .cta-btn {
-                padding: 10px 22px;
-                font-size: 14px;
-            }
-            .top-bar .left .search-box input {
-                width: 70px;
-                font-size: 12px;
-            }
-            .top-bar .left .contact-phone {
-                font-size: 11px;
-                padding: 3px 8px;
-            }
-            .btn {
-                padding: 10px 22px;
-                font-size: 13px;
-            }
-            .contact-box {
-                padding: 30px 20px;
+            .pricing-page .price-table {
+                min-width: 380px;
+                font-size: 10px;
             }
         }
     </style>
@@ -1220,7 +1421,7 @@
     <!-- ===== بخش اصلی محتوا ===== -->
     <div class="main-content" id="mainContent">
 
-        <!-- ===== بنر اصلی (مثل tarhkohan) ===== -->
+        <!-- ===== بنر اصلی ===== -->
         <section class="hero-main">
             <div class="hero-content">
                 <div class="hero-text">
@@ -1233,17 +1434,17 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="zinat.jpg" alt="زینت غلامی - طراح گرافیک" onerror="this.src='https://via.placeholder.com/380x380/6a00ff/ffffff?text=آرا+گرافیک'">
+                    <img src="zinat.jpg" alt="زینت غلامی - طراح گرافیک" onerror="this.src='https://via.placeholder.com/340x340/6a00ff/ffffff?text=آرا+گرافیک'">
                 </div>
             </div>
         </section>
 
-        <!-- ===== آیکون‌های زیر بنر (مثل tarhkohan) ===== -->
+        <!-- ===== آیکون‌های زیر بنر ===== -->
         <div class="feature-icons">
             <div class="feature-icon-item">
                 <span class="icon"><i class="fas fa-palette"></i></span>
                 <h4>طراحی اختصاصی</h4>
-                <p>هر طرح منحصربه‌فرد و متناسب با هویت برند شما</p>
+                <p>هر طرح منحصربه‌فرد و متناسب با برند شما</p>
             </div>
             <div class="feature-icon-item">
                 <span class="icon"><i class="fas fa-clock"></i></span>
@@ -1258,8 +1459,21 @@
             <div class="feature-icon-item">
                 <span class="icon"><i class="fas fa-headset"></i></span>
                 <h4>پشتیبانی ۲۴/۷</h4>
-                <p>همیشه آنلاین برای پاسخگویی به سوالات شما</p>
+                <p>همیشه آنلاین برای پاسخگویی به شما</p>
             </div>
+        </div>
+
+        <!-- ===== بنر پورتفولیو (مستطیل عریض) ===== -->
+        <div class="portfolio-banner">
+            <a href="#" class="banner-box" target="_blank">
+                <div class="text">
+                    <h3>🖼️ گالری نمونه کارها</h3>
+                    <p>مشاهده پروژه‌های طراحی من در پوشه پورتفولیو</p>
+                </div>
+                <button class="arrow-btn">
+                    <i class="fas fa-arrow-left"></i> مشاهده گالری
+                </button>
+            </a>
         </div>
 
         <!-- ===== درباره من ===== -->
@@ -1271,6 +1485,7 @@
                     <div class="about-text reveal">
                         <p><strong>سلام، من زینت غلامی هستم؛</strong> طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
                         <p>طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
+                        <p>در طول سال‌های فعالیت حرفه‌ای، با برندها، کسب‌وکارها و مجموعه‌های مختلف همکاری کرده‌ام و همواره تلاش کرده‌ام میان زیبایی بصری، کاربردپذیری و اهداف تجاری تعادل ایجاد کنم. هر پروژه را با تحقیق، دقت و توجه به جزئیات آغاز می‌کنم تا نتیجه نهایی نه‌تنها چشم‌نواز، بلکه مؤثر و ماندگار باشد.</p>
                     </div>
                     <div class="about-stats reveal">
                         <div class="item"><div class="num">۸+</div><div class="label">سال تجربه</div></div>
@@ -1389,9 +1604,9 @@
 
         <!-- ===== فوتر ===== -->
         <footer>
-            <div class="logo" style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;">
+            <div class="logo">
                 <img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
-                <span class="logo-text" style="display:none;color:white;font-size:24px;font-weight:900;">آرا گرافیک</span>
+                <span class="logo-text" style="display:none">آرا گرافیک</span>
             </div>
             <p style="opacity:.8;margin-bottom:14px;font-size:15px;">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
             <div class="socials">
