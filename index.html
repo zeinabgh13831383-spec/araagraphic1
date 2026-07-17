@@ -30,85 +30,6 @@
             cursor: default;
         }
 
-        /* ===== پس‌زمینه سه‌بعدی ابزارهای گرافیکی ===== */
-        .bg-3d-tools {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-            opacity: 0.5;
-        }
-        .bg-3d-tools .tool-3d {
-            position: absolute;
-            font-size: 60px;
-            animation: float3D 20s infinite ease-in-out;
-            filter: drop-shadow(0 10px 30px rgba(106, 0, 255, 0.15));
-            opacity: 0.15;
-        }
-        .bg-3d-tools .tool-3d:nth-child(1) {
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-            font-size: 80px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(2) {
-            bottom: 15%;
-            right: 8%;
-            animation-delay: -3s;
-            font-size: 70px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(3) {
-            top: 45%;
-            left: 50%;
-            animation-delay: -7s;
-            font-size: 90px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(4) {
-            bottom: 30%;
-            left: 15%;
-            animation-delay: -11s;
-            font-size: 50px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(5) {
-            top: 20%;
-            right: 20%;
-            animation-delay: -15s;
-            font-size: 65px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(6) {
-            bottom: 5%;
-            left: 45%;
-            animation-delay: -4s;
-            font-size: 55px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(7) {
-            top: 70%;
-            right: 5%;
-            animation-delay: -9s;
-            font-size: 75px;
-        }
-        .bg-3d-tools .tool-3d:nth-child(8) {
-            top: 5%;
-            left: 40%;
-            animation-delay: -13s;
-            font-size: 45px;
-        }
-        @keyframes float3D {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(30px, -40px) rotate(10deg) scale(1.1);
-            }
-            50% {
-                transform: translate(-20px, 20px) rotate(-5deg) scale(0.9);
-            }
-            75% {
-                transform: translate(40px, 30px) rotate(15deg) scale(1.05);
-            }
-        }
-
         /* ===== پس‌زمینه متحرک با المان‌های گرافیکی ===== */
         .bg-graphics {
             position: fixed;
@@ -240,34 +161,6 @@
             100% {
                 transform: translateX(100%);
             }
-        }
-
-        /* ===== دکمه کنترل موزیک ===== */
-        .music-control {
-            position: fixed;
-            bottom: 90px;
-            left: 25px;
-            z-index: 501;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--purple), var(--dpurple));
-            color: white;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            box-shadow: 0 6px 30px var(--shadow);
-            transition: 0.4s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .music-control:hover {
-            transform: scale(1.15);
-            box-shadow: 0 10px 40px rgba(106, 0, 255, 0.5);
-        }
-        .music-control.muted {
-            background: #666;
         }
 
         /* ===== سربرگ (بالا) ===== */
@@ -1620,12 +1513,6 @@
                 width: 270px;
                 right: -290px;
             }
-            .music-control {
-                bottom: 80px;
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
         }
         @media (max-width: 480px) {
             .top-bar .left .search-box input {
@@ -1695,79 +1582,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ===== موزیک پس‌زمینه ملایم (با سورس جدید و مطمئن‌تر) ===== -->
-    <audio id="bgMusic" loop>
-        <!-- استفاده از فایل صوتی رایگان و معتبر از سایت Freesound -->
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8c8c8c8.mp3?filename=calm-ambient-169277.mp3" type="audio/mpeg">
-        <!-- در صورت عدم پخش، سکوت -->
-    </audio>
-
-    <!-- ===== دکمه کنترل موزیک ===== -->
-    <button class="music-control" id="musicControl" onclick="toggleMusic()" title="قطع/ وصل موزیک">
-        <i class="fas fa-music"></i>
-    </button>
-
-    <script>
-        // ===== کنترل موزیک =====
-        let isMusicPlaying = false;
-        const music = document.getElementById('bgMusic');
-        const musicControl = document.getElementById('musicControl');
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                music.pause();
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                musicControl.classList.add('muted');
-                isMusicPlaying = false;
-            } else {
-                music.play().catch(function(e) {
-                    console.log('Audio play prevented:', e);
-                });
-                musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                musicControl.classList.remove('muted');
-                isMusicPlaying = true;
-            }
-        }
-
-        // تلاش برای پخش خودکار هنگام بارگذاری
-        window.addEventListener('load', function() {
-            music.play().then(function() {
-                isMusicPlaying = true;
-                musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                musicControl.classList.remove('muted');
-            }).catch(function(e) {
-                console.log('Auto-play prevented, waiting for user interaction');
-                // نمایش دکمه mute به صورت پیش‌فرض
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                musicControl.classList.add('muted');
-                isMusicPlaying = false;
-            });
-        });
-
-        // در صورت کلیک کاربر روی صفحه، اگر موزیک پخش نشده، پخش شود
-        document.addEventListener('click', function() {
-            if (!isMusicPlaying) {
-                music.play().then(function() {
-                    isMusicPlaying = true;
-                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                    musicControl.classList.remove('muted');
-                }).catch(function(e) {});
-            }
-        }, { once: false });
-    </script>
-
-    <!-- ===== پس‌زمینه سه‌بعدی ابزارهای گرافیکی ===== -->
-    <div class="bg-3d-tools">
-        <span class="tool-3d">🎨</span>
-        <span class="tool-3d">✏️</span>
-        <span class="tool-3d">🖌️</span>
-        <span class="tool-3d">📐</span>
-        <span class="tool-3d">🌈</span>
-        <span class="tool-3d">🖍️</span>
-        <span class="tool-3d">✒️</span>
-        <span class="tool-3d">🎯</span>
-    </div>
 
     <!-- ===== پس‌زمینه متحرک با المان‌های گرافیکی ===== -->
     <div class="bg-graphics">
