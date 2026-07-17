@@ -1,1607 +1,371 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="آرا گرافیک؛ طراحی لوگو، پوستر، بنر، کارت ویزیت، پست و استوری اینستاگرام و مشاوره طراحی">
-
-    <meta name="theme-color" content="#6d28d9">
-
-    <title>آرا گرافیک | طراحی خلاقانه و حرفه‌ای</title>
-
-    <style>
-        /* فونت سایت */
-        @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap");
-
-        :root {
-            --purple-950: #2e064d;
-            --purple-900: #3b0764;
-            --purple-800: #4c1d95;
-            --purple-700: #5b21b6;
-            --purple-600: #6d28d9;
-            --purple-500: #7c3aed;
-            --purple-400: #8b5cf6;
-            --purple-300: #c4b5fd;
-            --purple-200: #ddd6fe;
-            --purple-100: #ede9fe;
-            --purple-50: #f5f3ff;
-            --white: #ffffff;
-            --green: #22c55e;
-            --shadow: 0 18px 45px rgba(59, 7, 100, 0.13);
-            --shadow-hover: 0 28px 65px rgba(59, 7, 100, 0.24);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            color: var(--purple-900);
-            background: var(--purple-600);
-            font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
-            overflow-x: hidden;
-        }
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        section {
-            scroll-margin-top: 80px;
-        }
-
-        ::selection {
-            color: white;
-            background: var(--purple-500);
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--purple-100);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 20px;
-            background: linear-gradient(
-                var(--purple-600),
-                var(--purple-400)
-            );
-        }
-
-        .container {
-            width: min(1180px, calc(100% - 40px));
-            margin-inline: auto;
-        }
-
-        .section {
-            padding: 95px 0;
-        }
-
-        .white-section {
-            background: var(--white);
-        }
-
-        .light-section {
-            background:
-                radial-gradient(
-                    circle at 10% 10%,
-                    rgba(139, 92, 246, 0.11),
-                    transparent 24%
-                ),
-                var(--purple-50);
-        }
-
-        .section-heading {
-            max-width: 760px;
-            margin: 0 auto 50px;
-            text-align: center;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 10px 20px;
-            color: var(--purple-700);
-            background: var(--purple-100);
-            border: 1px solid var(--purple-200);
-            border-radius: 100px;
-            font-weight: 800;
-        }
-
-        .section-title {
-            margin: 20px 0 14px;
-            color: var(--purple-900);
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 900;
-            line-height: 1.35;
-        }
-
-        .section-description {
-            margin: 0;
-            color: #765b8d;
-            font-size: 1.05rem;
-            line-height: 2;
-        }
-
-        .btn {
-            min-height: 54px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 13px 24px;
-            border: 0;
-            border-radius: 17px;
-            font-weight: 800;
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-4px);
-        }
-
-        .btn-primary {
-            color: white;
-            background: linear-gradient(
-                135deg,
-                var(--purple-700),
-                var(--purple-500)
-            );
-            box-shadow: 0 13px 30px rgba(91, 33, 182, 0.28);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 18px 38px rgba(91, 33, 182, 0.38);
-        }
-
-        .btn-white {
-            color: var(--purple-800);
-            background: white;
-            box-shadow: 0 14px 34px rgba(35, 0, 60, 0.18);
-        }
-
-        .btn-outline-white {
-            color: white;
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.72);
-        }
-
-        .btn-outline-white:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        /* منوی سایت */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 7px 25px rgba(59, 7, 100, 0.09);
-            backdrop-filter: blur(15px);
-        }
-
-        .nav-inner {
-            min-height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 25px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        .brand-logo {
-            width: 50px;
-            height: 50px;
-            display: grid;
-            place-items: center;
-            color: white;
-            background: linear-gradient(
-                135deg,
-                var(--purple-700),
-                var(--purple-400)
-            );
-            border-radius: 17px;
-            font-size: 1.7rem;
-            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.24);
-        }
-
-        .brand-name {
-            color: var(--purple-800);
-            font-size: 1.35rem;
-            font-weight: 900;
-        }
-
-        .brand-subtitle {
-            margin-top: 2px;
-            color: var(--purple-500);
-            font-size: 0.72rem;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 27px;
-        }
-
-        .nav-link {
-            position: relative;
-            color: var(--purple-950);
-            font-weight: 700;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            bottom: -8px;
-            width: 0;
-            height: 3px;
-            border-radius: 10px;
-            background: var(--purple-500);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--purple-500);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .menu-button {
-            width: 48px;
-            height: 48px;
-            display: none;
-            color: var(--purple-800);
-            background: var(--purple-100);
-            border: 0;
-            border-radius: 14px;
-            font-size: 1.6rem;
-        }
-
-        .mobile-menu {
-            display: none;
-            padding: 0 0 17px;
-        }
-
-        .mobile-menu.active {
-            display: block;
-            animation: menuOpen 0.35s ease;
-        }
-
-        .mobile-links {
-            display: grid;
-            gap: 6px;
-            padding-top: 15px;
-            border-top: 1px solid var(--purple-100);
-        }
-
-        .mobile-link {
-            padding: 12px 15px;
-            border-radius: 12px;
-            font-weight: 700;
-        }
-
-        .mobile-link:hover {
-            color: var(--purple-700);
-            background: var(--purple-50);
-        }
-
-        @keyframes menuOpen {
-            from {
-                opacity: 0;
-                transform: translateY(-12px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* بخش نخست */
-        .hero {
-            position: relative;
-            min-height: calc(100vh - 78px);
-            display: flex;
-            align-items: center;
-            color: white;
-            overflow: hidden;
-            background:
-                radial-gradient(
-                    circle at 12% 20%,
-                    rgba(255, 255, 255, 0.17),
-                    transparent 24%
-                ),
-                radial-gradient(
-                    circle at 88% 80%,
-                    rgba(255, 255, 255, 0.13),
-                    transparent 24%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--purple-900) 0%,
-                    var(--purple-600) 52%,
-                    #9333ea 100%
-                );
-        }
-
-        .hero::before,
-        .hero::after {
-            content: "";
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.12);
-            border-radius: 50%;
-            animation: floatingCircle 8s ease-in-out infinite;
-        }
-
-        .hero::before {
-            width: 330px;
-            height: 330px;
-            top: -130px;
-            left: -80px;
-        }
-
-        .hero::after {
-            width: 230px;
-            height: 230px;
-            right: -70px;
-            bottom: -60px;
-            animation-delay: 2s;
-        }
-
-        @keyframes floatingCircle {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0);
-            }
-
-            50% {
-                transform: translateY(25px) rotate(12deg);
-            }
-        }
-
-        .floating-icon {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.08);
-            font-size: 9rem;
-            pointer-events: none;
-            animation: floatingIcon 6s ease-in-out infinite;
-        }
-
-        .floating-icon.one {
-            top: 13%;
-            right: 4%;
-        }
-
-        .floating-icon.two {
-            bottom: 8%;
-            left: 5%;
-            animation-delay: 1.4s;
-        }
-
-        @keyframes floatingIcon {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0);
-            }
-
-            50% {
-                transform: translateY(-24px) rotate(10deg);
-            }
-        }
-
-        .hero-grid {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1.08fr 0.92fr;
-            align-items: center;
-            gap: 80px;
-            padding: 80px 0 110px;
-        }
-
-        .availability {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 19px;
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.19);
-            border-radius: 100px;
-            backdrop-filter: blur(12px);
-        }
-
-        .status-dot {
-            width: 11px;
-            height: 11px;
-            background: #4ade80;
-            border-radius: 50%;
-            box-shadow: 0 0 0 7px rgba(74, 222, 128, 0.12);
-            animation: statusPulse 1.7s infinite;
-        }
-
-        @keyframes statusPulse {
-            50% {
-                box-shadow: 0 0 0 12px rgba(74, 222, 128, 0);
-            }
-        }
-
-        .hero-title {
-            margin: 27px 0 20px;
-            font-size: clamp(2.7rem, 7vw, 5.3rem);
-            font-weight: 900;
-            line-height: 1.25;
-        }
-
-        .gradient-text {
-            color: transparent;
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #ddd6fe,
-                #ffffff
-            );
-            background-size: 200% auto;
-            background-clip: text;
-            -webkit-background-clip: text;
-            animation: shineText 4s linear infinite;
-        }
-
-        @keyframes shineText {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        .hero-description {
-            max-width: 650px;
-            margin: 0;
-            color: #ede9fe;
-            font-size: 1.15rem;
-            line-height: 2;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 32px;
-        }
-
-        .hero-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 28px;
-            color: #ede9fe;
-        }
-
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-feature-icon {
-            color: #86efac;
-            font-weight: 900;
-        }
-
-        .profile-wrapper {
-            position: relative;
-            width: min(100%, 470px);
-            margin-inline: auto;
-        }
-
-        .profile-wrapper::before {
-            content: "";
-            position: absolute;
-            inset: -17px;
-            z-index: -1;
-            background: linear-gradient(
-                135deg,
-                white,
-                var(--purple-300),
-                white
-            );
-            border-radius: 57px;
-            transform: rotate(-5deg);
-            animation: profileFrame 5s ease-in-out infinite;
-        }
-
-        @keyframes profileFrame {
-            0%,
-            100% {
-                transform: rotate(-5deg) scale(1);
-            }
-
-            50% {
-                transform: rotate(-2deg) scale(1.025);
-            }
-        }
-
-        .profile-image {
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            object-position: center;
-            background: var(--purple-100);
-            border: 7px solid white;
-            border-radius: 45px;
-            box-shadow: 0 35px 80px rgba(30, 0, 50, 0.4);
-            transition: transform 0.55s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.025);
-        }
-
-        .profile-info {
-            position: absolute;
-            right: 24px;
-            bottom: -48px;
-            left: 24px;
-            padding: 19px;
-            color: var(--purple-900);
-            background: white;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .profile-info strong {
-            display: block;
-            font-size: 1.35rem;
-        }
-
-        .profile-info span {
-            display: block;
-            margin-top: 5px;
-            color: var(--purple-500);
-        }
-
-        /* نوار ویژگی‌ها */
-        .trust-bar {
-            position: relative;
-            z-index: 3;
-            padding: 31px 0;
-            background: white;
-            box-shadow: 0 14px 35px rgba(59, 7, 100, 0.1);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-
-        .trust-item {
-            text-align: center;
-        }
-
-        .trust-icon {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 2rem;
-        }
-
-        .trust-item strong {
-            color: var(--purple-900);
-        }
-
-        /* کارت نمونه‌کار */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .portfolio-card {
-            overflow: hidden;
-            background: white;
-            border: 1px solid rgba(109, 40, 217, 0.13);
-            border-radius: 28px;
-            box-shadow: var(--shadow);
-            transition:
-                transform 0.45s ease,
-                box-shadow 0.45s ease,
-                border-color 0.45s ease;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(109, 40, 217, 0.34);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .work-image-wrapper {
-            position: relative;
-            height: 270px;
-            overflow: hidden;
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--purple-100),
-                    var(--purple-200)
-                );
-            cursor: pointer;
-        }
-
-        .work-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.65s ease;
-        }
-
-        .portfolio-card:hover .work-image {
-            transform: scale(1.08);
-        }
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            color: white;
-            background: rgba(59, 7, 100, 0.72);
-            opacity: 0;
-            transition: opacity 0.35s ease;
-        }
-
-        .work-image-wrapper:hover .image-overlay {
-            opacity: 1;
-        }
-
-        .overlay-content {
-            text-align: center;
-        }
-
-        .overlay-icon {
-            display: block;
-            margin-bottom: 7px;
-            font-size: 2.3rem;
-        }
-
-        .portfolio-content {
-            padding: 25px;
-        }
-
-        .portfolio-category {
-            color: var(--purple-500);
-            font-size: 0.9rem;
-            font-weight: 800;
-        }
-
-        .portfolio-title {
-            margin: 9px 0 10px;
-            color: var(--purple-900);
-            font-size: 1.35rem;
-            font-weight: 900;
-        }
-
-        .portfolio-description {
-            margin: 0;
-            color: #765b8d;
-            line-height: 1.9;
-        }
-
-        /* خدمات و مزایا */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .info-card {
-            padding: 29px;
-            background: white;
-            border: 1px solid rgba(109, 40, 217, 0.12);
-            border-radius: 27px;
-            box-shadow: var(--shadow);
-            transition:
-                transform 0.4s ease,
-                box-shadow 0.4s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            display: grid;
-            place-items: center;
-            color: white;
-            background: linear-gradient(
-                135deg,
-                var(--purple-700),
-                var(--purple-400)
-            );
-            border-radius: 22px;
-            font-size: 2rem;
-            box-shadow: 0 13px 28px rgba(109, 40, 217, 0.25);
-            transition: transform 0.4s ease;
-        }
-
-        .info-card:hover .icon-box {
-            transform: rotate(-7deg) scale(1.08);
-        }
-
-        .info-card h3 {
-            margin: 22px 0 10px;
-            color: var(--purple-900);
-            font-size: 1.25rem;
-            font-weight: 900;
-        }
-
-        .info-card p {
-            margin: 0;
-            color: #765b8d;
-            line-height: 1.9;
-        }
-
-        /* مشاوره */
-        .consultation-grid {
-            display: grid;
-            grid-template-columns: 1fr 0.9fr;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .consultation-content h2 {
-            margin: 20px 0;
-            color: var(--purple-900);
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            line-height: 1.5;
-        }
-
-        .consultation-content > p {
-            color: #765b8d;
-            font-size: 1.05rem;
-            line-height: 2;
-        }
-
-        .check-list {
-            display: grid;
-            gap: 15px;
-            margin: 28px 0 33px;
-            padding: 0;
-            list-style: none;
-        }
-
-        .check-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 11px;
-            color: var(--purple-900);
-            line-height: 1.8;
-        }
-
-        .check {
-            width: 25px;
-            height: 25px;
-            flex: 0 0 25px;
-            display: grid;
-            place-items: center;
-            margin-top: 2px;
-            color: white;
-            background: var(--purple-500);
-            border-radius: 50%;
-            font-size: 0.75rem;
-        }
-
-        .consultation-box {
-            position: relative;
-            overflow: hidden;
-            padding: 48px;
-            color: white;
-            background:
-                radial-gradient(
-                    circle at top left,
-                    rgba(255, 255, 255, 0.18),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--purple-800),
-                    var(--purple-500)
-                );
-            border-radius: 40px;
-            box-shadow: 0 30px 70px rgba(59, 7, 100, 0.25);
-        }
-
-        .consultation-main-icon {
-            font-size: 4rem;
-        }
-
-        .consultation-box h3 {
-            margin: 22px 0 13px;
-            font-size: 2rem;
-        }
-
-        .consultation-box > p {
-            margin: 0;
-            color: var(--purple-100);
-            line-height: 2;
-        }
-
-        .consultation-small-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 13px;
-            margin-top: 28px;
-        }
-
-        .consultation-small-item {
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.13);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 18px;
-        }
-
-        .consultation-small-item span {
-            display: block;
-            margin-bottom: 7px;
-            font-size: 1.7rem;
-        }
-
-        /* تخفیف */
-        .offer-section {
-            position: relative;
-            overflow: hidden;
-            padding: 85px 0;
-            color: white;
-            background:
-                radial-gradient(
-                    circle at 10% 20%,
-                    rgba(255, 255, 255, 0.15),
-                    transparent 25%
-                ),
-                radial-gradient(
-                    circle at 90% 80%,
-                    rgba(255, 255, 255, 0.12),
-                    transparent 25%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--purple-950),
-                    var(--purple-600),
-                    #9333ea
-                );
-        }
-
-        .offer-box {
-            max-width: 900px;
-            margin-inline: auto;
-            padding: 50px 35px;
-            background: rgba(255, 255, 255, 0.11);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 35px;
-            text-align: center;
-            backdrop-filter: blur(14px);
-            box-shadow: 0 30px 70px rgba(30, 0, 50, 0.25);
-        }
-
-        .offer-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.13);
-            border-radius: 100px;
-            font-weight: 800;
-        }
-
-        .offer-box h2 {
-            margin: 25px 0 14px;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1.45;
-        }
-
-        .discount-number {
-            color: #fef08a;
-        }
-
-        .offer-box p {
-            max-width: 650px;
-            margin: 0 auto 28px;
-            color: var(--purple-100);
-            font-size: 1.08rem;
-            line-height: 2;
-        }
-
-        .pulse-button {
-            animation: pulseButton 2.2s infinite;
-        }
-
-        @keyframes pulseButton {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.32);
-            }
-
-            50% {
-                box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
-            }
-        }
-
-        /* درباره من */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 0.78fr 1.22fr;
-            align-items: center;
-            gap: 65px;
-        }
-
-        .about-image {
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            background: var(--purple-100);
-            border: 7px solid white;
-            border-radius: 35px;
-            box-shadow: var(--shadow-hover);
-        }
-
-        .about-content h2 {
-            margin: 20px 0 16px;
-            color: var(--purple-900);
-            font-size: clamp(2rem, 5vw, 3.2rem);
-        }
-
-        .about-content p {
-            color: #765b8d;
-            font-size: 1.05rem;
-            line-height: 2.1;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 28px;
-        }
-
-        .stat {
-            padding: 19px 12px;
-            background: var(--purple-50);
-            border: 1px solid var(--purple-100);
-            border-radius: 19px;
-            text-align: center;
-        }
-
-        .stat strong {
-            display: block;
-            color: var(--purple-700);
-            font-size: 1.45rem;
-        }
-
-        .stat span {
-            display: block;
-            margin-top: 5px;
-            color: #765b8d;
-            font-size: 0.85rem;
-        }
-
-        /* ثبت سفارش */
-        .contact-section {
-            padding: 95px 0;
-            color: white;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(139, 92, 246, 0.3),
-                    transparent 30%
-                ),
-                var(--purple-950);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            gap: 50px;
-            align-items: start;
-        }
-
-        .contact-info h2 {
-            margin: 18px 0 15px;
-            font-size: clamp(2rem, 5vw, 3.2rem);
-        }
-
-        .contact-info > p {
-            color: var(--purple-200);
-            line-height: 2;
-        }
-
-        .phone-card {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: 28px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 20px;
-        }
-
-        .phone-icon {
-            width: 54px;
-            height: 54px;
-            display: grid;
-            place-items: center;
-            flex: 0 0 54px;
-            color: var(--purple-800);
-            background: white;
-            border-radius: 16px;
-            font-size: 1.5rem;
-        }
-
-        .phone-card small {
-            display: block;
-            color: var(--purple-200);
-        }
-
-        .phone-card strong {
-            display: block;
-            margin-top: 3px;
-            direction: ltr;
-            font-size: 1.25rem;
-            text-align: right;
-        }
-
-        .social-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.17);
-        }
-
-        .social-icon {
-            font-size: 1.45rem;
-        }
-
-        .order-form {
-            padding: 32px;
-            color: var(--purple-900);
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 30px;
-            box-shadow: 0 30px 80px rgba(15, 0, 30, 0.28);
-        }
-
-        .order-form h3 {
-            margin: 0 0 6px;
-            font-size: 1.7rem;
-        }
-
-        .order-form > p {
-            margin: 0 0 24px;
-            color: #765b8d;
-            line-height: 1.8;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--purple-900);
-            font-size: 0.9rem;
-            font-weight: 800;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 16px;
-            color: var(--purple-900);
-            background: var(--purple-50);
-            border: 2px solid transparent;
-            border-radius: 15px;
-            outline: none;
-            transition:
-                border-color 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease;
-        }
-
-        .form-control:focus {
-            background: white;
-            border-color: var(--purple-400);
-            box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.12);
-        }
-
-        textarea.form-control {
-            min-height: 125px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            width: 100%;
-            margin-top: 3px;
-        }
-
-        .form-message {
-            display: none;
-            margin-top: 15px;
-            padding: 14px;
-            color: #166534;
-            background: #dcfce7;
-            border: 1px solid #86efac;
-            border-radius: 14px;
-            line-height: 1.8;
-        }
-
-        .form-message.active {
-            display: block;
-            animation: messageOpen 0.35s ease;
-        }
-
-        @keyframes messageOpen {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* فوتر */
-        .footer {
-            padding: 28px 0;
-            color: var(--purple-200);
-            background: #1d032e;
-        }
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .footer strong {
-            color: white;
-        }
-
-        .back-to-top {
-            width: 45px;
-            height: 45px;
-            display: grid;
-            place-items: center;
-            color: var(--purple-800);
-            background: white;
-            border-radius: 14px;
-            font-weight: 900;
-        }
-
-        /* نمایش بزرگ تصویر */
-        .image-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
-            background: rgba(20, 0, 35, 0.94);
-            backdrop-filter: blur(9px);
-        }
-
-        .image-modal.active {
-            display: flex;
-        }
-
-        .modal-box {
-            max-width: 1000px;
-            width: 100%;
-            text-align: center;
-            animation: modalOpen 0.35s ease;
-        }
-
-        @keyframes modalOpen {
-            from {
-                opacity: 0;
-                transform: scale(0.78);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-image {
-            max-width: 100%;
-            max-height: 78vh;
-            margin-inline: auto;
-            object-fit: contain;
-            background: var(--purple-100);
-            border: 5px solid white;
-            border-radius: 22px;
-            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-title {
-            margin-top: 14px;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-
-        .close-modal {
-            position: fixed;
-            top: 20px;
-            right: 22px;
-            width: 50px;
-            height: 50px;
-            display: grid;
-            place-items: center;
-            z-index: 10000;
-            color: var(--purple-800);
-            background: white;
-            border: 0;
-            border-radius: 50%;
-            font-size: 1.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .close-modal:hover {
-            transform: rotate(90deg);
-        }
-
-        /* انیمیشن ورود بدون کتابخانه خارجی */
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition:
-                opacity 0.8s ease,
-                transform 0.8s ease;
-        }
-
-        .reveal.from-left {
-            transform: translateX(-45px);
-        }
-
-        .reveal.from-right {
-            transform: translateX(45px);
-        }
-
-        .reveal.zoom {
-            transform: scale(0.9);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translate(0) scale(1);
-        }
-
-        /* تبلت */
-        @media (max-width: 1050px) {
-            .nav-links,
-            .nav-order-button {
-                display: none;
-            }
-
-            .menu-button {
-                display: block;
-            }
-
-            .hero-grid {
-                gap: 45px;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* موبایل */
-        @media (max-width: 768px) {
-            .container {
-                width: min(100% - 28px, 1180px);
-            }
-
-            .section {
-                padding: 72px 0;
-            }
-
-            .nav-inner {
-                min-height: 70px;
-            }
-
-            .brand-logo {
-                width: 45px;
-                height: 45px;
-            }
-
-            .brand-name {
-                font-size: 1.15rem;
-            }
-
-            .hero {
-                min-height: auto;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 80px;
-                padding: 65px 0 105px;
-                text-align: center;
-            }
-
-            .availability {
-                margin-inline: auto;
-            }
-
-            .hero-description {
-                margin-inline: auto;
-            }
-
-            .hero-buttons,
-            .hero-features {
-                justify-content: center;
-            }
-
-            .profile-wrapper {
-                width: min(86%, 420px);
-            }
-
-            .profile-wrapper::before {
-                inset: -11px;
-                border-radius: 42px;
-            }
-
-            .profile-image {
-                border-radius: 35px;
-            }
-
-            .profile-info {
-                right: 12px;
-                left: 12px;
-            }
-
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .work-image-wrapper {
-                height: 245px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .consultation-grid,
-            .about-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .consultation-grid,
-            .about-grid {
-                gap: 42px;
-            }
-
-            .consultation-box {
-                padding: 34px 25px;
-            }
-
-            .about-image {
-                width: min(100%, 420px);
-                margin-inline: auto;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .reveal.from-left,
-            .reveal.from-right {
-                transform: translateY(35px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.55rem;
-            }
-
-            .hero-buttons .btn {
-                width: 100%;
-            }
-
-            .hero-features {
-                align-items: center;
-                flex-direction: column;
-            }
-
-            .trust-grid {
-                gap: 20px 10px;
-            }
-
-            .consultation-small-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .order-form {
-                padding: 24px 18px;
-            }
-
-            .offer-box {
-                padding: 38px 19px;
-            }
-        }
-
-        /* رعایت تنظیم کاهش حرکت دستگاه */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="آرا گرافیک؛ طراحی لوگو، پوستر، بنر، کارت ویزیت و محتوای شبکه‌های اجتماعی">
+  <title>آرا گرافیک | خدمات طراحی گرافیک</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap');
+
+    * { scroll-behavior: smooth; }
+    body {
+      font-family: Vazirmatn, sans-serif;
+      background: #f6f0ff;
+      color: #581c87;
+    }
+
+    .purple-bg {
+      background: linear-gradient(135deg, #4c1d95, #7e22ce, #a855f7);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #ead7ff;
+      transition: .35s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 22px 45px rgba(107, 33, 168, .2);
+    }
+
+    .work-img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      transition: .5s;
+    }
+
+    .card:hover .work-img { transform: scale(1.08); }
+
+    .profile-img {
+      filter: drop-shadow(0 25px 30px rgba(46, 16, 101, .35));
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .price-table th, .price-table td {
+      padding: 15px;
+      border-bottom: 1px solid #ead7ff;
+      white-space: nowrap;
+    }
+
+    .price-table tr:hover { background: #faf5ff; }
+
+    .pulse-button {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, .5); }
+      50% { box-shadow: 0 0 0 15px rgba(168, 85, 247, 0); }
+    }
+  </style>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
-    <!-- منوی سایت -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-inner">
+  <!-- منو -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-black text-purple-800">
+        <i class="fas fa-pen-nib ml-2"></i>آرا گرافیک
+      </a>
 
-                <a href="#home" class="brand" aria-label="صفحه اصلی آرا گرافیک">
-                    <div class="brand-logo">✒</div>
+      <div class="hidden md:flex gap-7 font-bold">
+        <a href="#portfolio" class="hover:text-purple-500">نمونه‌کارها</a>
+        <a href="#pricing" class="hover:text-purple-500">تعرفه‌ها</a>
+        <a href="#advantages" class="hover:text-purple-500">مزیت همکاری</a>
+        <a href="#contact" class="hover:text-purple-500">ثبت سفارش</a>
+      </div>
 
-                    <div>
-                        <div class="brand-name">آرا گرافیک</div>
-                        <div class="brand-subtitle">
-                            طراحی خلاقانه، هویت ماندگار
-                        </div>
-                    </div>
-                </a>
+      <a href="tel:09927131621"
+         class="bg-purple-700 text-white px-5 py-3 rounded-2xl hover:bg-purple-900 transition">
+        <i class="fas fa-phone ml-2"></i>تماس
+      </a>
+    </div>
+  </nav>
 
-                <div class="nav-links">
-                    <a href="#portfolio" class="nav-link">نمونه‌کارها</a>
-                    <a href="#services" class="nav-link">خدمات</a>
-                    <a href="#benefits" class="nav-link">مزیت همکاری</a>
-                    <a href="#about" class="nav-link">درباره من</a>
-                    <a href="#contact" class="nav-link">ثبت سفارش</a>
-                </div>
+  <!-- معرفی -->
+  <header class="purple-bg text-white min-h-[88vh] flex items-center overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+      <div data-aos="fade-up">
+        <span class="inline-block bg-white/15 border border-white/30 px-5 py-2 rounded-full mb-5">
+          طراحی خلاقانه برای برند شما
+        </span>
 
-                <a href="tel:09927131621"
-                   class="btn btn-primary nav-order-button">
-                    ☎ ثبت سفارش
-                </a>
+        <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+          آرا گرافیک
+        </h1>
 
-                <button id="menuButton"
-                        class="menu-button"
-                        type="button"
-                        aria-label="باز کردن منو"
-                        aria-expanded="false">
-                    ☰
-                </button>
-            </div>
+        <p class="text-xl md:text-2xl text-purple-100 leading-10 mb-8">
+          طراحی لوگو، هویت بصری، پوستر، بنر و محتوای حرفه‌ای شبکه‌های اجتماعی
+        </p>
 
-            <div id="mobileMenu" class="mobile-menu">
-                <div class="mobile-links">
-                    <a href="#portfolio" class="mobile-link">نمونه‌کارها</a>
-                    <a href="#services" class="mobile-link">خدمات طراحی</a>
-                    <a href="#benefits" class="mobile-link">مزیت همکاری</a>
-                    <a href="#about" class="mobile-link">درباره من</a>
-                    <a href="#contact" class="mobile-link">ثبت سفارش</a>
-                </div>
-            </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="#contact"
+             class="bg-white text-purple-800 px-8 py-4 rounded-2xl font-bold hover:bg-purple-100 transition">
+            ثبت سفارش طراحی
+          </a>
+          <a href="#portfolio"
+             class="border-2 border-white px-8 py-4 rounded-2xl font-bold hover:bg-white/15 transition">
+            مشاهده نمونه‌کارها
+          </a>
         </div>
-    </nav>
+      </div>
 
-    <!-- بخش ابتدایی -->
-    <header id="home" class="hero">
+      <div class="text-center" data-aos="zoom-in">
+        <div class="bg-white/15 border border-white/30 rounded-[3rem] p-5 max-w-md mx-auto">
+          &lt;img src="zinat.jpg"
+               alt="طراح آرا گرافیک"
+               class="profile-img w-full max-h-[520px] object-cover rounded-[2.5rem]"&gt;
+        </div>
+        <h2 class="text-2xl font-bold mt-5">طراح و مدیر آرا گرافیک</h2>
+      </div>
+    </div>
+  </header>
+
+  <!-- خدمات سریع -->
+  <section class="py-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+      <div class="card rounded-2xl p-6" data-aos="fade-up">
+        <i class="fas fa-gem text-4xl mb-3"></i>
+        <h3 class="font-bold">طراحی اختصاصی</h3>
+      </div>
+      <div class="card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+        <i class="fas fa-bolt text-4xl mb-3"></i>
+        <h3 class="font-bold">تحویل سریع</h3>
+      </div>
+      <div class="card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-comments text-4xl mb-3"></i>
+        <h3 class="font-bold">مشاوره طراحی</h3>
+      </div>
+      <div class="card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+        <i class="fas fa-headset text-4xl mb-3"></i>
+        <h3 class="font-bold">پشتیبانی سفارش</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- نمونه‌کارها -->
+  <section id="portfolio" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-4xl font-black mb-4">نمونه طراحی‌ها</h2>
+        <p class="text-purple-600">چند نمونه تصویری از سبک خدمات قابل ارائه</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی هویت بصری"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">طراحی هویت بصری</h3>
+            <p class="text-purple-600">ساخت هویت منسجم، مدرن و حرفه‌ای برای برند شما.</p>
+          </div>
+        </article>
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی لوگو"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">طراحی لوگو</h3>
+            <p class="text-purple-600">لوگوی خلاقانه، به‌یادماندنی و متناسب با زمینه کاری.</p>
+          </div>
+        </article>
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1613909207039-6b173b755cc1?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی شبکه اجتماعی"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">پست و استوری</h3>
+            <p class="text-purple-600">طراحی جذاب و هدفمند برای رشد صفحات اجتماعی.</p>
+          </div>
+        </article>
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی کارت ویزیت"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">کارت ویزیت</h3>
+            <p class="text-purple-600">طراحی رسمی، لوکس یا مینیمال متناسب با برند.</p>
+          </div>
+        </article>
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی پوستر"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">پوستر تبلیغاتی</h3>
+            <p class="text-purple-600">پوسترهای چشمگیر برای کمپین‌ها و رویدادها.</p>
+          </div>
+        </article>
+
+        <article class="card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <div class="overflow-hidden">
+            &lt;img class="work-img"
+                 src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=80"
+                 alt="نمونه طراحی بنر سایت"&gt;
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">بنر وب‌سایت</h3>
+            <p class="text-purple-600">طراحی بنر استاندارد برای افزایش توجه و فروش.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- تعرفه -->
+  <section id="pricing" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <h2 class="text-4xl font-black mb-3">تعرفه خدمات آرا گرافیک ۱۴۰۵</h2>
+        <p class="text-purple-600">مبالغ به تومان است و با توجه به جزئیات سفارش تغییر می‌کند.</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-3xl shadow-xl border border-purple-100" data-aos="zoom-in">
+        <table class="price-table w-full text-center bg-white">
+          <thead class="bg-purple-800 text-white">
+            <tr>
+              <th class="text-right">خدمات</th>
+              <th>ساده</th>
+              <th>معمولی</th>
+              <th>سطح بالا</th>
+              <th>حرفه‌ای</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-bold text-right">لوگو / آیکن / پروفایل</td><td>۱,۵۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰</td><td>۴,۹۰۰,۰۰۰</td><td>۷,۰۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">ست اداری</td><td>۳,۰۰۰,۰۰۰</td><td>۴,۵۰۰,۰۰۰</td><td>۷,۹۰۰,۰۰۰</td><td>۹,۰۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">بنر وب‌سایت</td><td>۶۰۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۸۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">پست / استوری / کاور</td><td>۴۰۰,۰۰۰</td><td>۵۵۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">بنر / پوستر تبلیغاتی</td><td>۵۵۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰</td><td>۱,۷۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">بیزینس کارت / کارت ویزیت</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td></tr>
+            <tr><td class="font-bold text-right">بروشور / کاتالوگ (هر صفحه)</td><td>۱۹۰,۰۰۰</td><td>۲۳۰,۰۰۰</td><td>۲۹۰,۰۰۰</td><td>۴۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">اینفوگرافیک</td><td>۹۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۹۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰+</td></tr>
+            <tr><td class="font-bold text-right">کارت ویزیت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۹۰۰,۰۰۰</td></tr>
+            <tr><td class="font-bold text-right">تراکت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۹۰۰,۰۰۰</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- مشاوره و مزایا -->
+  <section id="advantages" class="py-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+      <div class="card p-9 rounded-3xl" data-aos="fade-left">
+        <i class="fas fa-lightbulb text-5xl mb-5"></i>
+        <h2 class="text-3xl font-black mb-5">مشاوره طراحی</h2>
+        <p class="leading-8 text-purple-700">
+          پیش از شروع سفارش، درباره رنگ، سبک، مخاطب هدف و هویت برند شما مشاوره انجام می‌شود
+          تا نتیجه نهایی کاربردی و حرفه‌ای باشد.
+        </p>
+      </div>
+
+      <div class="card p-9 rounded-3xl" data-aos="fade-right">
+        <i class="fas fa-handshake text-5xl mb-5"></i>
+        <h2 class="text-3xl font-black mb-5">مزیت همکاری با من</h2>
+        <ul class="space-y-4">
+          <li><i class="fas fa-check-circle ml-2"></i>طراحی خلاقانه و اختصاصی</li>
+          <li><i class="fas fa-check-circle ml-2"></i>ارتباط مستقیم با طراح</li>
+          <li><i class="fas fa-check-circle ml-2"></i>تحویل منظم و پشتیبانی سفارش</li>
+          <li><i class="fas fa-check-circle ml-2"></i>امکان اصلاح طبق توافق</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- تخفیف -->
+  <section class="purple-bg text-white py-16">
+    <div class="max-w-4xl mx-auto text-center px-6" data-aos="zoom-in">
+      <span class="inline-block bg-white/20 px-6 py-2 rounded-full mb-5">🎁 پیشنهاد ویژه</span>
+      <h2 class="text-3xl md:text-5xl font-black mb-6">طراحی با تخفیف ویژه</h2>
+      <p class="text-xl mb-9">برای اطلاع از تخفیف سفارش‌های جدید پیام دهید.</p>
+      <a href="tel:09927131621"
+         class="pulse-button inline-block bg-white text-purple-800 px-10 py-5 rounded-2xl font-black text-xl">
+        ثبت سفارش: ۰۹۹۲۷۱۳۱۶۲۱
+      </a>
+    </div>
+  </section>
+
+  <!-- تماس -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-black mb-5">ثبت سفارش طراحی</h2>
+      <p class="text-purple-600 mb-10">از طریق شماره تماس یا شبکه‌های اجتماعی پیام دهید.</p>
+
+      <a href="tel:09927131621"
+         class="inline-flex items-center gap-3 bg-purple-800 text-white px-8 py-4 rounded-2xl font-bold mb-9 hover:bg-purple-950 transition">
+        <i class="fas fa-phone"></i>
+        ۰۹۹۲۷۱۳۱۶۲۱
+      </a>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://t.me/ara_graphic1" target="_blank"
+           class="card px-6 py-4 rounded-2xl font-bold">
+          <i class="fab fa-telegram text-2xl ml-2"></i>تلگرام
+        </a>
+
+        <a href="https://ble.ir/ara_graphic1" target="_blank"
+           class="card px-6 py-4 rounded-2xl font-bold">
+          <i class="fas fa-comment text-2xl ml-2"></i>بله
+        </a>
+
+        <a href="https://eitaa.com/ara_graphic1" target="_blank"
+           class="card px-6 py-4 rounded-2xl font-bold">
+          <i class="fas fa-paper-plane text-2xl ml-2"></i>ایتا
+        </a>
+
+        <a href="https://instagram.com/ara_graphic1" target="_blank"
+           class="card px-6 py-4 rounded-2xl font-bold">
+          <i class="fab fa-instagram text-2xl ml-2"></i>اینستاگرام
+        </a>
+      </div>
+
+      <p class="mt-9 font-bold">کانال تلگرام و پیج اینستاگرام: ara_graphic1</p>
+    </div>
+  </section>
+
+  <footer class="bg-purple-950 text-purple-200 text-center py-7">
+    © ۱۴۰۵ آرا گرافیک — تمامی حقوق محفوظ است.
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 850,
+      once: true,
+      offset: 80
+    });
+  </script>
+</body>
+</html>
