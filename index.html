@@ -163,6 +163,85 @@
             }
         }
 
+        /* ===== پس‌زمینه سه‌بعدی ابزارهای گرافیکی ===== */
+        .bg-3d-tools {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.5;
+        }
+        .bg-3d-tools .tool-3d {
+            position: absolute;
+            font-size: 60px;
+            animation: float3D 20s infinite ease-in-out;
+            filter: drop-shadow(0 10px 30px rgba(106, 0, 255, 0.15));
+            opacity: 0.15;
+        }
+        .bg-3d-tools .tool-3d:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            font-size: 80px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(2) {
+            bottom: 15%;
+            right: 8%;
+            animation-delay: -3s;
+            font-size: 70px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(3) {
+            top: 45%;
+            left: 50%;
+            animation-delay: -7s;
+            font-size: 90px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(4) {
+            bottom: 30%;
+            left: 15%;
+            animation-delay: -11s;
+            font-size: 50px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(5) {
+            top: 20%;
+            right: 20%;
+            animation-delay: -15s;
+            font-size: 65px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(6) {
+            bottom: 5%;
+            left: 45%;
+            animation-delay: -4s;
+            font-size: 55px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(7) {
+            top: 70%;
+            right: 5%;
+            animation-delay: -9s;
+            font-size: 75px;
+        }
+        .bg-3d-tools .tool-3d:nth-child(8) {
+            top: 5%;
+            left: 40%;
+            animation-delay: -13s;
+            font-size: 45px;
+        }
+        @keyframes float3D {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(30px, -40px) rotate(10deg) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, 20px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translate(40px, 30px) rotate(15deg) scale(1.05);
+            }
+        }
+
         /* ===== سربرگ (بالا) ===== */
         .top-bar {
             position: fixed;
@@ -1583,6 +1662,44 @@
 </head>
 <body>
 
+    <!-- ===== موزیک پس‌زمینه ملایم ===== -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="https://www.bensound.com/bensound-music/bensound-relaxing.mp3" type="audio/mpeg">
+        <source src="https://www.bensound.com/bensound-music/bensound-relaxing.ogg" type="audio/ogg">
+        <!-- در صورت عدم پخش، سکوت -->
+    </audio>
+    <script>
+        // پخش خودکار موزیک با تعامل کاربر (برای مرورگرهای مدرن)
+        document.addEventListener('click', function() {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play().catch(function(e) {
+                    console.log('Audio play prevented:', e);
+                });
+            }
+        }, { once: true });
+
+        // تلاش برای پخش خودکار هنگام بارگذاری
+        window.addEventListener('load', function() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(function(e) {
+                console.log('Auto-play prevented, waiting for user interaction');
+            });
+        });
+    </script>
+
+    <!-- ===== پس‌زمینه سه‌بعدی ابزارهای گرافیکی ===== -->
+    <div class="bg-3d-tools">
+        <span class="tool-3d">🎨</span>
+        <span class="tool-3d">✏️</span>
+        <span class="tool-3d">🖌️</span>
+        <span class="tool-3d">📐</span>
+        <span class="tool-3d">🌈</span>
+        <span class="tool-3d">🖍️</span>
+        <span class="tool-3d">✒️</span>
+        <span class="tool-3d">🎯</span>
+    </div>
+
     <!-- ===== پس‌زمینه متحرک با المان‌های گرافیکی ===== -->
     <div class="bg-graphics">
         <span class="shape"></span>
@@ -2040,6 +2157,14 @@
             if (target) {
                 const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
                 window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+        });
+
+        // ===== کنترل موزیک با تعامل کاربر =====
+        document.addEventListener('click', function() {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play().catch(function(e) {});
             }
         });
     </script>
