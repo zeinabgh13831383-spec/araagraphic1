@@ -7,170 +7,201 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif;scroll-behavior:smooth}
-:root{--gold:#c9a84c;--dark:#1a1a1a;--light:#f8f5f0;--white:#ffffff;--shadow:rgba(0,0,0,.12);--glass:rgba(255,255,255,.85)}
-body{background:var(--white);color:var(--dark);overflow-x:hidden}
+:root{--purple:#6a00ff;--lpurple:#a855f7;--dpurple:#4c00b0;--white:#ffffff;--bg:#f8f5ff;--glass:rgba(255,255,255,.85);--shadow:rgba(106,0,255,.2)}
+body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 
-/* نوار بالا */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:10px 30px;display:flex;justify-content:space-between;align-items:center;transition:.4s;background:transparent}
-.navbar.scrolled{background:var(--glass);backdrop-filter:blur(20px);box-shadow:0 4px 30px var(--shadow)}
-.logo-container{display:flex;align-items:center;gap:10px}
-.logo-container img{height:45px;width:auto;object-fit:contain}
-.logo-text{font-size:24px;font-weight:900;color:var(--gold)}
-.nav-links{display:flex;gap:25px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--dark);font-weight:600;font-size:15px;position:relative;transition:.3s}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:3px;background:var(--gold);border-radius:5px;transition:.3s}
+/* ===== منو ===== */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:12px 30px;display:flex;justify-content:space-between;align-items:center;transition:.5s;background:transparent}
+.navbar.scrolled{background:var(--glass);backdrop-filter:blur(25px);box-shadow:0 4px 40px var(--shadow)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:42px;width:auto}
+.logo-text{font-size:24px;font-weight:900;color:var(--purple);letter-spacing:-1px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:#2d1b4e;font-weight:600;font-size:15px;position:relative;transition:.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-5px;right:0;width:0;height:3px;background:var(--purple);border-radius:5px;transition:.4s}
 .nav-links a:hover::after{width:100%}
-.nav-links a:hover{color:var(--gold)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.hamburger span{width:28px;height:3px;background:var(--dark);border-radius:5px;transition:.3s}
+.nav-links a:hover{color:var(--purple)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:28px;height:3px;background:var(--purple);border-radius:5px;transition:.4s}
 
-/* بخش هدر */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 40px 80px;background:linear-gradient(160deg,#ffffff 0%,#f5f0e8 50%,#e8e0d5 100%);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.08),transparent);border-radius:50%;top:-150px;left:-150px;animation:bubble 10s infinite}
-.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,.06),transparent);border-radius:50%;bottom:-100px;right:-100px;animation:bubble 12s infinite reverse}
-@keyframes bubble{0%,100%{transform:scale(1) translate(0)}50%{transform:scale(1.3) translate(40px,-40px)}}
+/* ===== هدر با پس‌زمینه گرافیستی ===== */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:linear-gradient(160deg,#ffffff 0%,#f5edff 40%,#ede0ff 100%)}
+.hero-bg-grid{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-bg-grid .dot{position:absolute;width:8px;height:8px;background:var(--purple);border-radius:50%;opacity:.08;animation:floatDot 20s infinite linear}
+.hero-bg-grid .dot:nth-child(1){top:15%;left:8%;animation-delay:0s}
+.hero-bg-grid .dot:nth-child(2){top:25%;right:12%;animation-delay:-3s;width:12px;height:12px}
+.hero-bg-grid .dot:nth-child(3){bottom:30%;left:20%;animation-delay:-6s;opacity:.05}
+.hero-bg-grid .dot:nth-child(4){top:60%;right:25%;animation-delay:-9s}
+.hero-bg-grid .dot:nth-child(5){bottom:15%;right:40%;animation-delay:-12s;width:6px;height:6px}
+.hero-bg-grid .line{position:absolute;height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);opacity:.06;animation:slideLine 15s infinite linear}
+.hero-bg-grid .line:nth-child(6){top:20%;left:0;width:60%;animation-delay:0s}
+.hero-bg-grid .line:nth-child(7){top:45%;right:0;width:40%;animation-delay:-5s}
+.hero-bg-grid .line:nth-child(8){bottom:35%;left:0;width:50%;animation-delay:-10s}
+.hero-bg-grid .shape{position:absolute;border:2px solid rgba(106,0,255,.06);border-radius:50%;animation:pulseShape 12s infinite}
+.hero-bg-grid .shape:nth-child(9){width:300px;height:300px;top:-80px;right:-80px;border-width:3px}
+.hero-bg-grid .shape:nth-child(10){width:200px;height:200px;bottom:-60px;left:-60px;animation-delay:-4s}
+.hero-bg-grid .shape:nth-child(11){width:150px;height:150px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-8s;border-color:rgba(106,0,255,.04)}
+@keyframes floatDot{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-40px) scale(1.3)}75%{transform:translateY(40px) scale(.8)}}
+@keyframes slideLine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes pulseShape{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
 
-.hero-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;width:100%;gap:60px;flex-wrap:wrap}
+.hero-content{display:flex;align-items:center;justify-content:space-between;max-width:1250px;width:100%;gap:50px;flex-wrap:wrap;position:relative;z-index:1}
 .hero-text{flex:1;min-width:300px}
-.hero-text .badge{display:inline-block;background:var(--gold);color:white;padding:6px 20px;border-radius:50px;font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:15px}
-.hero-text h1{font-size:80px;font-weight:900;color:var(--dark);margin-bottom:5px;animation:slideR 1s ease}
-.hero-text h1 span{color:var(--gold)}
-.hero-text .subtitle{font-size:26px;color:var(--gold);margin-bottom:20px;animation:slideR 1.2s ease}
-.hero-text p{font-size:18px;line-height:2.2;color:#555;margin-bottom:25px;animation:slideR 1.4s ease}
-.hero-text .btn-group{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
-.hero-img{flex:0 0 320px;animation:float 5s infinite ease-in-out}
-.hero-img img{width:539px;height:539px;object-fit:cover;border-radius:30px;box-shadow:0 20px 60px var(--shadow);border:5px solid var(--white)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-@keyframes slideR{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+.hero-text .badge{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;padding:6px 22px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:1.5px;margin-bottom:18px;animation:slideR 0.8s ease}
+.hero-text h1{font-size:85px;font-weight:900;color:#1a1a2e;margin-bottom:5px;animation:slideR 1s ease;line-height:1.1}
+.hero-text h1 span{background:linear-gradient(135deg,var(--purple),var(--lpurple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text .subtitle{font-size:28px;color:var(--lpurple);margin-bottom:22px;animation:slideR 1.2s ease;font-weight:500}
+.hero-text p{font-size:18px;line-height:2.2;color:#444;margin-bottom:30px;animation:slideR 1.4s ease;max-width:550px}
+.hero-text .btn-group{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;animation:slideR 1.6s ease}
+.hero-img{flex:0 0 340px;animation:float 6s infinite ease-in-out;position:relative}
+.hero-img::before{content:'';position:absolute;inset:-20px;border:3px solid rgba(106,0,255,.1);border-radius:35px;animation:spin 30s infinite linear}
+.hero-img img{width:539px;height:539px;object-fit:cover;border-radius:30px;box-shadow:0 25px 70px var(--shadow);border:6px solid var(--white);position:relative}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
+@keyframes slideR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
 
-.btn{display:inline-block;padding:14px 38px;background:var(--gold);color:var(--white);font-weight:700;text-decoration:none;border-radius:50px;transition:.4s;box-shadow:0 8px 30px rgba(201,168,76,.35);border:none;font-size:15px;cursor:pointer}
-.btn:hover{background:#b8963a;transform:translateY(-4px);box-shadow:0 12px 40px rgba(201,168,76,.45)}
-.btn-outline{background:transparent;color:var(--gold);border:2px solid var(--gold);box-shadow:none}
-.btn-outline:hover{background:var(--gold);color:var(--white)}
+.btn{display:inline-block;padding:15px 42px;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:var(--white);font-weight:700;text-decoration:none;border-radius:50px;transition:.4s;box-shadow:0 8px 35px var(--shadow);border:none;font-size:15px;cursor:pointer;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--lpurple),var(--purple));opacity:0;transition:.4s;border-radius:50px}
+.btn:hover::before{opacity:1}
+.btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 15px 45px rgba(106,0,255,.4)}
+.btn span{position:relative;z-index:1}
+.btn-outline{background:transparent;color:var(--purple);border:2px solid var(--purple);box-shadow:none}
+.btn-outline::before{background:linear-gradient(135deg,var(--purple),var(--dpurple))}
+.btn-outline:hover{color:white}
 
-/* موج */
-.wave{margin-top:-2px}
+.wave{margin-top:-2px;position:relative;z-index:2}
 .wave svg{display:block;width:100%}
 
-/* بخش‌ها */
-section{padding:80px 40px}
-.container{max-width:1200px;margin:auto}
-.section-title{text-align:center;font-size:36px;font-weight:800;color:var(--dark);margin-bottom:12px}
-.section-title span{color:var(--gold)}
-.section-sub{text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2}
-
-/* شمارنده */
-.stats{background:var(--dark);padding:50px 40px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+/* ===== شمارنده ===== */
+.stats{background:linear-gradient(135deg,var(--purple),var(--dpurple));padding:55px 40px;display:flex;justify-content:center;gap:70px;flex-wrap:wrap}
 .stat{text-align:center;color:white}
-.stat h2{font-size:48px;font-weight:900;color:var(--gold)}
-.stat p{font-size:16px;margin-top:5px;opacity:.8}
+.stat h2{font-size:52px;font-weight:900;letter-spacing:2px}
+.stat p{font-size:16px;margin-top:6px;opacity:.85}
 
-/* گالری */
-.filters{text-align:center;margin-bottom:35px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.filters button{padding:10px 24px;border:2px solid var(--gold);background:var(--white);color:var(--gold);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.3s;font-family:Vazirmatn,sans-serif}
-.filters button.active,.filters button:hover{background:var(--gold);color:var(--white)}
+/* ===== درباره من ===== */
+#about{background:var(--bg);padding:80px 40px}
+.about-wrapper{max-width:1200px;margin:auto}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:20px}
+.about-text p{font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:justify}
+.about-text .signature{font-family:serif;font-size:32px;color:var(--purple);margin-top:10px;opacity:.7;text-align:left}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.about-stats .item{background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06)}
+.about-stats .item:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow)}
+.about-stats .item .num{font-size:30px;font-weight:900;color:var(--purple)}
+.about-stats .item .label{font-size:14px;color:#666;margin-top:4px}
+.about-quote{background:linear-gradient(135deg,var(--bg),var(--white));padding:30px 35px;border-radius:20px;border-right:5px solid var(--purple);margin-top:25px}
+.about-quote p{font-size:18px;color:#333;line-height:2.2;font-weight:500}
+.about-quote .author{font-size:15px;color:var(--purple);font-weight:700;margin-top:8px}
 
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px}
-.work{background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 30px var(--shadow);transition:.5s;opacity:0;transform:translateY(40px)}
+/* ===== گالری ===== */
+.filters{text-align:center;margin-bottom:35px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.filters button{padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif}
+.filters button.active,.filters button:hover{background:var(--purple);color:var(--white);transform:scale(1.05);box-shadow:0 6px 25px var(--shadow)}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px;max-width:1200px;margin:auto}
+.work{background:var(--white);border-radius:22px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px)}
 .work.show{opacity:1;transform:translateY(0)}
-.work:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.work:hover{transform:translateY(-12px);box-shadow:0 25px 60px rgba(106,0,255,.25)}
 .work .img-wrapper{overflow:hidden;cursor:pointer;position:relative}
-.work .img-wrapper img{width:100%;height:280px;object-fit:cover;transition:.6s}
+.work .img-wrapper img{width:100%;height:300px;object-fit:cover;transition:.7s}
 .work:hover .img-wrapper img{transform:scale(1.08)}
-.work .work-desc{padding:18px 20px 22px;background:var(--white)}
-.work .work-desc h3{font-size:18px;color:var(--dark);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.work .work-desc h3 .tag{font-size:11px;background:var(--gold);color:white;padding:2px 12px;border-radius:50px;font-weight:500}
-.work .work-desc p{font-size:14px;color:#666;line-height:1.8;margin-bottom:8px}
-.work .work-desc .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
-.work .work-desc .meta span{font-size:11px;background:#f0ede8;color:#555;padding:3px 12px;border-radius:50px}
+.work .work-desc{padding:20px 22px 24px;background:white}
+.work .work-desc h3{font-size:18px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.work .work-desc h3 .tag{font-size:11px;background:var(--purple);color:white;padding:3px 14px;border-radius:50px;font-weight:500}
+.work .work-desc p{font-size:14px;color:#666;line-height:1.9;margin-bottom:10px}
+.work .work-desc .meta{display:flex;flex-wrap:wrap;gap:8px}
+.work .work-desc .meta span{font-size:11px;background:var(--bg);color:var(--purple);padding:4px 14px;border-radius:50px;font-weight:500}
 
-/* لایت باکس */
-.lightbox{position:fixed;inset:0;background:rgba(20,20,20,.92);display:none;align-items:center;justify-content:center;z-index:9999}
-.lightbox.show{display:flex}
-.lightbox img{max-width:90%;max-height:85%;border-radius:12px;box-shadow:0 0 60px rgba(201,168,76,.15);animation:zoomIn .4s}
-.lightbox .close{position:absolute;top:25px;left:35px;color:white;font-size:45px;cursor:pointer;transition:.3s;line-height:1}
-.lightbox .close:hover{transform:rotate(90deg)}
-@keyframes zoomIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
-
-/* کارت‌ها */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px}
-.card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(201,168,76,.15);padding:35px 25px;border-radius:22px;text-align:center;transition:.5s;opacity:0;transform:translateY(40px)}
+/* ===== خدمات ===== */
+#services{background:var(--bg);padding:80px 40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px;max-width:1200px;margin:auto}
+.card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04)}
 .card.show{opacity:1;transform:translateY(0)}
-.card:hover{transform:translateY(-10px);box-shadow:0 20px 50px var(--shadow);border-color:var(--gold)}
-.card .icon{font-size:42px;margin-bottom:15px}
-.card h3{font-size:19px;color:var(--dark);margin-bottom:8px}
+.card:hover{transform:translateY(-10px);box-shadow:0 20px 50px var(--shadow);border-color:var(--purple)}
+.card .icon{width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s}
+.card:hover .icon{border-color:var(--purple);transform:scale(1.05)}
+.card .icon svg{width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2}
+.card h3{font-size:19px;color:#1a1a2e;margin-bottom:8px}
 .card p{font-size:14px;color:#666;line-height:1.9}
 
-/* درباره من */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.about-grid .about-text p{font-size:17px;line-height:2.2;color:#555;margin-bottom:15px}
-.about-grid .about-text .signature{font-family:serif;font-size:28px;color:var(--gold);margin-top:10px}
-.about-grid .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.about-grid .about-stats .item{background:var(--white);padding:20px;border-radius:16px;text-align:center;border:1px solid rgba(201,168,76,.15)}
-.about-grid .about-stats .item .num{font-size:28px;font-weight:900;color:var(--gold)}
-.about-grid .about-stats .item .label{font-size:13px;color:#777;margin-top:4px}
+/* ===== جدول قیمت کارت‌ها ===== */
+.pricing-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;max-width:1200px;margin:auto}
+.pricing-card{background:white;border-radius:24px;padding:35px 25px 40px;text-align:center;border:2px solid rgba(106,0,255,.08);transition:.5s;position:relative;box-shadow:0 4px 20px rgba(106,0,255,.04)}
+.pricing-card:hover{transform:translateY(-10px);border-color:var(--purple);box-shadow:0 25px 60px var(--shadow)}
+.pricing-card.popular{border-color:var(--purple);background:linear-gradient(180deg,var(--bg),white)}
+.pricing-card.popular .badge-pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:white;padding:4px 22px;border-radius:50px;font-size:12px;font-weight:700}
+.pricing-card .name{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+.pricing-card .price{font-size:38px;font-weight:900;color:var(--purple);margin:12px 0 6px}
+.pricing-card .price small{font-size:14px;font-weight:400;color:#999}
+.pricing-card .desc{font-size:14px;color:#666;margin-bottom:18px;line-height:1.8}
+.pricing-card ul{list-style:none;text-align:right;padding:0;margin:18px 0 25px}
+.pricing-card ul li{padding:8px 0;font-size:14px;color:#444;border-bottom:1px solid #f0e6ff;display:flex;align-items:center;gap:10px}
+.pricing-card ul li::before{content:'✓';color:var(--purple);font-weight:900;font-size:18px}
+.pricing-card .btn{width:100%;padding:14px;font-size:14px}
 
-/* لیست مزیت‌ها */
-.adv-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.adv-item{display:flex;align-items:center;gap:15px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 25px;border-radius:18px;border:1px solid rgba(201,168,76,.1);transition:.4s;opacity:0;transform:translateX(-40px)}
+/* ===== مزیت‌ها ===== */
+#advantages{background:var(--bg);padding:80px 40px}
+.adv-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1200px;margin:auto}
+.adv-item{display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px)}
 .adv-item.show{opacity:1;transform:translateX(0)}
-.adv-item:hover{transform:translateX(8px);box-shadow:0 10px 30px var(--shadow)}
-.adv-item .num{width:44px;height:44px;background:var(--gold);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+.adv-item:hover{transform:translateX(8px);box-shadow:0 10px 35px var(--shadow);border-color:var(--purple)}
+.adv-item .num{width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .adv-item p{font-size:15px;color:#444;line-height:1.8}
 
-/* تخفیف */
-.discount{background:linear-gradient(135deg,var(--gold),#b8963a);border-radius:30px;padding:55px 40px;text-align:center;color:white;margin:40px auto;max-width:900px}
+/* ===== تخفیف ===== */
+.discount{background:linear-gradient(135deg,var(--purple),var(--dpurple));border-radius:30px;padding:55px 40px;text-align:center;color:white;margin:0 auto;max-width:900px}
 .discount h2{font-size:36px;margin-bottom:12px}
 .discount p{font-size:17px;line-height:2;margin-bottom:20px;opacity:.9}
-.discount .btn{background:white;color:var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.2)}
-.discount .btn:hover{background:#f5f0e8}
+.discount .btn{background:white;color:var(--purple);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.discount .btn:hover{background:#f0e6ff;transform:translateY(-4px)}
 
-/* ثبت سفارش */
-.order-box{text-align:center;background:var(--light);border-radius:30px;padding:55px 40px;border:2px solid rgba(201,168,76,.2)}
-.order-box .phone{font-size:34px;font-weight:900;color:var(--gold);margin:18px 0}
-.order-box .channels{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}
-.order-box .ch{padding:12px 26px;background:var(--white);border:2px solid var(--gold);border-radius:50px;color:var(--gold);font-weight:600;text-decoration:none;transition:.3s;font-size:14px}
-.order-box .ch:hover{background:var(--gold);color:white}
+/* ===== ثبت سفارش ===== */
+#order{background:var(--bg);padding:80px 40px}
+.order-box{text-align:center;background:white;border-radius:30px;padding:55px 40px;border:2px solid rgba(106,0,255,.08);max-width:700px;margin:auto;box-shadow:0 4px 30px rgba(106,0,255,.04)}
+.order-box .phone{font-size:34px;font-weight:900;color:var(--purple);margin:16px 0;direction:ltr}
+.order-box .channels{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.order-box .ch{padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px}
+.order-box .ch:hover{background:var(--purple);color:white;transform:scale(1.05)}
 
-/* دکمه شناور */
+/* ===== فوتر ===== */
+footer{background:var(--dpurple);color:white;text-align:center;padding:40px}
+footer .logo{justify-content:center;margin-bottom:8px}
+footer .logo-text{color:white}
+footer .socials{display:flex;justify-content:center;gap:16px;margin:16px 0;flex-wrap:wrap}
+footer .socials a{color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px}
+footer .socials a:hover{background:rgba(255,255,255,.12);border-color:var(--lpurple)}
+
+/* ===== دکمه شناور ===== */
 .float-btns{position:fixed;bottom:25px;left:25px;display:flex;flex-direction:column;gap:12px;z-index:500}
-.float-btns a{width:52px;height:52px;border-radius:50%;background:var(--gold);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 25px rgba(201,168,76,.4);transition:.4s;animation:bounceIn .6s}
-.float-btns a:hover{transform:scale(1.15);background:#b8963a}
-@keyframes bounceIn{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.float-btns a{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 30px var(--shadow);transition:.4s;animation:bounceIn .6s}
+.float-btns a:hover{transform:scale(1.15);box-shadow:0 10px 40px rgba(106,0,255,.5)}
+@keyframes bounceIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 
-/* فوتر */
-footer{background:var(--dark);color:white;text-align:center;padding:40px}
-footer .logo-container{justify-content:center;margin-bottom:10px}
-footer .logo-container img{height:40px}
-footer .logo-container .logo-text{color:var(--gold);font-size:22px}
-footer .socials{display:flex;justify-content:center;gap:15px;margin:18px 0;flex-wrap:wrap}
-footer .socials a{color:white;text-decoration:none;font-weight:500;padding:8px 18px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.3s;font-size:14px}
-footer .socials a:hover{background:rgba(201,168,76,.2);border-color:var(--gold)}
-
-/* انیمیشن اسکرول */
-.reveal{opacity:0;transform:translateY(50px);transition:.8s}
+/* ===== انیمیشن‌ها ===== */
+.reveal{opacity:0;transform:translateY(50px);transition:.9s cubic-bezier(.22,1,.36,1)}
 .reveal.show{opacity:1;transform:translateY(0)}
+.section-title{text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px}
+.section-title span{color:var(--purple)}
+.section-sub{text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto}
 
-/* جدول قیمت */
-.price-wrapper{overflow-x:auto;margin:40px 0;border-radius:24px;box-shadow:0 15px 50px var(--shadow);border:1px solid rgba(201,168,76,.15)}
-.price-table{width:100%;border-collapse:collapse;background:white;text-align:center;font-size:14px;min-width:700px}
-.price-table thead{background:var(--dark);color:var(--gold)}
-.price-table th{padding:16px 12px;font-weight:700;font-size:15px}
-.price-table td{padding:14px 12px;border-bottom:1px solid #f0ede8;color:#444}
-.price-table tbody tr{transition:.3s}
-.price-table tbody tr:hover{background:#f8f5f0}
-.price-table .service-name{text-align:right;font-weight:700;color:var(--dark);padding-right:20px}
-.price-table .price-high{color:var(--gold);font-weight:700}
+/* ===== لایت باکس ===== */
+.lightbox{position:fixed;inset:0;background:rgba(26,26,46,.93);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(10px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:90%;max-height:85%;border-radius:16px;box-shadow:0 0 60px rgba(106,0,255,.2);animation:zoomIn .5s cubic-bezier(.22,1,.36,1)}
+.lightbox .close{position:absolute;top:25px;left:35px;color:white;font-size:45px;cursor:pointer;transition:.4s;line-height:1;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.08)}
+.lightbox .close:hover{transform:rotate(90deg);background:rgba(255,255,255,.15)}
+@keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* ریسپانسیو */
+/* ===== ریسپانسیو ===== */
 @media(max-width:992px){
 .hero-text h1{font-size:56px}
+.hero-img{flex:0 0 280px}
 .hero-img img{width:380px;height:380px}
 .about-grid{grid-template-columns:1fr;gap:30px}
 }
 
 @media(max-width:768px){
-.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:var(--glass);backdrop-filter:blur(20px);flex-direction:column;align-items:center;padding:30px 0;gap:20px;box-shadow:0 10px 30px var(--shadow)}
+.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:var(--glass);backdrop-filter:blur(20px);flex-direction:column;align-items:center;padding:30px 0;gap:20px;box-shadow:0 10px 40px var(--shadow)}
 .nav-links.open{display:flex}
 .hamburger{display:flex}
 .hero{padding:100px 20px 60px}
@@ -178,39 +209,41 @@ footer .socials a:hover{background:rgba(201,168,76,.2);border-color:var(--gold)}
 .hero-text{min-width:auto;width:100%}
 .hero-text h1{font-size:40px}
 .hero-text .subtitle{font-size:20px}
-.hero-text p{font-size:16px}
+.hero-text p{font-size:16px;max-width:100%}
+.hero-text .btn-group{justify-content:center}
 .hero-img{flex:none;width:100%;display:flex;justify-content:center}
 .hero-img img{width:260px;height:260px}
-.hero-text .btn-group{justify-content:center}
+.hero-img::before{display:none}
 .btn{font-size:14px;padding:12px 28px}
-.stats{padding:30px 20px;gap:20px}
+.stats{padding:30px 20px;gap:25px}
 .stats .stat{flex:1 1 40%;min-width:100px}
-.stat h2{font-size:28px}
+.stat h2{font-size:30px}
 .section-title{font-size:26px}
 section{padding:50px 20px}
-.gallery{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.gallery{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
 .work .img-wrapper img{height:200px}
 .work .work-desc{padding:14px 16px 18px}
 .work .work-desc h3{font-size:15px}
-.work .work-desc p{font-size:13px}
 .cards{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px}
 .card{padding:22px 15px}
-.card .icon{font-size:32px}
+.card .icon{width:60px;height:60px}
+.card .icon svg{width:28px;height:28px}
+.pricing-cards{grid-template-columns:1fr;max-width:380px;margin:auto}
+.pricing-card{padding:25px 20px}
 .adv-list{grid-template-columns:1fr}
 .adv-item{padding:16px 18px}
-.discount{padding:35px 20px;margin:20px auto}
+.discount{padding:35px 20px;margin:20px}
 .discount h2{font-size:26px}
-.discount p{font-size:15px}
 .order-box{padding:35px 20px}
 .order-box .phone{font-size:26px}
-.price-wrapper{margin:20px 0}
-.price-table{min-width:550px;font-size:12px}
-.price-table th,.price-table td{padding:10px 6px}
 .float-btns a{width:44px;height:44px;font-size:17px}
 footer{padding:30px 20px}
 footer .socials{gap:10px}
-footer .socials a{font-size:12px;padding:6px 12px}
-.about-grid .about-stats{grid-template-columns:1fr 1fr}
+footer .socials a{font-size:12px;padding:6px 14px}
+.about-stats{grid-template-columns:1fr 1fr}
+.about-text p{font-size:15px}
+.about-quote p{font-size:16px}
+.about-quote{padding:20px}
 }
 
 @media(max-width:480px){
@@ -221,22 +254,21 @@ footer .socials a{font-size:12px;padding:6px 12px}
 .work .img-wrapper img{height:220px}
 .stats .stat{flex:1 1 45%}
 .stat h2{font-size:24px}
-.stat p{font-size:12px}
 .nav-links{top:60px}
 .section-title{font-size:22px}
-.price-table{min-width:480px;font-size:11px}
-.about-grid .about-stats{grid-template-columns:1fr}
+.about-stats{grid-template-columns:1fr}
+.pricing-card .price{font-size:30px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- منو -->
+<!-- ===== منو ===== -->
 <nav class="navbar" id="navbar">
-<div class="logo-container">
+<div class="logo">
 <img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
-<span class="logo-text" id="logoFallback" style="display:none">آرا گرافیک</span>
+<span class="logo-text" style="display:none">آرا گرافیک</span>
 </div>
 <ul class="nav-links" id="navLinks">
 <li><a href="#home">خانه</a></li>
@@ -250,30 +282,25 @@ footer .socials a{font-size:12px;padding:6px 12px}
 <div class="hamburger" onclick="toggleMenu()">
 <span></span><span></span><span></span>
 </div>
-</script>
-<script>
-// اگر لوگو بارگذاری نشد، متن رو نشون بده
-document.addEventListener('DOMContentLoaded',function(){
-const img=document.querySelector('.logo-container img');
-const fallback=document.getElementById('logoFallback');
-if(img && img.style.display==='none'){
-fallback.style.display='block';
-}
-});
-</script>
 </nav>
 
-<!-- هدر -->
+<!-- ===== هدر ===== -->
 <section class="hero" id="home">
+<div class="hero-bg-grid">
+<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+<span class="dot"></span><span class="dot"></span>
+<span class="line"></span><span class="line"></span><span class="line"></span>
+<span class="shape"></span><span class="shape"></span><span class="shape"></span>
+</div>
 <div class="hero-content">
 <div class="hero-text">
 <div class="badge">✨ طراح گرافیک حرفه‌ای</div>
 <h1>آرا <span>گرافیک</span></h1>
 <div class="subtitle">برندینگ · تایپوگرافی · تصویرسازی</div>
-<p>با بیش از ۸ سال تجربه در طراحی گرافیک و برندینگ، آماده‌ام تا هویت بصری منحصربه‌فردی برای کسب‌وکار شما خلق کنم. از لوگو و کارت ویزیت تا ست اداری و بسته‌بندی، همه با نهایت دقت و خلاقیت.</p>
+<p>با بیش از ۸ سال تجربه در طراحی گرافیک و برندینگ، آماده‌ام تا هویت بصری منحصربه‌فردی برای کسب‌وکار شما خلق کنم.</p>
 <div class="btn-group">
-<a class="btn" href="#order">ثبت سفارش</a>
-<a class="btn btn-outline" href="#works">مشاهده نمونه‌کارها</a>
+<a class="btn" href="#order"><span>ثبت سفارش</span></a>
+<a class="btn btn-outline" href="#works"><span>نمونه کارها</span></a>
 </div>
 </div>
 <div class="hero-img">
@@ -282,12 +309,12 @@ fallback.style.display='block';
 </div>
 </section>
 
-<!-- موج -->
+<!-- ===== موج ===== -->
 <div class="wave">
-<svg viewBox="0 0 1440 120" fill="none"><path d="M0,80 C360,120 720,40 1440,80 L1440,0 L0,0 Z" fill="#c9a84c" opacity=".06"/></svg>
+<svg viewBox="0 0 1440 120" fill="none"><path d="M0,80 C360,120 720,40 1440,80 L1440,0 L0,0 Z" fill="#6a00ff" opacity=".06"/></svg>
 </div>
 
-<!-- شمارنده -->
+<!-- ===== شمارنده ===== -->
 <div class="stats">
 <div class="stat"><h2 class="counter" data-target="250">0</h2><p>پروژه موفق</p></div>
 <div class="stat"><h2 class="counter" data-target="150">0</h2><p>مشتری راضی</p></div>
@@ -295,17 +322,23 @@ fallback.style.display='block';
 <div class="stat"><h2 class="counter" data-target="100">0</h2><p>رضایت‌مندی %</p></div>
 </div>
 
-<!-- درباره من -->
-<section id="about" style="background:var(--light)">
-<div class="container">
+<!-- ===== درباره من با متن جدید ===== -->
+<section id="about">
+<div class="about-wrapper">
 <h2 class="section-title reveal">درباره <span>من</span></h2>
-<p class="section-sub reveal">طراحی که به جزئیات عشق می‌ورزد</p>
+<p class="section-sub reveal">طراح گرافیک و متخصص هویت بصری</p>
+
 <div class="about-grid">
 <div class="about-text reveal">
-<p>سلام! من آرای هستم، طراح گرافیک با بیش از ۸ سال تجربه در زمینه برندینگ، تایپوگرافی و طراحی بصری. از دانشگاه هنر فارغ‌التحصیل شدم و همیشه به دنبال خلق آثاری هستم که هم زیبا باشند و هم هدفمند.</p>
-<p>باور من این است که هر برند داستانی برای گفتن دارد و وظیفه من این است که آن داستان را به زبان بصری ترجمه کنم. برای همین، هر پروژه را با دقت و عشق خاصی پیش می‌برم تا نتیجه‌ای فراتر از انتظار شما باشد.</p>
-<div class="signature">— آرا</div>
+<p>سلام، من <strong>زینت غلامی</strong> هستم؛ طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
+
+<p>طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
+
+<p>در طول سال‌های فعالیت حرفه‌ای، با برندها، کسب‌وکارها و مجموعه‌های مختلف همکاری کرده‌ام و همواره تلاش کرده‌ام میان زیبایی بصری، کاربردپذیری و اهداف تجاری تعادل ایجاد کنم. هر پروژه را با تحقیق، دقت و توجه به جزئیات آغاز می‌کنم تا نتیجه نهایی نه‌تنها چشم‌نواز، بلکه مؤثر و ماندگار باشد.</p>
+
+<div class="signature">— زینت غلامی</div>
 </div>
+
 <div class="about-stats reveal">
 <div class="item"><div class="num">۸+</div><div class="label">سال تجربه</div></div>
 <div class="item"><div class="num">۱۵۰+</div><div class="label">پروژه برندینگ</div></div>
@@ -313,12 +346,17 @@ fallback.style.display='block';
 <div class="item"><div class="num">۲۴h</div><div class="label">پاسخگویی</div></div>
 </div>
 </div>
+
+<div class="about-quote reveal">
+<p>«طراحی، پلی است میان آنچه برند می‌گوید و آنچه مخاطب احساس می‌کند. من این پل را با عشق می‌سازم.»</p>
+<div class="author">— زینت غلامی</div>
+</div>
 </div>
 </section>
 
-<!-- نمونه کارها -->
-<section id="works">
-<div class="container">
+<!-- ===== نمونه کارها ===== -->
+<section id="works" style="background:var(--bg);padding:80px 40px">
+<div class="container" style="max-width:1200px;margin:auto">
 <h2 class="section-title reveal">نمونه <span>کارها</span></h2>
 <p class="section-sub reveal">برخی از پروژه‌های اخیر من در حوزه‌های مختلف طراحی</p>
 
@@ -447,77 +485,130 @@ fallback.style.display='block';
 </div>
 </section>
 
-<!-- لایت باکس -->
+<!-- ===== لایت باکس ===== -->
 <div class="lightbox" id="lightbox" onclick="closeLB(event)">
-<span class="close">&times;</span>
+<span class="close">✕</span>
 <img id="lbImg" src="" alt="">
 </div>
 
-<!-- خدمات -->
-<section id="services" style="background:var(--light)">
-<div class="container">
+<!-- ===== خدمات ===== -->
+<section id="services">
+<div class="container" style="max-width:1200px;margin:auto">
 <h2 class="section-title reveal">خدمات <span>من</span></h2>
 <p class="section-sub reveal">تخصص‌های گرافیکی که می‌توانم به شما ارائه دهم</p>
 <div class="cards">
-<div class="card"><div class="icon">🎨</div><h3>طراحی لوگو</h3><p>لوگوی اختصاصی و منحصربه‌فرد با هویت برند شما</p></div>
-<div class="card"><div class="icon">💳</div><h3>کارت ویزیت</h3><p>طراحی مدرن و حرفه‌ای متناسب با شخصیت برند</p></div>
-<div class="card"><div class="icon">📄</div><h3>تراکت و بروشور</h3><p>طراحی تبلیغاتی جذاب با تمرکز بر پیام‌رسانی</p></div>
-<div class="card"><div class="icon">📁</div><h3>ست اداری</h3><p>هویت بصری یکپارچه برای کسب‌وکار شما</p></div>
-<div class="card"><div class="icon">🏷️</div><h3>لیبل و بسته‌بندی</h3><p>طراحی بسته‌بندی خلاقانه و جذاب</p></div>
-<div class="card"><div class="icon">📊</div><h3>اینفوگرافیک</h3><p>ارائه بصری داده‌ها به صورت خلاقانه</p></div>
-<div class="card"><div class="icon">🖼️</div><h3>پوستر و بنر</h3><p>طراحی گرافیکی برای چاپ و فضای دیجیتال</p></div>
-<div class="card"><div class="icon">📱</div><h3>محتوای شبکه اجتماعی</h3><p>طراحی پست و استوری برای اینستاگرام</p></div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+<h3>طراحی لوگو</h3>
+<p>لوگوی اختصاصی و منحصربه‌فرد با هویت برند شما</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></div>
+<h3>کارت ویزیت</h3>
+<p>طراحی مدرن و حرفه‌ای متناسب با شخصیت برند</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h4"/></svg></div>
+<h3>تراکت و بروشور</h3>
+<p>طراحی تبلیغاتی جذاب با تمرکز بر پیام‌رسانی</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M4 16h16"/></svg></div>
+<h3>ست اداری</h3>
+<p>هویت بصری یکپارچه برای کسب‌وکار شما</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></div>
+<h3>لیبل و بسته‌بندی</h3>
+<p>طراحی بسته‌بندی خلاقانه و جذاب</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12v4a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h7"/><path d="M15 6l3-3 3 3"/><path d="M18 3v8"/></svg></div>
+<h3>اینفوگرافیک</h3>
+<p>ارائه بصری داده‌ها به صورت خلاقانه</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></div>
+<h3>پوستر و بنر</h3>
+<p>طراحی گرافیکی برای چاپ و فضای دیجیتال</p>
+</div>
+<div class="card">
+<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/><line x1="2" y1="8" x2="22" y2="8"/></svg></div>
+<h3>محتوای شبکه اجتماعی</h3>
+<p>طراحی پست و استوری برای اینستاگرام</p>
+</div>
 </div>
 </div>
 </section>
 
-<!-- جدول قیمت‌ها -->
-<section id="pricing">
-<div class="container">
+<!-- ===== جدول قیمت ===== -->
+<section id="pricing" style="background:var(--bg);padding:80px 40px">
+<div class="container" style="max-width:1200px;margin:auto">
 <h2 class="section-title reveal">تعرفه <span>خدمات</span></h2>
-<p class="section-sub reveal">قیمت‌ها به تومان بوده و با توجه به پیچیدگی پروژه تغییر می‌کند</p>
+<p class="section-sub reveal">پکیج‌های طراحی متناسب با نیاز و بودجه شما</p>
 
-<div class="price-wrapper reveal">
-<table class="price-table">
-<thead>
-<tr>
-<th>خدمات</th>
-<th>ساده</th>
-<th>معمولی</th>
-<th>سطح بالا</th>
-<th>حرفه‌ای</th>
-</tr>
-</thead>
-<tbody>
-<tr><td class="service-name">لوگو / آیکن / پروفایل</td><td>۱,۵۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰</td><td>۴,۹۰۰,۰۰۰</td><td class="price-high">۷,۰۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">ست اداری</td><td>۳,۰۰۰,۰۰۰</td><td>۴,۵۰۰,۰۰۰</td><td>۷,۹۰۰,۰۰۰</td><td class="price-high">۹,۰۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بنر وبسایت</td><td>۶۰۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td class="price-high">۱,۸۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">پست / استوری / کاور</td><td>۴۰۰,۰۰۰</td><td>۵۵۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td class="price-high">۱,۲۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بنر / پوستر تبلیغاتی</td><td>۵۵۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰</td><td class="price-high">۱,۷۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بروشور / کاتالوگ (هر صفحه)</td><td>۱۹۰,۰۰۰</td><td>۲۳۰,۰۰۰</td><td>۲۹۰,۰۰۰</td><td class="price-high">۴۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">اینفوگرافیک</td><td>۹۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۹۰۰,۰۰۰</td><td class="price-high">۲,۵۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">کارت ویزیت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
-<tr><td class="service-name">تراکت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
-</tbody>
-</table>
+<div class="pricing-cards">
+<div class="pricing-card reveal">
+<div class="name">پایه</div>
+<div class="price">۱.۵<small> میلیون</small></div>
+<div class="desc">مناسب برای شروع کار</div>
+<ul>
+<li>لوگو ساده</li>
+<li>کارت ویزیت</li>
+<li>۱ ویرایش</li>
+</ul>
+<a class="btn" href="#order"><span>انتخاب</span></a>
+</div>
+
+<div class="pricing-card popular reveal">
+<span class="badge-pop">محبوب ترین</span>
+<div class="name">حرفه‌ای</div>
+<div class="price">۴.۹<small> میلیون</small></div>
+<div class="desc">مناسب برای برندهای در حال رشد</div>
+<ul>
+<li>لوگو اختصاصی</li>
+<li>ست اداری کامل</li>
+<li>کارت ویزیت لوکس</li>
+<li>۵ ویرایش</li>
+<li>مشاوره برندینگ</li>
+</ul>
+<a class="btn" href="#order"><span>انتخاب</span></a>
+</div>
+
+<div class="pricing-card reveal">
+<div class="name">پریمیوم</div>
+<div class="price">۹.۹<small> میلیون</small></div>
+<div class="desc">مناسب برای برندهای بزرگ</div>
+<ul>
+<li>لوگو + برندبوک</li>
+<li>ست اداری کامل</li>
+<li>کارت ویزیت ویژه</li>
+<li>بسته‌بندی محصول</li>
+<li>۱۰ ویرایش</li>
+<li>پشتیبانی ۱ ساله</li>
+</ul>
+<a class="btn" href="#order"><span>انتخاب</span></a>
+</div>
+
+<div class="pricing-card reveal">
+<div class="name">سفارشی</div>
+<div class="price">تماس</div>
+<div class="desc">پروژه‌های ویژه و بزرگ</div>
+<ul>
+<li>طراحی اختصاصی</li>
+<li>هر نوع پروژه</li>
+<li>مشاوره تخصصی</li>
+<li>تحویل فوری</li>
+</ul>
+<a class="btn" href="#order"><span>تماس بگیرید</span></a>
+</div>
 </div>
 </div>
 </section>
 
-<!-- مشاوره -->
-<section>
-<div class="container">
-<div class="discount reveal" style="background:linear-gradient(135deg,#f5f0e8,var(--white));color:var(--dark);border:2px solid rgba(201,168,76,.2)">
-<h2 style="color:var(--gold)">💡 مشاوره رایگان طراحی</h2>
-<p>قبل از شروع هر پروژه، مشاوره رایگان برای انتخاب بهترین سبک طراحی، رنگ‌بندی و نوع طرح متناسب با کسب‌وکار شما ارائه می‌شود تا نتیجه نهایی دقیقاً مطابق نیازتان باشد.</p>
-<a class="btn" href="tel:09927131621">مشاوره رایگان</a>
-</div>
-</div>
-</section>
-
-<!-- مزیت‌ها -->
-<section id="advantages" style="background:var(--light)">
-<div class="container">
+<!-- ===== مزیت‌ها ===== -->
+<section id="advantages">
+<div class="container" style="max-width:1200px;margin:auto">
 <h2 class="section-title reveal">چرا <span>آرا گرافیک</span>؟</h2>
 <p class="section-sub reveal">مزیت‌های همکاری با یک گرافیست حرفه‌ای</p>
 <div class="adv-list">
@@ -527,31 +618,29 @@ fallback.style.display='block';
 <div class="adv-item"><div class="num">۴</div><p>فایل‌های آماده چاپ با کیفیت بسیار بالا (۳۰۰ DPI)</p></div>
 <div class="adv-item"><div class="num">۵</div><p>مشاوره تخصصی در انتخاب رنگ، فونت و المان‌ها</p></div>
 <div class="adv-item"><div class="num">۶</div><p>تجربه کار با برندهای بزرگ و پروژه‌های متنوع</p></div>
-<div class="adv-item"><div class="num">۷</div><p>تعهد به زمان‌بندی و تحویل به موقع پروژه</p></div>
-<div class="adv-item"><div class="num">۸</div><p>قیمت‌گذاری منصفانه و شفاف بدون هزینه اضافی</p></div>
 </div>
 </div>
 </section>
 
-<!-- تخفیف -->
-<section id="discount">
-<div class="container">
+<!-- ===== تخفیف ===== -->
+<section id="discount" style="padding:80px 40px">
+<div class="container" style="max-width:1200px;margin:auto">
 <div class="discount reveal">
 <h2>🎉 تخفیف ویژه پروژه‌های جدید</h2>
 <p>به مناسبت استقبال شما عزیزان، تخفیف ویژه‌ای برای سفارشات جدید در نظر گرفته شده است. برای دریافت مشاوره رایگان و اطلاع از تخفیف، همین حالا تماس بگیرید!</p>
-<a class="btn" href="tel:09927131621">📞 تماس بگیرید</a>
+<a class="btn" href="tel:09927131621"><span>📞 تماس بگیرید</span></a>
 </div>
 </div>
 </section>
 
-<!-- ثبت سفارش -->
-<section id="order" style="background:var(--light)">
-<div class="container">
+<!-- ===== ثبت سفارش ===== -->
+<section id="order">
+<div class="container" style="max-width:1200px;margin:auto">
 <div class="order-box reveal">
 <h2 class="section-title" style="margin-bottom:8px">ثبت <span>سفارش</span></h2>
-<p style="font-size:16px;color:#555;line-height:2">سفارش خود را از طریق یکی از راه‌های زیر ثبت کنید</p>
+<p style="font-size:16px;color:#666;line-height:2">سفارش خود را از طریق یکی از راه‌های زیر ثبت کنید</p>
 <div class="phone">۰۹۹۲۷۱۳۱۶۲۱</div>
-<a class="btn" href="tel:09927131621" style="margin-top:8px">📞 تماس مستقیم</a>
+<a class="btn" href="tel:09927131621" style="margin-top:8px"><span>📞 تماس مستقیم</span></a>
 <div class="channels">
 <a class="ch" href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
 <a class="ch" href="#">💬 بله</a>
@@ -562,13 +651,13 @@ fallback.style.display='block';
 </div>
 </section>
 
-<!-- فوتر -->
+<!-- ===== فوتر ===== -->
 <footer>
-<div class="logo-container">
+<div class="logo" style="justify-content:center">
 <img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
 <span class="logo-text" style="display:none">آرا گرافیک</span>
 </div>
-<p style="opacity:.8;margin-bottom:15px;font-size:15px">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
+<p style="opacity:.8;margin-bottom:14px;font-size:15px">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
 <div class="socials">
 <a href="https://instagram.com/ara_graphic1" target="_blank">📷 اینستاگرام</a>
 <a href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
@@ -578,24 +667,21 @@ fallback.style.display='block';
 <p style="opacity:.5;margin-top:18px;font-size:13px">© تمامی حقوق برای آرا گرافیک محفوظ است.</p>
 </footer>
 
-<!-- دکمه‌های شناور -->
+<!-- ===== دکمه‌های شناور ===== -->
 <div class="float-btns">
 <a href="tel:09927131621" title="تماس">📞</a>
 <a href="https://t.me/ara_graphic1" target="_blank" title="تلگرام">✈️</a>
 <a href="https://instagram.com/ara_graphic1" target="_blank" title="اینستاگرام">📷</a>
 </div>
 
-<!-- اسکریپت -->
+<!-- ===== اسکریپت ===== -->
 <script>
-// منوی موبایل
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
 
-// منوی چسبان
 window.addEventListener('scroll',()=>{
 document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 });
 
-// فیلتر گالری
 function filterWorks(cat,btn){
 document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
@@ -613,14 +699,12 @@ setTimeout(()=>{w.style.display='none'},400);
 });
 }
 
-// نمایش اولیه گالری
 window.addEventListener('load',()=>{
 document.querySelectorAll('.work').forEach((w,i)=>{
-setTimeout(()=>{w.classList.add('show')},i*100);
+setTimeout(()=>{w.classList.add('show')},i*80);
 });
 });
 
-// لایت باکس
 function openLB(img){
 document.getElementById('lbImg').src=img.src;
 document.getElementById('lightbox').classList.add('show');
@@ -636,7 +720,6 @@ document.addEventListener('keydown',e=>{
 if(e.key==='Escape'){closeLB({target:document.getElementById('lightbox')})}
 });
 
-// شمارنده
 const counters=document.querySelectorAll('.counter');
 const startCount=()=>{
 counters.forEach(c=>{
@@ -646,20 +729,19 @@ if(top<window.innerHeight){
 c.classList.add('done');
 let target=+c.dataset.target;
 let count=0;
-let step=Math.ceil(target/80);
+let step=Math.ceil(target/70);
 let timer=setInterval(()=>{
 count+=step;
 if(count>=target){count=target;clearInterval(timer)}
 c.textContent=count+'+';
-},25);
+},20);
 }
 });
 };
 window.addEventListener('scroll',startCount);
 startCount();
 
-// انیمیشن اسکرول
-const revealItems=document.querySelectorAll('.reveal,.card,.adv-item');
+const revealItems=document.querySelectorAll('.reveal,.card,.adv-item,.pricing-card');
 const revealOnScroll=()=>{
 revealItems.forEach(el=>{
 let top=el.getBoundingClientRect().top;
@@ -669,9 +751,8 @@ if(top<window.innerHeight-80){el.classList.add('show')}
 window.addEventListener('scroll',revealOnScroll);
 window.addEventListener('load',revealOnScroll);
 
-// مدیریت لوگو (اگر تصویر لود نشد، متن جایگزین نمایش داده شود)
 document.addEventListener('DOMContentLoaded',function(){
-document.querySelectorAll('.logo-container img').forEach(img=>{
+document.querySelectorAll('.logo img').forEach(img=>{
 img.onerror=function(){
 this.style.display='none';
 let fallback=this.parentElement.querySelector('.logo-text');
