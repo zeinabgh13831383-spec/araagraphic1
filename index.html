@@ -1,829 +1,1120 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>آرا گرافیک | طراحی گرافیک حرفه‌ای</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif;scroll-behavior:smooth}
-:root{--purple:#6a00ff;--lpurple:#a855f7;--dpurple:#4c00b0;--white:#ffffff;--bg:#f8f5ff;--glass:rgba(255,255,255,.85);--shadow:rgba(106,0,255,.2)}
-body{background:var(--white);color:#1a1a2e;overflow-x:hidden;cursor:default}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرا گرافیک | طراحی گرافیک حرفه‌ای</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --purple: #6a00ff;
+            --lpurple: #a855f7;
+            --dpurple: #4c00b0;
+            --white: #ffffff;
+            --bg: #f8f5ff;
+            --glass: rgba(255, 255, 255, 0.9);
+            --shadow: rgba(106, 0, 255, 0.2);
+        }
+        body {
+            background: var(--white);
+            color: #1a1a2e;
+            overflow-x: hidden;
+            cursor: default;
+        }
 
-/* ===== منو ===== */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:12px 30px;display:flex;justify-content:space-between;align-items:center;transition:.5s;background:transparent}
-.navbar.scrolled{background:var(--glass);backdrop-filter:blur(25px);box-shadow:0 4px 40px var(--shadow)}
-.logo{display:flex;align-items:center;gap:10px}
-.logo img{height:42px;width:auto}
-.logo-text{font-size:24px;font-weight:900;color:var(--purple);letter-spacing:-1px}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;color:#2d1b4e;font-weight:600;font-size:15px;position:relative;transition:.3s}
-.nav-links a::after{content:'';position:absolute;bottom:-5px;right:0;width:0;height:3px;background:var(--purple);border-radius:5px;transition:.4s}
-.nav-links a:hover::after{width:100%}
-.nav-links a:hover{color:var(--purple)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{width:28px;height:3px;background:var(--purple);border-radius:5px;transition:.4s}
+        /* ===== سربرگ (بالا) ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 8px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(106, 0, 255, 0.08);
+        }
+        .top-bar .right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .top-bar .right .menu-toggle {
+            font-size: 24px;
+            color: var(--purple);
+            cursor: pointer;
+            transition: 0.3s;
+            background: none;
+            border: none;
+            padding: 5px 8px;
+        }
+        .top-bar .right .menu-toggle:hover {
+            transform: scale(1.1);
+            color: var(--dpurple);
+        }
+        .top-bar .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .top-bar .logo-area img {
+            height: 40px;
+            width: auto;
+        }
+        .top-bar .logo-area .logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--purple);
+            letter-spacing: -1px;
+        }
+        .top-bar .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-bar .left .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            border-radius: 50px;
+            padding: 6px 15px;
+            border: 1px solid rgba(106, 0, 255, 0.15);
+            transition: 0.3s;
+        }
+        .top-bar .left .search-box:focus-within {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(106, 0, 255, 0.1);
+        }
+        .top-bar .left .search-box input {
+            border: none;
+            background: transparent;
+            padding: 6px 10px;
+            font-size: 14px;
+            outline: none;
+            width: 160px;
+            color: #333;
+        }
+        .top-bar .left .search-box input::placeholder {
+            color: #aaa;
+        }
+        .top-bar .left .search-box i {
+            color: var(--purple);
+            font-size: 16px;
+            opacity: 0.7;
+        }
+        .top-bar .left .contact-phone {
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 15px;
+            direction: ltr;
+            text-decoration: none;
+            background: var(--bg);
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(106, 0, 255, 0.1);
+            transition: 0.3s;
+        }
+        .top-bar .left .contact-phone:hover {
+            background: var(--purple);
+            color: white;
+            border-color: var(--purple);
+        }
 
-/* ===== هدر با پس‌زمینه گرافیستی ===== */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:linear-gradient(160deg,#ffffff 0%,#f5edff 40%,#ede0ff 100%)}
-.hero-bg-grid{position:absolute;inset:0;pointer-events:none;z-index:0}
-.hero-bg-grid .dot{position:absolute;width:8px;height:8px;background:var(--purple);border-radius:50%;opacity:.08;animation:floatDot 20s infinite linear}
-.hero-bg-grid .dot:nth-child(1){top:15%;left:8%;animation-delay:0s}
-.hero-bg-grid .dot:nth-child(2){top:25%;right:12%;animation-delay:-3s;width:12px;height:12px}
-.hero-bg-grid .dot:nth-child(3){bottom:30%;left:20%;animation-delay:-6s;opacity:.05}
-.hero-bg-grid .dot:nth-child(4){top:60%;right:25%;animation-delay:-9s}
-.hero-bg-grid .dot:nth-child(5){bottom:15%;right:40%;animation-delay:-12s;width:6px;height:6px}
-.hero-bg-grid .line{position:absolute;height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);opacity:.06;animation:slideLine 15s infinite linear}
-.hero-bg-grid .line:nth-child(6){top:20%;left:0;width:60%;animation-delay:0s}
-.hero-bg-grid .line:nth-child(7){top:45%;right:0;width:40%;animation-delay:-5s}
-.hero-bg-grid .line:nth-child(8){bottom:35%;left:0;width:50%;animation-delay:-10s}
-.hero-bg-grid .shape{position:absolute;border:2px solid rgba(106,0,255,.06);border-radius:50%;animation:pulseShape 12s infinite}
-.hero-bg-grid .shape:nth-child(9){width:300px;height:300px;top:-80px;right:-80px;border-width:3px}
-.hero-bg-grid .shape:nth-child(10){width:200px;height:200px;bottom:-60px;left:-60px;animation-delay:-4s}
-.hero-bg-grid .shape:nth-child(11){width:150px;height:150px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-8s;border-color:rgba(106,0,255,.04)}
+        /* ===== منوی کناری (اسلاید) ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+            z-index: 1100;
+            padding: 30px 25px;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow-y: auto;
+            border-left: 3px solid var(--purple);
+        }
+        .side-menu.open {
+            right: 0;
+        }
+        .side-menu .close-btn {
+            font-size: 28px;
+            color: var(--purple);
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            display: block;
+            background: none;
+            border: none;
+            width: 100%;
+        }
+        .side-menu .close-btn:hover {
+            transform: rotate(90deg);
+            transition: 0.3s;
+        }
+        .side-menu .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .side-menu .menu-links li a {
+            text-decoration: none;
+            color: #2d1b4e;
+            font-weight: 600;
+            font-size: 17px;
+            padding: 12px 18px;
+            display: block;
+            border-radius: 12px;
+            transition: 0.3s;
+            border-right: 3px solid transparent;
+        }
+        .side-menu .menu-links li a:hover {
+            background: var(--bg);
+            color: var(--purple);
+            border-right-color: var(--purple);
+            padding-right: 25px;
+        }
+        .side-menu .menu-links li a i {
+            margin-left: 12px;
+            width: 22px;
+            color: var(--purple);
+            opacity: 0.7;
+        }
+        .side-menu .menu-footer {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+        }
+        .side-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1050;
+            display: none;
+            backdrop-filter: blur(3px);
+        }
+        .side-overlay.show {
+            display: block;
+        }
 
-/* ===== آیکون‌های سه‌بعدی فتوشاپ و ایلاستریتور ===== */
-.tool-icons{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.tool-icons .tool{position:absolute;font-size:50px;opacity:.08;animation:floatTool 25s infinite linear;filter:drop-shadow(0 10px 30px rgba(106,0,255,.1))}
-.tool-icons .tool:nth-child(1){top:5%;left:5%;animation-delay:0s;font-size:70px;opacity:.06}
-.tool-icons .tool:nth-child(2){top:15%;right:8%;animation-delay:-5s;font-size:55px}
-.tool-icons .tool:nth-child(3){bottom:20%;left:10%;animation-delay:-10s;font-size:60px;opacity:.05}
-.tool-icons .tool:nth-child(4){bottom:10%;right:5%;animation-delay:-15s;font-size:45px}
-.tool-icons .tool:nth-child(5){top:45%;left:3%;animation-delay:-20s;font-size:40px;opacity:.04}
-.tool-icons .tool:nth-child(6){top:40%;right:3%;animation-delay:-7s;font-size:50px}
-@keyframes floatTool{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}25%{transform:translateY(-80px) rotate(10deg) scale(1.1)}75%{transform:translateY(60px) rotate(-5deg) scale(.9)}}
+        /* ===== بنر بالای سایت ===== */
+        .hero-banner {
+            margin-top: 70px;
+            background: linear-gradient(135deg, #f5edff 0%, #ede0ff 50%, #f8f5ff 100%);
+            padding: 50px 40px 40px;
+            text-align: center;
+            border-bottom: 2px solid rgba(106, 0, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(106, 0, 255, 0.04), transparent 60%);
+            pointer-events: none;
+        }
+        .hero-banner .banner-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-banner .banner-content .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
+            color: white;
+            padding: 5px 22px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .hero-banner .banner-content h1 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a1a2e;
+            line-height: 1.2;
+        }
+        .hero-banner .banner-content h1 span {
+            background: linear-gradient(135deg, var(--purple), var(--lpurple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-banner .banner-content p {
+            font-size: 18px;
+            color: #555;
+            margin: 12px auto 22px;
+            max-width: 650px;
+            line-height: 2;
+        }
+        .hero-banner .banner-content .banner-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+        .hero-banner .banner-content .banner-btns .btn {
+            padding: 14px 40px;
+            font-size: 16px;
+        }
 
-@keyframes floatDot{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-40px) scale(1.3)}75%{transform:translateY(40px) scale(.8)}}
-@keyframes slideLine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-@keyframes pulseShape{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+        /* ===== بنر تبلیغاتی تعرفه ===== */
+        .pricing-cta-banner {
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            padding: 30px 20px;
+            margin: 30px 20px 0;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 40px rgba(106, 0, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.4s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .pricing-cta-banner:hover {
+            transform: scale(1.01);
+            box-shadow: 0 15px 50px rgba(106, 0, 255, 0.4);
+        }
+        .pricing-cta-banner::before {
+            content: '💰';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            opacity: 0.15;
+        }
+        .pricing-cta-banner::after {
+            content: '📊';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            opacity: 0.12;
+        }
+        .pricing-cta-banner h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .pricing-cta-banner p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .pricing-cta-banner .arrow {
+            display: inline-block;
+            margin-right: 12px;
+            font-size: 22px;
+            animation: bounceArrow 1.5s infinite;
+        }
+        @keyframes bounceArrow {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
 
-.hero-content{display:flex;align-items:center;justify-content:space-between;max-width:1250px;width:100%;gap:50px;flex-wrap:wrap;position:relative;z-index:1}
-.hero-text{flex:1;min-width:300px}
-.hero-text .badge{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;padding:6px 22px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:1.5px;margin-bottom:18px;animation:slideR 0.8s ease}
-.hero-text h1{font-size:85px;font-weight:900;color:#1a1a2e;margin-bottom:5px;animation:slideR 1s ease;line-height:1.1}
-.hero-text h1 span{background:linear-gradient(135deg,var(--purple),var(--lpurple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-text .subtitle{font-size:28px;color:var(--lpurple);margin-bottom:22px;animation:slideR 1.2s ease;font-weight:500}
-.hero-text .type-wrapper{font-size:18px;line-height:2.2;color:#444;margin-bottom:30px;animation:slideR 1.4s ease;max-width:550px;min-height:60px}
-.hero-text .type-wrapper .cursor{display:inline-block;width:3px;height:24px;background:var(--purple);margin-right:3px;animation:blink .8s infinite;vertical-align:middle}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        /* ===== صفحه تعرفه جداگانه ===== */
+        .pricing-page {
+            display: none;
+            padding: 100px 40px 60px;
+            background: var(--bg);
+            min-height: 100vh;
+        }
+        .pricing-page.active {
+            display: block;
+        }
+        .pricing-page .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .pricing-page .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--purple);
+            font-weight: 600;
+            border: 2px solid var(--purple);
+            margin-bottom: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .pricing-page .back-home:hover {
+            background: var(--purple);
+            color: white;
+        }
+        .pricing-page .pricing-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .pricing-page .pricing-header h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a1a2e;
+        }
+        .pricing-page .pricing-header h2 span {
+            color: var(--purple);
+        }
+        .pricing-page .pricing-header p {
+            font-size: 17px;
+            color: #777;
+            margin-top: 8px;
+        }
+        .pricing-page .price-wrapper {
+            overflow-x: auto;
+            border-radius: 24px;
+            box-shadow: 0 15px 50px var(--shadow);
+            border: 1px solid rgba(106, 0, 255, 0.1);
+            background: white;
+        }
+        .pricing-page .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 15px;
+            min-width: 700px;
+        }
+        .pricing-page .price-table thead {
+            background: var(--purple);
+            color: white;
+        }
+        .pricing-page .price-table th {
+            padding: 18px 12px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .pricing-page .price-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #f0e6ff;
+            color: #444;
+        }
+        .pricing-page .price-table tbody tr {
+            transition: 0.3s;
+        }
+        .pricing-page .price-table tbody tr:hover {
+            background: #f8f5ff;
+            transform: scale(1.01);
+        }
+        .pricing-page .price-table .service-name {
+            text-align: right;
+            font-weight: 700;
+            color: var(--purple);
+            padding-right: 20px;
+        }
+        .pricing-page .price-table .price-high {
+            color: var(--purple);
+            font-weight: 700;
+        }
+        .pricing-page .pricing-note {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(106, 0, 255, 0.08);
+        }
+        .pricing-page .pricing-note i {
+            color: var(--purple);
+            margin-left: 8px;
+        }
 
-.hero-text .btn-group{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;animation:slideR 1.6s ease}
-.hero-img{flex:0 0 340px;animation:float 6s infinite ease-in-out;position:relative}
-.hero-img::before{content:'';position:absolute;inset:-20px;border:3px solid rgba(106,0,255,.1);border-radius:35px;animation:spin 30s infinite linear}
-.hero-img img{width:539px;height:539px;object-fit:cover;border-radius:30px;box-shadow:0 25px 70px var(--shadow);border:6px solid var(--white);position:relative;transition:transform .6s,box-shadow .6s}
-.hero-img img:hover{transform:scale(1.02) rotate(-2deg);box-shadow:0 30px 90px rgba(106,0,255,.3)}
-@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
-@keyframes slideR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+        /* ===== بقیه بخش‌ها (همانند قبل) ===== */
+        .navbar {
+            display: none;
+        }
+        /* بخش‌های اصلی سایت */
+        .main-content {
+            display: block;
+        }
+        .main-content.hide {
+            display: none;
+        }
 
-.btn{display:inline-block;padding:15px 42px;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:var(--white);font-weight:700;text-decoration:none;border-radius:50px;transition:.4s;box-shadow:0 8px 35px var(--shadow);border:none;font-size:15px;cursor:pointer;position:relative;overflow:hidden}
-.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--lpurple),var(--purple));opacity:0;transition:.4s;border-radius:50px}
-.btn:hover::before{opacity:1}
-.btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 15px 45px rgba(106,0,255,.4)}
-.btn span{position:relative;z-index:1}
-.btn-outline{background:transparent;color:var(--purple);border:2px solid var(--purple);box-shadow:none}
-.btn-outline::before{background:linear-gradient(135deg,var(--purple),var(--dpurple))}
-.btn-outline:hover{color:white}
+        /* ===== دکمه‌ها ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 38px;
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+            color: var(--white);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.4s;
+            box-shadow: 0 8px 35px var(--shadow);
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--lpurple), var(--purple));
+            opacity: 0;
+            transition: 0.4s;
+            border-radius: 50px;
+        }
+        .btn:hover::before {
+            opacity: 1;
+        }
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(106, 0, 255, 0.4);
+        }
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--purple);
+            border: 2px solid var(--purple);
+            box-shadow: none;
+        }
+        .btn-outline::before {
+            background: linear-gradient(135deg, var(--purple), var(--dpurple));
+        }
+        .btn-outline:hover {
+            color: white;
+        }
 
-.wave{margin-top:-2px;position:relative;z-index:2}
-.wave svg{display:block;width:100%}
-
-/* ===== شمارنده ===== */
-.stats{background:linear-gradient(135deg,var(--purple),var(--dpurple));padding:55px 40px;display:flex;justify-content:center;gap:70px;flex-wrap:wrap}
-.stat{text-align:center;color:white}
-.stat h2{font-size:52px;font-weight:900;letter-spacing:2px}
-.stat p{font-size:16px;margin-top:6px;opacity:.85}
-
-/* ===== درباره من (وسط‌چین) ===== */
-#about{background:var(--bg);padding:80px 40px}
-.about-wrapper{max-width:1200px;margin:auto}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:20px}
-.about-text p{font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:center}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.about-stats .item{background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06)}
-.about-stats .item:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow)}
-.about-stats .item .num{font-size:30px;font-weight:900;color:var(--purple)}
-.about-stats .item .label{font-size:14px;color:#666;margin-top:4px}
-.about-quote{background:linear-gradient(135deg,var(--bg),var(--white));padding:30px 35px;border-radius:20px;border-right:5px solid var(--purple);margin-top:25px;text-align:center}
-.about-quote p{font-size:18px;color:#333;line-height:2.2;font-weight:500}
-
-/* ===== گالری ===== */
-#works{background:var(--bg);padding:80px 40px}
-.filters{text-align:center;margin-bottom:35px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.filters button{padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif}
-.filters button.active,.filters button:hover{background:var(--purple);color:var(--white);transform:scale(1.05);box-shadow:0 6px 25px var(--shadow)}
-
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px;max-width:1200px;margin:auto}
-.work{background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px)}
-.work.show{opacity:1;transform:translateY(0)}
-.work:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 25px 60px rgba(106,0,255,.3)}
-.work .img-wrapper{overflow:hidden;cursor:pointer;position:relative}
-.work .img-wrapper img{width:100%;height:280px;object-fit:cover;transition:.7s}
-.work:hover .img-wrapper img{transform:scale(1.1) rotate(-2deg)}
-.work .img-wrapper::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(106,0,255,.15),transparent 70%);opacity:0;transition:opacity .4s;pointer-events:none}
-.work:hover .img-wrapper::after{opacity:1}
-.work .work-desc{padding:18px 20px 22px;background:white}
-.work .work-desc h3{font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.work .work-desc h3 .tag{font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500}
-.work .work-desc p{font-size:14px;color:#666;line-height:1.8;margin-bottom:8px}
-.work .work-desc .meta{display:flex;flex-wrap:wrap;gap:6px}
-.work .work-desc .meta span{font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500}
-
-/* ===== لایت باکس ===== */
-.lightbox{position:fixed;inset:0;background:rgba(26,26,46,.93);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(10px)}
-.lightbox.show{display:flex}
-.lightbox img{max-width:90%;max-height:85%;border-radius:16px;box-shadow:0 0 60px rgba(106,0,255,.2);animation:zoomIn .5s cubic-bezier(.22,1,.36,1)}
-.lightbox .close{position:absolute;top:25px;left:35px;color:white;font-size:45px;cursor:pointer;transition:.4s;line-height:1;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.08)}
-.lightbox .close:hover{transform:rotate(90deg);background:rgba(255,255,255,.15)}
-@keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
-
-/* ===== خدمات ===== */
-#services{background:var(--bg);padding:80px 40px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:1200px;margin:auto}
-.card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04)}
-.card.show{opacity:1;transform:translateY(0)}
-.card:hover{transform:translateY(-10px);box-shadow:0 20px 50px var(--shadow);border-color:var(--purple)}
-.card .icon{width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s}
-.card:hover .icon{border-color:var(--purple);transform:scale(1.05)}
-.card .icon svg{width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2}
-.card h3{font-size:19px;color:#1a1a2e;margin-bottom:8px}
-.card p{font-size:14px;color:#666;line-height:1.9}
-
-/* ===== جدول قیمت ===== */
-#pricing{background:white;padding:80px 40px}
-.price-wrapper{overflow-x:auto;margin:40px 0;border-radius:24px;box-shadow:0 15px 50px var(--shadow);border:1px solid rgba(106,0,255,.1)}
-.price-table{width:100%;border-collapse:collapse;background:white;text-align:center;font-size:15px;min-width:700px}
-.price-table thead{background:var(--purple);color:white}
-.price-table th{padding:18px 12px;font-weight:700;font-size:16px}
-.price-table td{padding:16px 12px;border-bottom:1px solid #f0e6ff;color:#444}
-.price-table tbody tr{transition:.3s}
-.price-table tbody tr:hover{background:#f8f5ff;transform:scale(1.01)}
-.price-table .service-name{text-align:right;font-weight:700;color:var(--purple);padding-right:20px}
-.price-table .price-high{color:var(--purple);font-weight:700}
-
-/* ===== مزیت‌ها ===== */
-#advantages{background:var(--bg);padding:80px 40px}
-.adv-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1200px;margin:auto}
-.adv-item{display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px)}
-.adv-item.show{opacity:1;transform:translateX(0)}
-.adv-item:hover{transform:translateX(8px);box-shadow:0 10px 35px var(--shadow);border-color:var(--purple)}
-.adv-item .num{width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
-.adv-item p{font-size:15px;color:#444;line-height:1.8}
-
-/* ===== تخفیف ===== */
-.discount{background:linear-gradient(135deg,var(--purple),var(--dpurple));border-radius:30px;padding:55px 40px;text-align:center;color:white;margin:0 auto;max-width:900px}
-.discount h2{font-size:36px;margin-bottom:12px}
-.discount p{font-size:17px;line-height:2;margin-bottom:20px;opacity:.9}
-.discount .btn{background:white;color:var(--purple);box-shadow:0 8px 30px rgba(0,0,0,.15)}
-.discount .btn:hover{background:#f0e6ff;transform:translateY(-4px)}
-
-/* ===== ثبت سفارش ===== */
-#order{background:var(--bg);padding:80px 40px}
-.order-box{text-align:center;background:white;border-radius:30px;padding:55px 40px;border:2px solid rgba(106,0,255,.08);max-width:700px;margin:auto;box-shadow:0 4px 30px rgba(106,0,255,.04)}
-.order-box .phone{font-size:34px;font-weight:900;color:var(--purple);margin:16px 0;direction:ltr}
-.order-box .channels{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
-.order-box .ch{padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px}
-.order-box .ch:hover{background:var(--purple);color:white;transform:scale(1.05)}
-
-/* ===== فوتر ===== */
-footer{background:var(--dpurple);color:white;text-align:center;padding:40px}
-footer .logo{justify-content:center;margin-bottom:8px}
-footer .logo-text{color:white}
-footer .socials{display:flex;justify-content:center;gap:16px;margin:16px 0;flex-wrap:wrap}
-footer .socials a{color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px}
-footer .socials a:hover{background:rgba(255,255,255,.12);border-color:var(--lpurple)}
-
-/* ===== دکمه شناور ===== */
-.float-btns{position:fixed;bottom:25px;left:25px;display:flex;flex-direction:column;gap:12px;z-index:500}
-.float-btns a{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 30px var(--shadow);transition:.4s;animation:bounceIn .6s}
-.float-btns a:hover{transform:scale(1.15);box-shadow:0 10px 40px rgba(106,0,255,.5)}
-@keyframes bounceIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
-
-/* ===== انیمیشن‌ها ===== */
-.reveal{opacity:0;transform:translateY(50px);transition:.9s cubic-bezier(.22,1,.36,1)}
-.reveal.show{opacity:1;transform:translateY(0)}
-.section-title{text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px}
-.section-title span{color:var(--purple)}
-.section-sub{text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto}
-
-/* ===== ریسپانسیو ===== */
-@media(max-width:992px){
-.hero-text h1{font-size:56px}
-.hero-img{flex:0 0 280px}
-.hero-img img{width:380px;height:380px}
-.about-grid{grid-template-columns:1fr;gap:30px}
-}
-
-@media(max-width:768px){
-.nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:var(--glass);backdrop-filter:blur(20px);flex-direction:column;align-items:center;padding:30px 0;gap:20px;box-shadow:0 10px 40px var(--shadow)}
-.nav-links.open{display:flex}
-.hamburger{display:flex}
-.hero{padding:100px 20px 60px}
-.hero-content{flex-direction:column;text-align:center;gap:30px}
-.hero-text{min-width:auto;width:100%}
-.hero-text h1{font-size:40px}
-.hero-text .subtitle{font-size:20px}
-.hero-text .type-wrapper{font-size:15px;max-width:100%}
-.hero-text .btn-group{justify-content:center}
-.hero-img{flex:none;width:100%;display:flex;justify-content:center}
-.hero-img img{width:260px;height:260px}
-.hero-img::before{display:none}
-.btn{font-size:14px;padding:12px 28px}
-.stats{padding:30px 20px;gap:25px}
-.stats .stat{flex:1 1 40%;min-width:100px}
-.stat h2{font-size:30px}
-.section-title{font-size:26px}
-section{padding:50px 20px}
-.gallery{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
-.work .img-wrapper img{height:200px}
-.work .work-desc{padding:14px 16px 18px}
-.work .work-desc h3{font-size:15px}
-.cards{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px}
-.card{padding:22px 15px}
-.card .icon{width:60px;height:60px}
-.card .icon svg{width:28px;height:28px}
-.price-wrapper{margin:20px 0}
-.price-table{font-size:12px;min-width:600px}
-.price-table th,.price-table td{padding:10px 6px}
-.adv-list{grid-template-columns:1fr}
-.adv-item{padding:16px 18px}
-.discount{padding:35px 20px;margin:20px}
-.discount h2{font-size:26px}
-.order-box{padding:35px 20px}
-.order-box .phone{font-size:26px}
-.float-btns a{width:44px;height:44px;font-size:17px}
-footer{padding:30px 20px}
-footer .socials{gap:10px}
-footer .socials a{font-size:12px;padding:6px 14px}
-.about-stats{grid-template-columns:1fr 1fr}
-.about-text p{font-size:15px;text-align:center}
-.about-quote p{font-size:16px}
-.about-quote{padding:20px}
-.tool-icons .tool{font-size:30px!important}
-}
-
-@media(max-width:480px){
-.hero-text h1{font-size:32px}
-.hero-text .subtitle{font-size:17px}
-.hero-img img{width:200px;height:200px}
-.gallery{grid-template-columns:1fr}
-.work .img-wrapper img{height:220px}
-.stats .stat{flex:1 1 45%}
-.stat h2{font-size:24px}
-.nav-links{top:60px}
-.section-title{font-size:22px}
-.about-stats{grid-template-columns:1fr}
-.price-table{min-width:480px;font-size:11px}
-.tool-icons .tool{font-size:24px!important}
-}
-</style>
+        /* ===== ریسپانسیو ===== */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 8px 16px;
+            }
+            .top-bar .left .search-box input {
+                width: 100px;
+            }
+            .top-bar .left .contact-phone {
+                font-size: 13px;
+                padding: 4px 12px;
+            }
+            .hero-banner .banner-content h1 {
+                font-size: 32px;
+            }
+            .hero-banner {
+                padding: 30px 20px 25px;
+            }
+            .pricing-cta-banner {
+                margin: 20px 10px 0;
+                padding: 22px 15px;
+            }
+            .pricing-cta-banner h3 {
+                font-size: 20px;
+            }
+            .pricing-cta-banner::before,
+            .pricing-cta-banner::after {
+                display: none;
+            }
+            .pricing-page {
+                padding: 80px 16px 40px;
+            }
+            .pricing-page .price-table {
+                font-size: 12px;
+                min-width: 600px;
+            }
+            .pricing-page .price-table th,
+            .pricing-page .price-table td {
+                padding: 10px 6px;
+            }
+            .side-menu {
+                width: 280px;
+                right: -300px;
+            }
+            .top-bar .logo-area .logo-text {
+                font-size: 18px;
+            }
+        }
+        @media (max-width: 480px) {
+            .top-bar .left .search-box input {
+                width: 70px;
+                font-size: 12px;
+            }
+            .top-bar .left .contact-phone {
+                font-size: 11px;
+                padding: 3px 8px;
+            }
+            .hero-banner .banner-content h1 {
+                font-size: 26px;
+            }
+            .hero-banner .banner-content p {
+                font-size: 15px;
+            }
+            .btn {
+                padding: 10px 22px;
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- ===== منو ===== -->
-<nav class="navbar" id="navbar">
-<div class="logo">
-<img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
-<span class="logo-text" style="display:none">آرا گرافیک</span>
-</div>
-<ul class="nav-links" id="navLinks">
-<li><a href="#home">خانه</a></li>
-<li><a href="#about">درباره من</a></li>
-<li><a href="#works">نمونه کارها</a></li>
-<li><a href="#services">خدمات</a></li>
-<li><a href="#pricing">تعرفه‌ها</a></li>
-<li><a href="#advantages">مزیت‌ها</a></li>
-<li><a href="#order">ثبت سفارش</a></li>
-</ul>
-<div class="hamburger" onclick="toggleMenu()">
-<span></span><span></span><span></span>
-</div>
-</nav>
+    <!-- ===== سربرگ (بالا) با آیکون سه خط و جستجو ===== -->
+    <header class="top-bar">
+        <div class="right">
+            <button class="menu-toggle" onclick="toggleSideMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo-area">
+                <img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
+                <span class="logo-text" style="display:none">آرا گرافیک</span>
+            </div>
+        </div>
+        <div class="left">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو...">
+            </div>
+            <a href="tel:09927131621" class="contact-phone">📞 ۰۹۹۲۷۱۳۱۶۲۱</a>
+        </div>
+    </header>
 
-<!-- ===== هدر ===== -->
-<section class="hero" id="home">
-<div class="tool-icons">
-<span class="tool">🎨</span>
-<span class="tool">✏️</span>
-<span class="tool">🖌️</span>
-<span class="tool">📐</span>
-<span class="tool">🖍️</span>
-<span class="tool">✨</span>
-</div>
+    <!-- ===== منوی کناری ===== -->
+    <div class="side-overlay" id="sideOverlay" onclick="toggleSideMenu()"></div>
+    <nav class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="toggleSideMenu()"><i class="fas fa-times"></i></button>
+        <ul class="menu-links">
+            <li><a href="#" onclick="showMainContent()"><i class="fas fa-home"></i> خانه</a></li>
+            <li><a href="#about" onclick="closeSideMenu()"><i class="fas fa-user"></i> درباره من</a></li>
+            <li><a href="#works" onclick="closeSideMenu()"><i class="fas fa-image"></i> نمونه کارها</a></li>
+            <li><a href="#services" onclick="closeSideMenu()"><i class="fas fa-cogs"></i> خدمات</a></li>
+            <li><a href="#" onclick="showPricingPage(); closeSideMenu();"><i class="fas fa-table"></i> تعرفه طراحی گرافیک</a></li>
+            <li><a href="#advantages" onclick="closeSideMenu()"><i class="fas fa-star"></i> مزیت‌ها</a></li>
+            <li><a href="#order" onclick="closeSideMenu()"><i class="fas fa-shopping-cart"></i> ثبت سفارش</a></li>
+        </ul>
+        <div class="menu-footer">
+            <i class="fas fa-phone" style="color:var(--purple);margin-left:8px;"></i> ۰۹۹۲۷۱۳۱۶۲۱
+            <br>
+            <span style="font-size:12px;opacity:0.6;">آرا گرافیک | طراحی حرفه‌ای</span>
+        </div>
+    </nav>
 
-<div class="hero-bg-grid">
-<span class="dot"></span><span class="dot"></span><span class="dot"></span>
-<span class="dot"></span><span class="dot"></span>
-<span class="line"></span><span class="line"></span><span class="line"></span>
-<span class="shape"></span><span class="shape"></span><span class="shape"></span>
-</div>
-<div class="hero-content">
-<div class="hero-text">
-<div class="badge">✨ طراح گرافیک حرفه‌ای</div>
-<h1>آرا <span>گرافیک</span></h1>
-<div class="subtitle">برندینگ · تایپوگرافی · تصویرسازی</div>
-<div class="type-wrapper" id="typeWriter">
-<span id="typeText"></span><span class="cursor"></span>
-</div>
-<div class="btn-group">
-<a class="btn" href="#order"><span>ثبت سفارش</span></a>
-<a class="btn btn-outline" href="#works"><span>نمونه کارها</span></a>
-</div>
-</div>
-<div class="hero-img">
-<img src="zinat.jpg" alt="آرا گرافیک">
-</div>
-</div>
-</section>
+    <!-- ===== بخش اصلی محتوا ===== -->
+    <div class="main-content" id="mainContent">
 
-<!-- ===== موج ===== -->
-<div class="wave">
-<svg viewBox="0 0 1440 120" fill="none"><path d="M0,80 C360,120 720,40 1440,80 L1440,0 L0,0 Z" fill="#6a00ff" opacity=".06"/></svg>
-</div>
+        <!-- ===== بنر بالای سایت ===== -->
+        <section class="hero-banner">
+            <div class="banner-content">
+                <div class="badge">✨ طراح گرافیک حرفه‌ای</div>
+                <h1>آرا <span>گرافیک</span></h1>
+                <p>برندینگ · تایپوگرافی · تصویرسازی · طراحی هویت بصری با کیفیت بالا و خلاقیت بی‌نهایت</p>
+                <div class="banner-btns">
+                    <a class="btn" href="#order"><span>ثبت سفارش</span></a>
+                    <a class="btn btn-outline" href="#works"><span>نمونه کارها</span></a>
+                </div>
+            </div>
+        </section>
 
-<!-- ===== شمارنده ===== -->
-<div class="stats">
-<div class="stat"><h2 class="counter" data-target="250">0</h2><p>پروژه موفق</p></div>
-<div class="stat"><h2 class="counter" data-target="150">0</h2><p>مشتری راضی</p></div>
-<div class="stat"><h2 class="counter" data-target="8">0</h2><p>سال تجربه</p></div>
-<div class="stat"><h2 class="counter" data-target="100">0</h2><p>رضایت‌مندی %</p></div>
-</div>
+        <!-- ===== بنر تعرفه طراحی گرافیک (قابل کلیک) ===== -->
+        <div class="pricing-cta-banner" onclick="showPricingPage()">
+            <h3>📊 تعرفه طراحی گرافیک <span class="arrow">←</span></h3>
+            <p>مشاهده قیمت‌های حرفه‌ای و کامل خدمات طراحی لوگو، کارت ویزیت، بروشور، بنر و...</p>
+        </div>
 
-<!-- ===== درباره من (وسط‌چین، بدون امضای بنفش) ===== -->
-<section id="about">
-<div class="about-wrapper">
-<h2 class="section-title reveal">درباره <span>من</span></h2>
-<p class="section-sub reveal">طراح گرافیک و متخصص هویت بصری</p>
+        <!-- ===== موج ===== -->
+        <div class="wave" style="margin-top:20px;">
+            <svg viewBox="0 0 1440 120" fill="none"><path d="M0,80 C360,120 720,40 1440,80 L1440,0 L0,0 Z" fill="#6a00ff" opacity=".06"/></svg>
+        </div>
 
-<div class="about-grid">
-<div class="about-text reveal">
-<p><strong>سلام، من زینت غلامی هستم؛</strong> طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
+        <!-- ===== شمارنده ===== -->
+        <div class="stats" style="background:linear-gradient(135deg,var(--purple),var(--dpurple));padding:55px 40px;display:flex;justify-content:center;gap:70px;flex-wrap:wrap;">
+            <div class="stat"><h2 class="counter" data-target="250">0</h2><p>پروژه موفق</p></div>
+            <div class="stat"><h2 class="counter" data-target="150">0</h2><p>مشتری راضی</p></div>
+            <div class="stat"><h2 class="counter" data-target="8">0</h2><p>سال تجربه</p></div>
+            <div class="stat"><h2 class="counter" data-target="100">0</h2><p>رضایت‌مندی %</p></div>
+        </div>
 
-<p>طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
+        <!-- ===== درباره من ===== -->
+        <section id="about" style="background:var(--bg);padding:80px 40px;">
+            <div class="about-wrapper" style="max-width:1200px;margin:auto;">
+                <h2 class="section-title reveal" style="text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">درباره <span style="color:var(--purple);">من</span></h2>
+                <p class="section-sub reveal" style="text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto;">طراح گرافیک و متخصص هویت بصری</p>
+                <div class="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:20px;">
+                    <div class="about-text reveal">
+                        <p style="font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:center;"><strong>سلام، من زینت غلامی هستم؛</strong> طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
+                        <p style="font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:center;">طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
+                        <p style="font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:center;">در طول سال‌های فعالیت حرفه‌ای، با برندها، کسب‌وکارها و مجموعه‌های مختلف همکاری کرده‌ام و همواره تلاش کرده‌ام میان زیبایی بصری، کاربردپذیری و اهداف تجاری تعادل ایجاد کنم. هر پروژه را با تحقیق، دقت و توجه به جزئیات آغاز می‌کنم تا نتیجه نهایی نه‌تنها چشم‌نواز، بلکه مؤثر و ماندگار باشد.</p>
+                    </div>
+                    <div class="about-stats reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+                        <div class="item" style="background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06);"><div class="num" style="font-size:30px;font-weight:900;color:var(--purple);">۸+</div><div class="label" style="font-size:14px;color:#666;margin-top:4px;">سال تجربه</div></div>
+                        <div class="item" style="background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06);"><div class="num" style="font-size:30px;font-weight:900;color:var(--purple);">۱۵۰+</div><div class="label" style="font-size:14px;color:#666;margin-top:4px;">پروژه برندینگ</div></div>
+                        <div class="item" style="background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06);"><div class="num" style="font-size:30px;font-weight:900;color:var(--purple);">۱۰۰%</div><div class="label" style="font-size:14px;color:#666;margin-top:4px;">رضایت مشتری</div></div>
+                        <div class="item" style="background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06);"><div class="num" style="font-size:30px;font-weight:900;color:var(--purple);">۲۴h</div><div class="label" style="font-size:14px;color:#666;margin-top:4px;">پاسخگویی</div></div>
+                    </div>
+                </div>
+                <div class="about-quote reveal" style="background:linear-gradient(135deg,var(--bg),var(--white));padding:30px 35px;border-radius:20px;border-right:5px solid var(--purple);margin-top:25px;text-align:center;">
+                    <p style="font-size:18px;color:#333;line-height:2.2;font-weight:500;">«طراحی، پلی است میان آنچه برند می‌گوید و آنچه مخاطب احساس می‌کند. من این پل را با عشق می‌سازم.»</p>
+                </div>
+            </div>
+        </section>
 
-<p>در طول سال‌های فعالیت حرفه‌ای، با برندها، کسب‌وکارها و مجموعه‌های مختلف همکاری کرده‌ام و همواره تلاش کرده‌ام میان زیبایی بصری، کاربردپذیری و اهداف تجاری تعادل ایجاد کنم. هر پروژه را با تحقیق، دقت و توجه به جزئیات آغاز می‌کنم تا نتیجه نهایی نه‌تنها چشم‌نواز، بلکه مؤثر و ماندگار باشد.</p>
-</div>
+        <!-- ===== نمونه کارها ===== -->
+        <section id="works" style="background:var(--bg);padding:80px 40px;">
+            <div class="container" style="max-width:1200px;margin:auto;">
+                <h2 class="section-title reveal" style="text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">نمونه <span style="color:var(--purple);">کارها</span></h2>
+                <p class="section-sub reveal" style="text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto;">برخی از پروژه‌های اخیر من در حوزه‌های مختلف طراحی</p>
+                <div class="filters" style="text-align:center;margin-bottom:35px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+                    <button class="active" onclick="filterWorks('all',this)" style="padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif;">همه</button>
+                    <button onclick="filterWorks('card',this)" style="padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif;">کارت ویزیت</button>
+                    <button onclick="filterWorks('flyer',this)" style="padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif;">تراکت</button>
+                    <button onclick="filterWorks('label',this)" style="padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif;">لیبل</button>
+                    <button onclick="filterWorks('logo',this)" style="padding:10px 26px;border:2px solid var(--purple);background:var(--white);color:var(--purple);border-radius:50px;cursor:pointer;font-weight:600;font-size:14px;transition:.4s;font-family:Vazirmatn,sans-serif;">لوگو</button>
+                </div>
+                <div class="gallery" id="gallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px;max-width:1200px;margin:auto;">
+                    <div class="work" data-cat="card" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/card/1.jpg" alt="کارت ویزیت" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">کارت ویزیت روانشناس <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">برندینگ</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی مدرن و مینیمال</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">چاپ افست</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">بیزینس کارت</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">روانشناس</span></div>
+                        </div>
+                    </div>
+                    <div class="work" data-cat="card" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/card/2.jpg" alt="کارت ویزیت" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">کارت ویزیت فروشگاه موبایل <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">لوکس</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی مینیمال مشکی و نارنجی</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشکی</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">فروشگاه</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشتری: موبایل</span></div>
+                        </div>
+                    </div>
+                    <div class="work" data-cat="card" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/card/3.jpg" alt="کارت ویزیت" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">کارت ویزیت مبلمان <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">خلاق</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی با ترکیب رنگ جذاب</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">سرویس خواب</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">سبز</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشتری: مبلمان</span></div>
+                        </div>
+                    </div>
+                    <div class="work" data-cat="flyer" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/flyer/1.jpg" alt="تراکت" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">تراکت تبلیغاتی <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">تبلیغات</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی جذاب برای کافه ها</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">A4</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">جذاب</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشتری: کافه</span></div>
+                        </div>
+                    </div>
+                    <div class="work" data-cat="flyer" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/flyer/2.jpg" alt="تراکت" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">تراکت رویداد <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">رویداد</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی برای جشنواره موسیقی با المان‌های گرافیکی</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">A5</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">فانتزی</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشتری: جشنواره</span></div>
+                        </div>
+                    </div>
+                    <div class="work" data-cat="label" style="background:var(--white);border-radius:20px;overflow:hidden;cursor:default;box-shadow:0 10px 35px var(--shadow);transition:.6s;opacity:0;transform:translateY(50px);">
+                        <div class="img-wrapper" style="overflow:hidden;cursor:pointer;position:relative;"><img src="images/label/1.jpg" alt="لیبل" onclick="openLB(this)" style="width:100%;height:280px;object-fit:cover;transition:.7s;"></div>
+                        <div class="work-desc" style="padding:18px 20px 22px;background:white;">
+                            <h3 style="font-size:17px;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">لیبل محصول ارگانیک <span class="tag" style="font-size:11px;background:var(--purple);color:white;padding:3px 12px;border-radius:50px;font-weight:500;">طبیعی</span></h3>
+                            <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:8px;">طراحی لیبل با حس طبیعی و ارگانیک برای محصولات غذایی</p>
+                            <div class="meta" style="display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مات</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">رنگ‌های خاکی</span><span style="font-size:11px;background:var(--bg);color:var(--purple);padding:3px 12px;border-radius:50px;font-weight:500;">مشتری: ارگانیک‌فود</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="about-stats reveal">
-<div class="item"><div class="num">۸+</div><div class="label">سال تجربه</div></div>
-<div class="item"><div class="num">۱۵۰+</div><div class="label">پروژه برندینگ</div></div>
-<div class="item"><div class="num">۱۰۰%</div><div class="label">رضایت مشتری</div></div>
-<div class="item"><div class="num">۲۴h</div><div class="label">پاسخگویی</div></div>
-</div>
-</div>
+        <!-- ===== لایت باکس ===== -->
+        <div class="lightbox" id="lightbox" onclick="closeLB(event)" style="position:fixed;inset:0;background:rgba(26,26,46,.93);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(10px);">
+            <span class="close" style="position:absolute;top:25px;left:35px;color:white;font-size:45px;cursor:pointer;transition:.4s;line-height:1;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.08);">✕</span>
+            <img id="lbImg" src="" alt="" style="max-width:90%;max-height:85%;border-radius:16px;box-shadow:0 0 60px rgba(106,0,255,.2);animation:zoomIn .5s cubic-bezier(.22,1,.36,1);">
+        </div>
 
-<div class="about-quote reveal">
-<p>«طراحی، پلی است میان آنچه برند می‌گوید و آنچه مخاطب احساس می‌کند. من این پل را با عشق می‌سازم.»</p>
-</div>
-</div>
-</section>
+        <!-- ===== خدمات ===== -->
+        <section id="services" style="background:var(--bg);padding:80px 40px;">
+            <div class="container" style="max-width:1200px;margin:auto;">
+                <h2 class="section-title reveal" style="text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">خدمات <span style="color:var(--purple);">من</span></h2>
+                <p class="section-sub reveal" style="text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto;">تخصص‌های گرافیکی که می‌توانم به شما ارائه دهم</p>
+                <div class="cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:1200px;margin:auto;">
+                    <div class="card" style="background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04);">
+                        <div class="icon" style="width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s;"><svg viewBox="0 0 24 24" style="width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                        <h3 style="font-size:19px;color:#1a1a2e;margin-bottom:8px;">طراحی لوگو</h3>
+                        <p style="font-size:14px;color:#666;line-height:1.9;">لوگوی اختصاصی و منحصربه‌فرد با هویت برند شما</p>
+                    </div>
+                    <div class="card" style="background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04);">
+                        <div class="icon" style="width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s;"><svg viewBox="0 0 24 24" style="width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></div>
+                        <h3 style="font-size:19px;color:#1a1a2e;margin-bottom:8px;">کارت ویزیت</h3>
+                        <p style="font-size:14px;color:#666;line-height:1.9;">طراحی مدرن و حرفه‌ای متناسب با شخصیت برند</p>
+                    </div>
+                    <div class="card" style="background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04);">
+                        <div class="icon" style="width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s;"><svg viewBox="0 0 24 24" style="width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2;"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h4"/></svg></div>
+                        <h3 style="font-size:19px;color:#1a1a2e;margin-bottom:8px;">تراکت و بروشور</h3>
+                        <p style="font-size:14px;color:#666;line-height:1.9;">طراحی تبلیغاتی جذاب با تمرکز بر پیام‌رسانی</p>
+                    </div>
+                    <div class="card" style="background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(106,0,255,.1);padding:35px 25px;border-radius:22px;text-align:center;transition:.6s;opacity:0;transform:translateY(40px);box-shadow:0 4px 20px rgba(106,0,255,.04);">
+                        <div class="icon" style="width:70px;height:70px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--white));border-radius:50%;border:2px solid rgba(106,0,255,.1);transition:.4s;"><svg viewBox="0 0 24 24" style="width:34px;height:34px;fill:none;stroke:var(--purple);stroke-width:2;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></div>
+                        <h3 style="font-size:19px;color:#1a1a2e;margin-bottom:8px;">لیبل و بسته‌بندی</h3>
+                        <p style="font-size:14px;color:#666;line-height:1.9;">طراحی بسته‌بندی خلاقانه و جذاب</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- ===== نمونه کارها ===== -->
-<section id="works">
-<div class="container" style="max-width:1200px;margin:auto">
-<h2 class="section-title reveal">نمونه <span>کارها</span></h2>
-<p class="section-sub reveal">برخی از پروژه‌های اخیر من در حوزه‌های مختلف طراحی</p>
+        <!-- ===== مزیت‌ها ===== -->
+        <section id="advantages" style="background:var(--bg);padding:80px 40px;">
+            <div class="container" style="max-width:1200px;margin:auto;">
+                <h2 class="section-title reveal" style="text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">مزیت‌های <span style="color:var(--purple);">آرا گرافیک</span></h2>
+                <p class="section-sub reveal" style="text-align:center;font-size:17px;color:#777;margin-bottom:50px;line-height:2;max-width:700px;margin-left:auto;margin-right:auto;">چرا مشتریان من را انتخاب می‌کنند؟</p>
+                <div class="adv-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1200px;margin:auto;">
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۱</div><p style="font-size:15px;color:#444;line-height:1.8;">طراحی کاملاً اختصاصی و خلاقانه با نگاه برندینگ</p></div>
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۲</div><p style="font-size:15px;color:#444;line-height:1.8;">تحویل سریع همراه با کیفیت بالا و جزئیات کامل</p></div>
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۳</div><p style="font-size:15px;color:#444;line-height:1.8;">ویرایش نامحدود تا رسیدن به رضایت کامل شما</p></div>
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۴</div><p style="font-size:15px;color:#444;line-height:1.8;">فایل‌های آماده چاپ با کیفیت بسیار بالا (۳۰۰ DPI)</p></div>
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۵</div><p style="font-size:15px;color:#444;line-height:1.8;">مشاوره تخصصی در انتخاب رنگ، فونت و المان‌ها</p></div>
+                    <div class="adv-item" style="display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(15px);padding:20px 24px;border-radius:18px;border:1px solid rgba(106,0,255,.08);transition:.5s;opacity:0;transform:translateX(-40px);"><div class="num" style="width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;">۶</div><p style="font-size:15px;color:#444;line-height:1.8;">تجربه کار با برندهای بزرگ و پروژه‌های متنوع</p></div>
+                </div>
+            </div>
+        </section>
 
-<div class="filters reveal">
-<button class="active" onclick="filterWorks('all',this)">همه</button>
-<button onclick="filterWorks('card',this)">کارت ویزیت</button>
-<button onclick="filterWorks('flyer',this)">تراکت</button>
-<button onclick="filterWorks('label',this)">لیبل</button>
-<button onclick="filterWorks('logo',this)">لوگو</button>
-</div>
+        <!-- ===== تخفیف ===== -->
+        <section id="discount" style="padding:80px 40px;">
+            <div class="container" style="max-width:1200px;margin:auto;">
+                <div class="discount reveal" style="background:linear-gradient(135deg,var(--purple),var(--dpurple));border-radius:30px;padding:55px 40px;text-align:center;color:white;margin:0 auto;max-width:900px;">
+                    <h2 style="font-size:36px;margin-bottom:12px;">🎉 تخفیف ویژه پروژه‌های جدید</h2>
+                    <p style="font-size:17px;line-height:2;margin-bottom:20px;opacity:.9;">به مناسبت استقبال شما عزیزان، تخفیف ویژه‌ای برای سفارشات جدید در نظر گرفته شده است. برای دریافت مشاوره رایگان و اطلاع از تخفیف، همین حالا تماس بگیرید!</p>
+                    <a class="btn" href="tel:09927131621" style="background:white;color:var(--purple);box-shadow:0 8px 30px rgba(0,0,0,.15);"><span>📞 تماس بگیرید</span></a>
+                </div>
+            </div>
+        </section>
 
-<div class="gallery" id="gallery">
-<div class="work" data-cat="card">
-<div class="img-wrapper"><img src="images/card/1.jpg" alt="کارت ویزیت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>کارت ویزیت روانشناس <span class="tag">برندینگ</span></h3>
-<p>طراحی مدرن و مینیمال </p>
-<div class="meta"><span>چاپ افست</span><span>بیزینس کارت</span><span>روانشناس</span></div>
-</div>
-</div>
-<div class="work" data-cat="card">
-<div class="img-wrapper"><img src="images/card/2.jpg" alt="کارت ویزیت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>کارت ویزیت فروشگاه موبایل <span class="tag">لوکس</span></h3>
-<p>طراحی مینیمال مشکی و نارنجی</p>
-<div class="meta"><span>مشکی</span><span>فروشگاه</span><span>مشتری: موبایل</span></div>
-</div>
-</div>
-<div class="work" data-cat="card">
-<div class="img-wrapper"><img src="images/card/3.jpg" alt="کارت ویزیت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>کارت ویزیت مبلمان <span class="tag">خلاق</span></h3>
-<p>طراحی با ترکیب رنگ  جذاب </p>
-<div class="meta"><span>سرویس خواب</span><span>سبز</span><span>مشتری: مبلمان</span></div>
-</div>
-</div>
-<div class="work" data-cat="card">
-<div class="img-wrapper"><img src="images/card/4.jpg" alt="کارت ویزیت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>کارت ویزیت برنامه نویس <span class="tag">جذاب</span></h3>
-<p>طراحی بسیار ساده و شیک</p>
-<div class="meta"><span>رنگ بندی عالی</span><span>سئو</span><span>برنامه نویسی</span></div>
-</div>
-</div>
-<div class="work" data-cat="flyer">
-<div class="img-wrapper"><img src="images/flyer/1.jpg" alt="تراکت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>تراکت تبلیغاتی <span class="tag">تبلیغات</span></h3>
-<p>طراحی جذاب برای کافه ها </p>
-<div class="meta"><span>A4</span><span>جذاب</span><span>مشتری: کافه </span></div>
-</div>
-</div>
-<div class="work" data-cat="flyer">
-<div class="img-wrapper"><img src="images/flyer/2.jpg" alt="تراکت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>تراکت رویداد <span class="tag">رویداد</span></h3>
-<p>طراحی برای جشنواره موسیقی با المان‌های گرافیکی</p>
-<div class="meta"><span>A5</span><span>فانتزی</span><span>مشتری: جشنواره</span></div>
-</div>
-</div>
-<div class="work" data-cat="flyer">
-<div class="img-wrapper"><img src="images/flyer/3.jpg" alt="تراکت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>تراکت فروش ویژه <span class="tag">تخفیف</span></h3>
-<p>طراحی جذاب با تمرکز بر پیشنهادات ویژه</p>
-<div class="meta"><span>رنگی</span><span>جلددار</span><span>مشتری: فروشگاه آنلاین</span></div>
-</div>
-</div>
-<div class="work" data-cat="flyer">
-<div class="img-wrapper"><img src="images/flyer/4.jpg" alt="تراکت" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>بروشور آموزشی <span class="tag">آموزشی</span></h3>
-<p>طراحی محتوای آموزشی با اینفوگرافیک و تصاویر</p>
-<div class="meta"><span>مات</span><span>تصویرسازی</span><span>مشتری: موسسه علمی</span></div>
-</div>
-</div>
-<div class="work" data-cat="banner">
-<div class="img-wrapper"><img src="images/banner/1.jpg" alt="بنر" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>بنر سایت <span class="tag">دیجیتال</span></h3>
-<p>بنر تبلیغاتی برای صفحه اول یک فروشگاه آنلاین</p>
-<div class="meta"><span>وب</span><span>موشن</span><span>مشتری: دیجی‌مارت</span></div>
-</div>
-</div>
-<div class="work" data-cat="banner">
-<div class="img-wrapper"><img src="images/banner/2.jpg" alt="بنر" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>بنر شبکه اجتماعی <span class="tag">سوشال</span></h3>
-<p>طراحی کاور و پست برای کمپین اینستاگرامی</p>
-<div class="meta"><span>اینستاگرام</span><span>کاور</span><span>مشتری: برند مد</span></div>
-</div>
-</div>
-<div class="work" data-cat="banner">
-<div class="img-wrapper"><img src="images/banner/3.jpg" alt="بنر" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>بنر بیلبورد <span class="tag">چاپ</span></h3>
-<p>طراحی بیلبورد شهری برای یک برند خودروسازی</p>
-<div class="meta"><span>بیلبورد</span><span>رنگ‌های قوی</span><span>مشتری: خودروسازان</span></div>
-</div>
-</div>
-<div class="work" data-cat="label">
-<div class="img-wrapper"><img src="images/label/1.jpg" alt="لیبل" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>لیبل محصول ارگانیک <span class="tag">طبیعی</span></h3>
-<p>طراحی لیبل با حس طبیعی و ارگانیک برای محصولات غذایی</p>
-<div class="meta"><span>مات</span><span>رنگ‌های خاکی</span><span>مشتری: ارگانیک‌فود</span></div>
-</div>
-</div>
-<div class="work" data-cat="label">
-<div class="img-wrapper"><img src="images/label/2.jpg" alt="لیبل" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>لیبل لوکس <span class="tag">لوکس</span></h3>
-<p>طراحی لیبل با طلاکوب و جزئیات ظریف برای برند عطر</p>
-<div class="meta"><span>طلاکوب</span><span>برجسته</span><span>مشتری: عطر سپیده</span></div>
-</div>
-</div>
-<div class="work" data-cat="label">
-<div class="img-wrapper"><img src="images/label/3.jpg" alt="لیبل" onclick="openLB(this)"></div>
-<div class="work-desc">
-<h3>لیبل مدرن <span class="tag">مدرن</span></h3>
-<p>طراحی مینیمال و مدرن برای برند لوازم آرایشی</p>
-<div class="meta"><span>گلاسه</span><span>نقره‌ای</span><span>مشتری: آرایشی آنا</span></div>
-</div>
-</div>
-</div>
-</div>
-</section>
+        <!-- ===== ثبت سفارش ===== -->
+        <section id="order" style="background:var(--bg);padding:80px 40px;">
+            <div class="container" style="max-width:1200px;margin:auto;">
+                <div class="order-box" style="text-align:center;background:white;border-radius:30px;padding:55px 40px;border:2px solid rgba(106,0,255,.08);max-width:700px;margin:auto;box-shadow:0 4px 30px rgba(106,0,255,.04);">
+                    <h2 class="section-title" style="margin-bottom:8px;font-size:36px;font-weight:800;color:#1a1a2e;">ثبت <span style="color:var(--purple);">سفارش</span></h2>
+                    <p style="font-size:16px;color:#666;line-height:2;">سفارش خود را از طریق یکی از راه‌های زیر ثبت کنید</p>
+                    <div class="phone" style="font-size:34px;font-weight:900;color:var(--purple);margin:16px 0;direction:ltr;">۰۹۹۲۷۱۳۱۶۲۱</div>
+                    <a class="btn" href="tel:09927131621" style="margin-top:8px;"><span>📞 تماس مستقیم</span></a>
+                    <div class="channels" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px;">
+                        <a class="ch" href="https://t.me/ara_graphic1" target="_blank" style="padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px;">✈️ تلگرام</a>
+                        <a class="ch" href="https://bale.ai/Gholami_graphist" target="_blank" style="padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px;">💬 بله</a>
+                        <a class="ch" href="#" style="padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px;">📱 ایتا</a>
+                        <a class="ch" href="https://instagram.com/ara_graphic1" target="_blank" style="padding:12px 26px;background:var(--bg);border:2px solid var(--purple);border-radius:50px;color:var(--purple);font-weight:600;text-decoration:none;transition:.4s;font-size:14px;">📷 اینستاگرام</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- ===== لایت باکس ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLB(event)">
-<span class="close">✕</span>
-<img id="lbImg" src="" alt="">
-</div>
+        <!-- ===== فوتر ===== -->
+        <footer style="background:var(--dpurple);color:white;text-align:center;padding:40px;">
+            <div class="logo" style="justify-content:center;display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
+                <span class="logo-text" style="display:none;color:white;font-size:24px;font-weight:900;">آرا گرافیک</span>
+            </div>
+            <p style="opacity:.8;margin-bottom:14px;font-size:15px;">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
+            <div class="socials" style="display:flex;justify-content:center;gap:16px;margin:16px 0;flex-wrap:wrap;">
+                <a href="https://instagram.com/ara_graphic1" target="_blank" style="color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px;">📷 اینستاگرام</a>
+                <a href="https://t.me/ara_graphic1" target="_blank" style="color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px;">✈️ تلگرام</a>
+                <a href="https://bale.ai/Gholami_graphist" target="_blank" style="color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px;">💬 بله</a>
+                <a href="#" style="color:white;text-decoration:none;font-weight:500;padding:8px 20px;border:1px solid rgba(255,255,255,.15);border-radius:50px;transition:.4s;font-size:14px;">📱 ایتا</a>
+            </div>
+            <p style="opacity:.5;margin-top:18px;font-size:13px;">© تمامی حقوق برای آرا گرافیک محفوظ است.</p>
+        </footer>
 
-<!-- ===== خدمات ===== -->
-<section id="services">
-<div class="container" style="max-width:1200px;margin:auto">
-<h2 class="section-title reveal">خدمات <span>من</span></h2>
-<p class="section-sub reveal">تخصص‌های گرافیکی که می‌توانم به شما ارائه دهم</p>
-<div class="cards">
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-<h3>طراحی لوگو</h3>
-<p>لوگوی اختصاصی و منحصربه‌فرد با هویت برند شما</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></div>
-<h3>کارت ویزیت</h3>
-<p>طراحی مدرن و حرفه‌ای متناسب با شخصیت برند</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h4"/></svg></div>
-<h3>تراکت و بروشور</h3>
-<p>طراحی تبلیغاتی جذاب با تمرکز بر پیام‌رسانی</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M4 16h16"/></svg></div>
-<h3>ست اداری</h3>
-<p>هویت بصری یکپارچه برای کسب‌وکار شما</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></div>
-<h3>لیبل و بسته‌بندی</h3>
-<p>طراحی بسته‌بندی خلاقانه و جذاب</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12v4a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h7"/><path d="M15 6l3-3 3 3"/><path d="M18 3v8"/></svg></div>
-<h3>اینفوگرافیک</h3>
-<p>ارائه بصری داده‌ها به صورت خلاقانه</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></div>
-<h3>پوستر و بنر</h3>
-<p>طراحی گرافیکی برای چاپ و فضای دیجیتال</p>
-</div>
-<div class="card">
-<div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/><line x1="2" y1="8" x2="22" y2="8"/></svg></div>
-<h3>محتوای شبکه اجتماعی</h3>
-<p>طراحی پست و استوری برای اینستاگرام</p>
-</div>
-</div>
-</div>
-</section>
+        <!-- ===== دکمه‌های شناور ===== -->
+        <div class="float-btns" style="position:fixed;bottom:25px;left:25px;display:flex;flex-direction:column;gap:12px;z-index:500;">
+            <a href="tel:09927131621" title="تماس" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 30px var(--shadow);transition:.4s;animation:bounceIn .6s;">📞</a>
+            <a href="https://t.me/ara_graphic1" target="_blank" title="تلگرام" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 30px var(--shadow);transition:.4s;animation:bounceIn .6s;">✈️</a>
+            <a href="https://instagram.com/ara_graphic1" target="_blank" title="اینستاگرام" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:white;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 6px 30px var(--shadow);transition:.4s;animation:bounceIn .6s;">📷</a>
+        </div>
+    </div>
 
-<!-- ===== جدول قیمت‌ها ===== -->
-<section id="pricing">
-<div class="container" style="max-width:1200px;margin:auto">
-<h2 class="section-title reveal">تعرفه <span>خدمات</span></h2>
-<p class="section-sub reveal">قیمت‌ها به تومان بوده و با توجه به پیچیدگی پروژه تغییر می‌کند</p>
+    <!-- ===== صفحه تعرفه (جداگانه) ===== -->
+    <section class="pricing-page" id="pricingPage">
+        <div class="container">
+            <button class="back-home" onclick="showMainContent()">
+                <i class="fas fa-arrow-right"></i> بازگشت به صفحه اصلی
+            </button>
+            <div class="pricing-header">
+                <h2>تعرفه <span>طراحی گرافیک</span></h2>
+                <p>قیمت‌ها به تومان بوده و با توجه به پیچیدگی پروژه تغییر می‌کند</p>
+            </div>
+            <div class="price-wrapper">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>خدمات</th>
+                            <th>ساده</th>
+                            <th>معمولی</th>
+                            <th>سطح بالا</th>
+                            <th>حرفه‌ای</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="service-name">لوگو / آیکن / پروفایل</td><td>۱,۵۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰</td><td>۴,۹۰۰,۰۰۰</td><td class="price-high">۷,۰۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">ست اداری</td><td>۳,۰۰۰,۰۰۰</td><td>۴,۵۰۰,۰۰۰</td><td>۷,۹۰۰,۰۰۰</td><td class="price-high">۹,۰۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">بنر وبسایت</td><td>۶۰۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td class="price-high">۱,۸۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">پست / استوری / کاور</td><td>۴۰۰,۰۰۰</td><td>۵۵۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td class="price-high">۱,۲۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">بنر / پوستر تبلیغاتی</td><td>۵۵۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰</td><td class="price-high">۱,۷۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">بیزینس کارت / کارت ویزیت</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td class="price-high">۵۰۰,۰۰۰</td></tr>
+                        <tr><td class="service-name">بروشور / کاتالوگ (هر صفحه)</td><td>۱۹۰,۰۰۰</td><td>۲۳۰,۰۰۰</td><td>۲۹۰,۰۰۰</td><td class="price-high">۴۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">اینفوگرافیک</td><td>۹۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۹۰۰,۰۰۰</td><td class="price-high">۲,۵۰۰,۰۰۰+</td></tr>
+                        <tr><td class="service-name">کارت ویزیت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
+                        <tr><td class="service-name">تراکت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pricing-note">
+                <i class="fas fa-info-circle"></i> تمامی قیمت‌ها به تومان بوده و با توجه به پیچیدگی و نیازهای خاص پروژه، قابل مذاکره و تغییر هستند.
+            </div>
+        </div>
+    </section>
 
-<div class="price-wrapper reveal">
-<table class="price-table">
-<thead>
-<tr>
-<th>خدمات</th>
-<th>ساده</th>
-<th>معمولی</th>
-<th>سطح بالا</th>
-<th>حرفه‌ای</th>
-</tr>
-</thead>
-<tbody>
-<tr><td class="service-name">لوگو / آیکن / پروفایل</td><td>۱,۵۰۰,۰۰۰</td><td>۲,۵۰۰,۰۰۰</td><td>۴,۹۰۰,۰۰۰</td><td class="price-high">۷,۰۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">ست اداری</td><td>۳,۰۰۰,۰۰۰</td><td>۴,۵۰۰,۰۰۰</td><td>۷,۹۰۰,۰۰۰</td><td class="price-high">۹,۰۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بنر وبسایت</td><td>۶۰۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td class="price-high">۱,۸۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">پست / استوری / کاور</td><td>۴۰۰,۰۰۰</td><td>۵۵۰,۰۰۰</td><td>۸۰۰,۰۰۰</td><td class="price-high">۱,۲۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بنر / پوستر تبلیغاتی</td><td>۵۵۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td>۱,۲۰۰,۰۰۰</td><td class="price-high">۱,۷۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">بیزینس کارت / کارت ویزیت</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td class="price-high">۵۰۰,۰۰۰</td></tr>
-<tr><td class="service-name">بروشور / کاتالوگ (هر صفحه)</td><td>۱۹۰,۰۰۰</td><td>۲۳۰,۰۰۰</td><td>۲۹۰,۰۰۰</td><td class="price-high">۴۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">اینفوگرافیک</td><td>۹۰۰,۰۰۰</td><td>۱,۳۰۰,۰۰۰</td><td>۱,۹۰۰,۰۰۰</td><td class="price-high">۲,۵۰۰,۰۰۰+</td></tr>
-<tr><td class="service-name">کارت ویزیت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
-<tr><td class="service-name">تراکت</td><td>۳۰۰,۰۰۰</td><td>۵۰۰,۰۰۰</td><td>۷۰۰,۰۰۰</td><td class="price-high">۹۰۰,۰۰۰</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-
-<!-- ===== مشاوره ===== -->
-<section>
-<div class="container" style="max-width:1200px;margin:auto">
-<div class="discount reveal" style="background:linear-gradient(135deg,#f0e6ff,var(--white));color:var(--purple);border:2px solid rgba(106,0,255,.15)">
-<h2 style="color:var(--purple)">💡 مشاوره رایگان طراحی</h2>
-<p>قبل از شروع هر پروژه، مشاوره رایگان برای انتخاب بهترین سبک طراحی، رنگ‌بندی و نوع طرح متناسب با کسب‌وکار شما ارائه می‌شود تا نتیجه نهایی دقیقاً مطابق نیازتان باشد.</p>
-<a class="btn" href="tel:09927131621">مشاوره رایگان</a>
-</div>
-</div>
-</section>
-
-<!-- ===== مزیت‌ها ===== -->
-<section id="advantages">
-<div class="container" style="max-width:1200px;margin:auto">
-<h2 class="section-title reveal">مزیت‌های <span>آرا گرافیک</span></h2>
-<p class="section-sub reveal">چرا مشتریان من را انتخاب می‌کنند؟</p>
-<div class="adv-list">
-<div class="adv-item"><div class="num">۱</div><p>طراحی کاملاً اختصاصی و خلاقانه با نگاه برندینگ</p></div>
-<div class="adv-item"><div class="num">۲</div><p>تحویل سریع همراه با کیفیت بالا و جزئیات کامل</p></div>
-<div class="adv-item"><div class="num">۳</div><p>ویرایش نامحدود تا رسیدن به رضایت کامل شما</p></div>
-<div class="adv-item"><div class="num">۴</div><p>فایل‌های آماده چاپ با کیفیت بسیار بالا (۳۰۰ DPI)</p></div>
-<div class="adv-item"><div class="num">۵</div><p>مشاوره تخصصی در انتخاب رنگ، فونت و المان‌ها</p></div>
-<div class="adv-item"><div class="num">۶</div><p>تجربه کار با برندهای بزرگ و پروژه‌های متنوع</p></div>
-</div>
-</div>
-</section>
-
-<!-- ===== تخفیف ===== -->
-<section id="discount" style="padding:80px 40px">
-<div class="container" style="max-width:1200px;margin:auto">
-<div class="discount reveal">
-<h2>🎉 تخفیف ویژه پروژه‌های جدید</h2>
-<p>به مناسبت استقبال شما عزیزان، تخفیف ویژه‌ای برای سفارشات جدید در نظر گرفته شده است. برای دریافت مشاوره رایگان و اطلاع از تخفیف، همین حالا تماس بگیرید!</p>
-<a class="btn" href="tel:09927131621"><span>📞 تماس بگیرید</span></a>
-</div>
-</div>
-</section>
-
-<!-- ===== ثبت سفارش ===== -->
-<section id="order">
-<div class="container" style="max-width:1200px;margin:auto">
-<div class="order-box reveal">
-<h2 class="section-title" style="margin-bottom:8px">ثبت <span>سفارش</span></h2>
-<p style="font-size:16px;color:#666;line-height:2">سفارش خود را از طریق یکی از راه‌های زیر ثبت کنید</p>
-<div class="phone">۰۹۹۲۷۱۳۱۶۲۱</div>
-<a class="btn" href="tel:09927131621" style="margin-top:8px"><span>📞 تماس مستقیم</span></a>
-<div class="channels">
-<a class="ch" href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
-<a class="ch" href="https://bale.ai/Gholami_graphist" target="_blank">💬 بله</a>
-<a class="ch" href="#">📱 ایتا</a>
-<a class="ch" href="https://instagram.com/ara_graphic1" target="_blank">📷 اینستاگرام</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ===== فوتر ===== -->
-<footer>
-<div class="logo" style="justify-content:center">
-<img src="logo.png" alt="لوگو" onerror="this.style.display='none'">
-<span class="logo-text" style="display:none">آرا گرافیک</span>
-</div>
-<p style="opacity:.8;margin-bottom:14px;font-size:15px">طراحی گرافیک حرفه‌ای · برندینگ · خلاقیت</p>
-<div class="socials">
-<a href="https://instagram.com/ara_graphic1" target="_blank">📷 اینستاگرام</a>
-<a href="https://t.me/ara_graphic1" target="_blank">✈️ تلگرام</a>
-<a href="https://bale.ai/Gholami_graphist" target="_blank">💬 بله</a>
-<a href="#">📱 ایتا</a>
-</div>
-<p style="opacity:.5;margin-top:18px;font-size:13px">© تمامی حقوق برای آرا گرافیک محفوظ است.</p>
-</footer>
-
-<!-- ===== دکمه‌های شناور ===== -->
-<div class="float-btns">
-<a href="tel:09927131621" title="تماس">📞</a>
-<a href="https://t.me/ara_graphic1" target="_blank" title="تلگرام">✈️</a>
-<a href="https://instagram.com/ara_graphic1" target="_blank" title="اینستاگرام">📷</a>
-</div>
-
-<!-- ===== اسکریپت ===== -->
-<script>
-// ===== منو =====
-function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
-
-window.addEventListener('scroll',()=>{
-document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
-});
-
-// ===== فیلتر گالری =====
-function filterWorks(cat,btn){
-document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-let works=document.querySelectorAll('.work');
-let delay=0;
-works.forEach(w=>{
-if(cat==='all'||w.dataset.cat===cat){
-w.style.display='block';
-setTimeout(()=>{w.classList.add('show')},delay);
-delay+=100;
-}else{
-w.classList.remove('show');
-setTimeout(()=>{w.style.display='none'},400);
-}
-});
-}
-
-window.addEventListener('load',()=>{
-document.querySelectorAll('.work').forEach((w,i)=>{
-setTimeout(()=>{w.classList.add('show')},i*80);
-});
-});
-
-// ===== لایت باکس =====
-function openLB(img){
-document.getElementById('lbImg').src=img.src;
-document.getElementById('lightbox').classList.add('show');
-document.body.style.overflow='hidden';
-}
-function closeLB(e){
-if(e.target===document.getElementById('lightbox')||e.target.classList.contains('close')){
-document.getElementById('lightbox').classList.remove('show');
-document.body.style.overflow='auto';
-}
-}
-document.addEventListener('keydown',e=>{
-if(e.key==='Escape'){closeLB({target:document.getElementById('lightbox')})}
-});
-
-// ===== شمارنده =====
-const counters=document.querySelectorAll('.counter');
-const startCount=()=>{
-counters.forEach(c=>{
-if(c.classList.contains('done'))return;
-let top=c.getBoundingClientRect().top;
-if(top<window.innerHeight){
-c.classList.add('done');
-let target=+c.dataset.target;
-let count=0;
-let step=Math.ceil(target/70);
-let timer=setInterval(()=>{
-count+=step;
-if(count>=target){count=target;clearInterval(timer)}
-c.textContent=count+'+';
-},20);
-}
-});
-};
-window.addEventListener('scroll',startCount);
-startCount();
-
-// ===== انیمیشن اسکرول =====
-const revealItems=document.querySelectorAll('.reveal,.card,.adv-item');
-const revealOnScroll=()=>{
-revealItems.forEach(el=>{
-let top=el.getBoundingClientRect().top;
-if(top<window.innerHeight-80){el.classList.add('show')}
-});
-};
-window.addEventListener('scroll',revealOnScroll);
-window.addEventListener('load',revealOnScroll);
-
-// ===== مدیریت لوگو =====
-document.addEventListener('DOMContentLoaded',function(){
-document.querySelectorAll('.logo img').forEach(img=>{
-img.onerror=function(){
-this.style.display='none';
-let fallback=this.parentElement.querySelector('.logo-text');
-if(fallback) fallback.style.display='block';
-};
-});
-});
-
-// ===== تایپ‌رایتر (Typewriter) =====
-document.addEventListener('DOMContentLoaded',function(){
-const texts = [
-    'طراحی گرافیک حرفه‌ای با نگاه برندینگ',
-    'خلق هویت بصری منحصربه‌فرد برای برند شما',
-    'از ایده تا اجرا، با دقت و خلاقیت',
-    'تخصص در تایپوگرافی و تصویرسازی'
-];
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typeElement = document.getElementById('typeText');
-
-function typeEffect(){
-    const currentText = texts[textIndex];
-    if(isDeleting){
-        typeElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        if(charIndex === 0){
-            isDeleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-            setTimeout(typeEffect, 1000);
-            return;
+    <style>
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.6);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        setTimeout(typeEffect, 30);
-    } else {
-        typeElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-        if(charIndex === currentText.length){
-            isDeleting = true;
-            setTimeout(typeEffect, 2000);
-            return;
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        setTimeout(typeEffect, 60);
-    }
-}
-typeEffect();
-});
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: .9s cubic-bezier(.22, 1, .36, 1);
+        }
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .filters button.active,
+        .filters button:hover {
+            background: var(--purple) !important;
+            color: var(--white) !important;
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px var(--shadow);
+        }
+        .card:hover,
+        .adv-item:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 20px 50px var(--shadow) !important;
+            border-color: var(--purple) !important;
+        }
+        .adv-item:hover {
+            transform: translateX(8px) !important;
+        }
+        .work.show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        .work:hover {
+            transform: translateY(-12px) scale(1.02) !important;
+            box-shadow: 0 25px 60px rgba(106, 0, 255, 0.3) !important;
+        }
+        .card.show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        .adv-item.show {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+        .discount .btn:hover {
+            background: #f0e6ff !important;
+            transform: translateY(-4px) !important;
+        }
+        .order-box .ch:hover {
+            background: var(--purple) !important;
+            color: white !important;
+            transform: scale(1.05) !important;
+        }
+        .float-btns a:hover {
+            transform: scale(1.15) !important;
+            box-shadow: 0 10px 40px rgba(106, 0, 255, 0.5) !important;
+        }
+        .pricing-cta-banner .btn {
+            background: white;
+            color: var(--purple);
+        }
+        .pricing-cta-banner .btn:hover {
+            background: #f0e6ff;
+        }
+    </style>
 
-// ===== افکت شیشه روی تصاویر =====
-document.addEventListener('DOMContentLoaded',function(){
-document.querySelectorAll('.work .img-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('mousemove', function(e){
-        const rect = this.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        this.style.setProperty('--mx', x + '%');
-        this.style.setProperty('--my', y + '%');
-    });
-});
-});
-</script>
+    <script>
+        // ===== منوی کناری =====
+        function toggleSideMenu() {
+            document.getElementById('sideMenu').classList.toggle('open');
+            document.getElementById('sideOverlay').classList.toggle('show');
+            document.body.style.overflow = document.getElementById('sideMenu').classList.contains('open') ? 'hidden' : 'auto';
+        }
+
+        function closeSideMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('sideOverlay').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ===== نمایش صفحه تعرفه =====
+        function showPricingPage() {
+            document.getElementById('mainContent').classList.add('hide');
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('pricingPage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showMainContent() {
+            document.getElementById('mainContent').classList.remove('hide');
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('pricingPage').classList.remove('active');
+            window.scrollTo(0, 0);
+            // بستن منو در صورت باز بودن
+            closeSideMenu();
+        }
+
+        // ===== فیلتر گالری =====
+        function filterWorks(cat, btn) {
+            document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            let works = document.querySelectorAll('.work');
+            let delay = 0;
+            works.forEach(w => {
+                if (cat === 'all' || w.dataset.cat === cat) {
+                    w.style.display = 'block';
+                    setTimeout(() => { w.classList.add('show') }, delay);
+                    delay += 100;
+                } else {
+                    w.classList.remove('show');
+                    setTimeout(() => { w.style.display = 'none' }, 400);
+                }
+            });
+        }
+
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.work').forEach((w, i) => {
+                setTimeout(() => { w.classList.add('show') }, i * 80);
+            });
+            // نمایش اولیه کارت‌ها و آیتم‌ها
+            document.querySelectorAll('.card, .adv-item, .reveal').forEach(el => {
+                let top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) { el.classList.add('show') }
+            });
+        });
+
+        // ===== لایت باکس =====
+        function openLB(img) {
+            document.getElementById('lbImg').src = img.src;
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLB(e) {
+            if (e.target === document.getElementById('lightbox') || e.target.classList.contains('close')) {
+                document.getElementById('lightbox').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeLB({ target: document.getElementById('lightbox') }) }
+        });
+
+        // ===== شمارنده =====
+        const counters = document.querySelectorAll('.counter');
+        const startCount = () => {
+            counters.forEach(c => {
+                if (c.classList.contains('done')) return;
+                let top = c.getBoundingClientRect().top;
+                if (top < window.innerHeight) {
+                    c.classList.add('done');
+                    let target = +c.dataset.target;
+                    let count = 0;
+                    let step = Math.ceil(target / 70);
+                    let timer = setInterval(() => {
+                        count += step;
+                        if (count >= target) { count = target;
+                            clearInterval(timer) }
+                        c.textContent = count + '+';
+                    }, 20);
+                }
+            });
+        };
+        window.addEventListener('scroll', startCount);
+        startCount();
+
+        // ===== انیمیشن اسکرول =====
+        const revealItems = document.querySelectorAll('.reveal, .card, .adv-item');
+        const revealOnScroll = () => {
+            revealItems.forEach(el => {
+                let top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) { el.classList.add('show') }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ===== مدیریت لوگو =====
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.logo img').forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    let fallback = this.parentElement.querySelector('.logo-text');
+                    if (fallback) fallback.style.display = 'block';
+                };
+            });
+        });
+
+        // ===== کلیک روی بنر تعرفه =====
+        document.querySelector('.pricing-cta-banner').addEventListener('click', function(e) {
+            // جلوگیری از خطا در صورت کلیک روی دکمه‌های داخل
+            if (e.target.tagName !== 'A') {
+                showPricingPage();
+            }
+        });
+    </script>
 
 </body>
 </html>
