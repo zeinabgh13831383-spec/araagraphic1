@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif;scroll-behavior:smooth}
-:root{--purple:#6a00ff;--lpurple:#a855f7;--dpurple:#4c00b0;--white:#ffffff;--bg:#f8f5ff;--glass:rgba(255,255,255,.85);--shadow:rgba(106,0,255,.2)}
+:root{--purple:#6a00ff;--lpurple:#a855f7;--dpurple:#4c00b0;--white:#ffffff;--bg:#f8f5ff;--glass:rgba(255,255,255,.8);--shadow:rgba(106,0,255,.2)}
 body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 
 /* ===== منو ===== */
@@ -26,6 +26,7 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 
 /* ===== هدر با پس‌زمینه گرافیستی ===== */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:linear-gradient(160deg,#ffffff 0%,#f5edff 40%,#ede0ff 100%)}
+/* المان‌های گرافیستی پس‌زمینه */
 .hero-bg-grid{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hero-bg-grid .dot{position:absolute;width:8px;height:8px;background:var(--purple);border-radius:50%;opacity:.08;animation:floatDot 20s infinite linear}
 .hero-bg-grid .dot:nth-child(1){top:15%;left:8%;animation-delay:0s}
@@ -41,10 +42,12 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 .hero-bg-grid .shape:nth-child(9){width:300px;height:300px;top:-80px;right:-80px;border-width:3px}
 .hero-bg-grid .shape:nth-child(10){width:200px;height:200px;bottom:-60px;left:-60px;animation-delay:-4s}
 .hero-bg-grid .shape:nth-child(11){width:150px;height:150px;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-8s;border-color:rgba(106,0,255,.04)}
+
 @keyframes floatDot{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-40px) scale(1.3)}75%{transform:translateY(40px) scale(.8)}}
 @keyframes slideLine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @keyframes pulseShape{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
 
+/* محتوای هدر */
 .hero-content{display:flex;align-items:center;justify-content:space-between;max-width:1250px;width:100%;gap:50px;flex-wrap:wrap;position:relative;z-index:1}
 .hero-text{flex:1;min-width:300px}
 .hero-text .badge{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--lpurple));color:white;padding:6px 22px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:1.5px;margin-bottom:18px;animation:slideR 0.8s ease}
@@ -60,6 +63,7 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
 @keyframes slideR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
 
+/* دکمه‌ها با افکت حرفه‌ای */
 .btn{display:inline-block;padding:15px 42px;background:linear-gradient(135deg,var(--purple),var(--dpurple));color:var(--white);font-weight:700;text-decoration:none;border-radius:50px;transition:.4s;box-shadow:0 8px 35px var(--shadow);border:none;font-size:15px;cursor:pointer;position:relative;overflow:hidden}
 .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--lpurple),var(--purple));opacity:0;transition:.4s;border-radius:50px}
 .btn:hover::before{opacity:1}
@@ -69,6 +73,7 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 .btn-outline::before{background:linear-gradient(135deg,var(--purple),var(--dpurple))}
 .btn-outline:hover{color:white}
 
+/* ===== موج ===== */
 .wave{margin-top:-2px;position:relative;z-index:2}
 .wave svg{display:block;width:100%}
 
@@ -80,18 +85,14 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 
 /* ===== درباره من ===== */
 #about{background:var(--bg);padding:80px 40px}
-.about-wrapper{max-width:1200px;margin:auto}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:20px}
-.about-text p{font-size:17px;line-height:2.3;color:#444;margin-bottom:16px;text-align:justify}
-.about-text .signature{font-family:serif;font-size:32px;color:var(--purple);margin-top:10px;opacity:.7;text-align:left}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;max-width:1200px;margin:auto}
+.about-text p{font-size:17px;line-height:2.3;color:#444;margin-bottom:14px}
+.about-text .signature{font-family:serif;font-size:32px;color:var(--purple);margin-top:10px;opacity:.7}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .about-stats .item{background:white;padding:22px;border-radius:18px;text-align:center;border:1px solid rgba(106,0,255,.08);transition:.4s;box-shadow:0 4px 20px rgba(106,0,255,.06)}
 .about-stats .item:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow)}
 .about-stats .item .num{font-size:30px;font-weight:900;color:var(--purple)}
 .about-stats .item .label{font-size:14px;color:#666;margin-top:4px}
-.about-quote{background:linear-gradient(135deg,var(--bg),var(--white));padding:30px 35px;border-radius:20px;border-right:5px solid var(--purple);margin-top:25px}
-.about-quote p{font-size:18px;color:#333;line-height:2.2;font-weight:500}
-.about-quote .author{font-size:15px;color:var(--purple);font-weight:700;margin-top:8px}
 
 /* ===== گالری ===== */
 .filters{text-align:center;margin-bottom:35px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
@@ -124,7 +125,7 @@ body{background:var(--white);color:#1a1a2e;overflow-x:hidden}
 .card h3{font-size:19px;color:#1a1a2e;margin-bottom:8px}
 .card p{font-size:14px;color:#666;line-height:1.9}
 
-/* ===== جدول قیمت کارت‌ها ===== */
+/* ===== جدول قیمت حرفه‌ای (کارت‌های قیمت) ===== */
 .pricing-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;max-width:1200px;margin:auto}
 .pricing-card{background:white;border-radius:24px;padding:35px 25px 40px;text-align:center;border:2px solid rgba(106,0,255,.08);transition:.5s;position:relative;box-shadow:0 4px 20px rgba(106,0,255,.04)}
 .pricing-card:hover{transform:translateY(-10px);border-color:var(--purple);box-shadow:0 25px 60px var(--shadow)}
@@ -177,7 +178,7 @@ footer .socials a:hover{background:rgba(255,255,255,.12);border-color:var(--lpur
 .float-btns a:hover{transform:scale(1.15);box-shadow:0 10px 40px rgba(106,0,255,.5)}
 @keyframes bounceIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 
-/* ===== انیمیشن‌ها ===== */
+/* ===== انیمیشن‌های عمومی ===== */
 .reveal{opacity:0;transform:translateY(50px);transition:.9s cubic-bezier(.22,1,.36,1)}
 .reveal.show{opacity:1;transform:translateY(0)}
 .section-title{text-align:center;font-size:36px;font-weight:800;color:#1a1a2e;margin-bottom:12px}
@@ -242,8 +243,6 @@ footer .socials{gap:10px}
 footer .socials a{font-size:12px;padding:6px 14px}
 .about-stats{grid-template-columns:1fr 1fr}
 .about-text p{font-size:15px}
-.about-quote p{font-size:16px}
-.about-quote{padding:20px}
 }
 
 @media(max-width:480px){
@@ -284,13 +283,20 @@ footer .socials a{font-size:12px;padding:6px 14px}
 </div>
 </nav>
 
-<!-- ===== هدر ===== -->
+<!-- ===== هدر با پس‌زمینه گرافیستی ===== -->
 <section class="hero" id="home">
 <div class="hero-bg-grid">
-<span class="dot"></span><span class="dot"></span><span class="dot"></span>
-<span class="dot"></span><span class="dot"></span>
-<span class="line"></span><span class="line"></span><span class="line"></span>
-<span class="shape"></span><span class="shape"></span><span class="shape"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="shape"></span>
+<span class="shape"></span>
+<span class="shape"></span>
 </div>
 <div class="hero-content">
 <div class="hero-text">
@@ -322,34 +328,20 @@ footer .socials a{font-size:12px;padding:6px 14px}
 <div class="stat"><h2 class="counter" data-target="100">0</h2><p>رضایت‌مندی %</p></div>
 </div>
 
-<!-- ===== درباره من با متن جدید ===== -->
+<!-- ===== درباره من ===== -->
 <section id="about">
-<div class="about-wrapper">
-<h2 class="section-title reveal">درباره <span>من</span></h2>
-<p class="section-sub reveal">طراح گرافیک و متخصص هویت بصری</p>
-
 <div class="about-grid">
 <div class="about-text reveal">
-<p>سلام، من <strong>زینت غلامی</strong> هستم؛ طراح گرافیک و متخصص هویت بصری با بیش از ۸ سال تجربه در زمینه طراحی برند، هویت سازمانی، چاپ و طراحی دیجیتال.</p>
-
-<p>طراحی برای من تنها خلق یک تصویر زیبا نیست؛ بلکه فرآیندی است برای انتقال مفهوم، ایجاد اعتماد و ساخت هویتی ماندگار برای هر برند. باور دارم هر کسب‌وکار داستانی منحصربه‌فرد دارد و رسالت من این است که آن داستان را به زبانی ساده، خلاقانه و تأثیرگذار به تصویر بکشم.</p>
-
-<p>در طول سال‌های فعالیت حرفه‌ای، با برندها، کسب‌وکارها و مجموعه‌های مختلف همکاری کرده‌ام و همواره تلاش کرده‌ام میان زیبایی بصری، کاربردپذیری و اهداف تجاری تعادل ایجاد کنم. هر پروژه را با تحقیق، دقت و توجه به جزئیات آغاز می‌کنم تا نتیجه نهایی نه‌تنها چشم‌نواز، بلکه مؤثر و ماندگار باشد.</p>
-
-<div class="signature">— زینت غلامی</div>
+<h2 class="section-title" style="text-align:right;margin-bottom:20px">درباره <span>من</span></h2>
+<p>سلام! من آرای هستم، طراح گرافیک با بیش از ۸ سال تجربه در زمینه برندینگ، تایپوگرافی و طراحی بصری. از دانشگاه هنر فارغ‌التحصیل شدم و همیشه به دنبال خلق آثاری هستم که هم زیبا باشند و هم هدفمند.</p>
+<p>باور من این است که هر برند داستانی برای گفتن دارد و وظیفه من این است که آن داستان را به زبان بصری ترجمه کنم. برای همین، هر پروژه را با دقت و عشق خاصی پیش می‌برم.</p>
+<div class="signature">— آرا</div>
 </div>
-
 <div class="about-stats reveal">
 <div class="item"><div class="num">۸+</div><div class="label">سال تجربه</div></div>
 <div class="item"><div class="num">۱۵۰+</div><div class="label">پروژه برندینگ</div></div>
 <div class="item"><div class="num">۱۰۰%</div><div class="label">رضایت مشتری</div></div>
 <div class="item"><div class="num">۲۴h</div><div class="label">پاسخگویی</div></div>
-</div>
-</div>
-
-<div class="about-quote reveal">
-<p>«طراحی، پلی است میان آنچه برند می‌گوید و آنچه مخاطب احساس می‌کند. من این پل را با عشق می‌سازم.»</p>
-<div class="author">— زینت غلامی</div>
 </div>
 </div>
 </section>
@@ -541,7 +533,7 @@ footer .socials a{font-size:12px;padding:6px 14px}
 </div>
 </section>
 
-<!-- ===== جدول قیمت ===== -->
+<!-- ===== جدول قیمت حرفه‌ای ===== -->
 <section id="pricing" style="background:var(--bg);padding:80px 40px">
 <div class="container" style="max-width:1200px;margin:auto">
 <h2 class="section-title reveal">تعرفه <span>خدمات</span></h2>
@@ -676,12 +668,15 @@ footer .socials a{font-size:12px;padding:6px 14px}
 
 <!-- ===== اسکریپت ===== -->
 <script>
+// منوی موبایل
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
 
+// منوی چسبان
 window.addEventListener('scroll',()=>{
 document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 });
 
+// فیلتر گالری
 function filterWorks(cat,btn){
 document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
@@ -699,12 +694,14 @@ setTimeout(()=>{w.style.display='none'},400);
 });
 }
 
+// نمایش اولیه گالری
 window.addEventListener('load',()=>{
 document.querySelectorAll('.work').forEach((w,i)=>{
 setTimeout(()=>{w.classList.add('show')},i*80);
 });
 });
 
+// لایت باکس
 function openLB(img){
 document.getElementById('lbImg').src=img.src;
 document.getElementById('lightbox').classList.add('show');
@@ -720,6 +717,7 @@ document.addEventListener('keydown',e=>{
 if(e.key==='Escape'){closeLB({target:document.getElementById('lightbox')})}
 });
 
+// شمارنده
 const counters=document.querySelectorAll('.counter');
 const startCount=()=>{
 counters.forEach(c=>{
@@ -741,6 +739,7 @@ c.textContent=count+'+';
 window.addEventListener('scroll',startCount);
 startCount();
 
+// انیمیشن اسکرول
 const revealItems=document.querySelectorAll('.reveal,.card,.adv-item,.pricing-card');
 const revealOnScroll=()=>{
 revealItems.forEach(el=>{
@@ -751,6 +750,7 @@ if(top<window.innerHeight-80){el.classList.add('show')}
 window.addEventListener('scroll',revealOnScroll);
 window.addEventListener('load',revealOnScroll);
 
+// مدیریت لوگو
 document.addEventListener('DOMContentLoaded',function(){
 document.querySelectorAll('.logo img').forEach(img=>{
 img.onerror=function(){
